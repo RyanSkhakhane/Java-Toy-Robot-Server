@@ -70,10 +70,13 @@ public class ClientHandler implements Runnable{
             try {
                 // Read what the client sent and then send it to every other client.
                 commandFromClient = bufferedReader.readLine();
+                broadcastMessage(commandFromClient);
                 if(adminCheck(this)){
+                    System.out.println("admin access requested granting admin commands");
                     try {
                         command = ServerCommand.create(commandFromClient);
                         command.execute(users, robots, world);
+                        System.exit(0);
                     }catch(IllegalArgumentException e){
                         bufferedWriter.write("This argument is not recognised)");
                         bufferedWriter.newLine();
@@ -85,6 +88,20 @@ public class ClientHandler implements Runnable{
                 // Close everything gracefully.
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
+            }
+        }
+    }
+
+    public void broadcastMessage(String messageToBroadcast){
+        for(ClientHandler clientHandler : users) {
+            try {
+                if (!clientHandler.getClientUsername().equals(clientUsername)) {
+                    clientHandler.bufferedWriter.write(messageToBroadcast);
+                    clientHandler.bufferedWriter.newLine();
+                    clientHandler.bufferedWriter.flush();
+                }
+            }catch(IOException e) {
+                closeEverything(socket, bufferedReader, bufferedWriter);
             }
         }
     }

@@ -53,7 +53,9 @@ public class RobotClient {
             Scanner scanner = new Scanner(System.in);
             while(socket.isConnected()){
                 String messageToSend = scanner.nextLine();
-
+                bufferedWriter.write(messageToSend);
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
             }
         }catch(IOException e){
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -71,5 +73,6 @@ public class RobotClient {
         // Pass the socket and give the client a username.
         RobotClient robotClient = new RobotClient(socket, username);
         // Infinite loop to read and send messages.
+        robotClient.sendCommand();
     }
 }
