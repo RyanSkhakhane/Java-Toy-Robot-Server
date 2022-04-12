@@ -1,29 +1,32 @@
-package za.co.wethinkcode.RobotClient;
+package za.co.wethinkcode.robotServer;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class RobotClient {
-<<<<<<< HEAD
-
-=======
+public class ClientHandler implements Runnable{
+    public static ArrayList<ClientHandler> users = new ArrayList<>();
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private String username;
+    private String clientUsername;
 
-    public RobotClient(Socket socket, String username) {
+    public ClientHandler(Socket socket) {
         try {
             this.socket = socket;
-            this.username = username;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            // When a client connects their username is sent.
+            this.clientUsername = bufferedReader.readLine();
+            // Add the new client handler to the array so they can receive messages from others.
+            users.add(this);
         } catch (IOException e) {
-            // Gracefully close everything.
+            // Close everything more gracefully.
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
+
+
 
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         // Note you only need to close the outer wrapper as the underlying streams are closed when you close the wrapper.
@@ -32,6 +35,8 @@ public class RobotClient {
         // Closing the input stream closes the socket. You need to use shutdownInput() on socket to just close the input stream.
         // Closing the socket will also close the socket's input stream and output stream.
         // Close the socket after closing the streams.
+
+        // The client disconnected or an error occurred so remove them from the list so no message is broadcasted.
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
@@ -47,18 +52,20 @@ public class RobotClient {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-
-        // Get a username for the user and a socket connection.
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your username for the group chat: ");
-        String username = scanner.nextLine();
-        // Create a socket to connect to the server.
-        Socket socket = new Socket("10.200.108.209", 1234);
-
-        // Pass the socket and give the client a username.
-        RobotClient robotClient = new RobotClient(socket, username);
-        // Infinite loop to read and send messages.
+    @Override
+    public void run() {
+        String commandFromClient;
+        // Continue to listen for messages while a connection with the client is still established.
+        while (socket.isConnected()) {
+            try {
+                // Read what the client sent and then send it to every other client.
+                commandFromClient = bufferedReader.readLine();
+                 // here we can handleCommand
+            } catch (IOException e) {
+                // Close everything gracefully.
+                closeEverything(socket, bufferedReader, bufferedWriter);
+                break;
+            }
+        }
     }
->>>>>>> 0ff6f1fe2d4010872a70fa4c5a474b98b7dbe0f8
 }
