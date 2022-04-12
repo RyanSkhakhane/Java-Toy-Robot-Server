@@ -1,15 +1,21 @@
 package za.co.wethinkcode.robotServer;
 
+import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
+import za.co.wethinkcode.robotServer.World.World;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> users = new ArrayList<>();
+    public static ArrayList<Robot> robots = new ArrayList<>();
+    World world = new World(robots);
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String clientUsername;
+    ServerCommand command;
 
     public ClientHandler(Socket socket) {
         try {
@@ -18,7 +24,7 @@ public class ClientHandler implements Runnable{
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             // When a client connects their username is sent.
             this.clientUsername = bufferedReader.readLine();
-            // Add the new client handler to the array so they can receive messages from others.
+            // Add the new client handler to the array, so they can receive messages from others.
             users.add(this);
         } catch (IOException e) {
             // Close everything more gracefully.
@@ -52,6 +58,10 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    public static ArrayList<Robot> getRobots(){
+        return robots;
+    }
+
     @Override
     public void run() {
         String commandFromClient;
@@ -60,6 +70,16 @@ public class ClientHandler implements Runnable{
             try {
                 // Read what the client sent and then send it to every other client.
                 commandFromClient = bufferedReader.readLine();
+                if(adminCheck(this)){
+                    try {
+                        command = ServerCommand.create(commandFromClient);
+                        command.execute(users, robots, world);
+                    }catch(IllegalArgumentException e){
+                        bufferedWriter.write("This argument is not recognised)");
+                        bufferedWriter.newLine();
+                        bufferedWriter.flush();
+                    }
+                }
                  // here we can handleCommand
             } catch (IOException e) {
                 // Close everything gracefully.
@@ -67,5 +87,27 @@ public class ClientHandler implements Runnable{
                 break;
             }
         }
+    }
+
+    public String getClientUsername(){
+        return clientUsername;
+    }
+
+    public Socket getSocket(){
+        return socket;
+    }
+    public BufferedReader getBufferedReader() {
+        return bufferedReader;
+    }
+
+    public BufferedWriter getBufferedWriter(){
+        return bufferedWriter;
+    }
+
+    public boolean adminCheck(ClientHandler clientHandler){
+        if(clientHandler.getClientUsername().equals("admin")){
+            return true;
+        }
+        return false;
     }
 }

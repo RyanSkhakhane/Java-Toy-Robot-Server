@@ -31,8 +31,8 @@ public class SquareObstacle implements Obstacle {
 
     @Override
     public boolean blocksPosition(Position position) {
-        if(this.bottomLeftX <= position.getX() && position.getX() <= (this.bottomLeftX+ 4)){
-            if(this.bottomLeftY <= position.getY() && position.getY()<= (this.bottomLeftY + 4))
+        if(this.bottomLeftX <= position.getX() && position.getX() <= (this.bottomLeftX+ 2)){
+            if(this.bottomLeftY <= position.getY() && position.getY()<= (this.bottomLeftY + 2))
                 return true;
         }
         return false;

@@ -1,16 +1,16 @@
 package za.co.wethinkcode.robotServer;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
 import java.util.Scanner;
 
 public class RobotServer {
-
     private final Scanner scanner;
     private final ServerSocket serverSocket;
 
-    public RobotServer(ServerSocket serverSocket){
+
+    public RobotServer(ServerSocket serverSocket) throws IOException {
         this.serverSocket = serverSocket;
         this.scanner = new Scanner(System.in);
     }
@@ -29,6 +29,36 @@ public class RobotServer {
         }
     }
 
+//    public void listenForMessage() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                String instruction;
+//                ServerCommands command;
+//                // While there is still a connection with the server, continue to listen for messages on a separate thread.
+//                while (!serverSocket.isClosed()) {
+//                    try {
+//                        Socket socket = new Socket("10.200.108.209", 1234);
+//                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//                        BufferedWriter bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+//                        // Get the messages sent from other users and print it to the console.
+//                        String messageToSend = scanner.nextLine();
+//                        bufferedWriter.write(messageToSend);
+//                        bufferedWriter.newLine();
+//                        bufferedWriter.flush();
+//                        instruction = bufferedReader.readLine();
+//                        System.out.println(instruction);
+//                        command = ServerCommands.create(instruction);
+//                        command.execute();
+//                    } catch (IOException e) {
+//                        // Close everything gracefully.
+//                        closeServerSocket();
+//                    }
+//                }
+//            }
+//        }).start();
+//    }
 
     public void closeServerSocket() {
         try {
@@ -51,6 +81,7 @@ public class RobotServer {
         }
         return Integer.parseInt(portChosen);
     }
+
     public static void myIp() {
         String ip;
         try {
@@ -72,6 +103,7 @@ public class RobotServer {
             throw new RuntimeException(e);
         }
     }
+
     public static boolean portCheck(String portChoice){
         try {
             Integer.parseInt(portChoice);
@@ -93,9 +125,10 @@ public class RobotServer {
     public static void main(String[] args) throws IOException {
         int port = portChoice();
         myIp();
-        ServerSocket serverSocket = new ServerSocket(1234);
+        ServerSocket serverSocket = new ServerSocket(port);
         RobotServer server = new RobotServer(serverSocket);
         System.out.println("Server configuration successful starting server :)");
         server.startServer();
+
     }
 }

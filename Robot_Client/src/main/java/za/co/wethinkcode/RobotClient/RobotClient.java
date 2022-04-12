@@ -8,12 +8,13 @@ public class RobotClient {
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private String username;
+    private String userName;
 
-    public RobotClient(Socket socket, String username) {
+
+    public RobotClient(Socket socket, String userName) {
         try {
             this.socket = socket;
-            this.username = username;
+            this.userName = userName;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
@@ -44,6 +45,20 @@ public class RobotClient {
         }
     }
 
+    public void sendCommand(){
+        try{
+            bufferedWriter.write(userName);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+            Scanner scanner = new Scanner(System.in);
+            while(socket.isConnected()){
+                String messageToSend = scanner.nextLine();
+
+            }
+        }catch(IOException e){
+            closeEverything(socket, bufferedReader, bufferedWriter);
+        }
+    }
     public static void main(String[] args) throws IOException {
 
         // Get a username for the user and a socket connection.
