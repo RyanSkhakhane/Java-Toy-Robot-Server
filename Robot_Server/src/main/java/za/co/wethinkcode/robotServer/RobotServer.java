@@ -6,6 +6,13 @@ import java.util.Enumeration;
 import java.util.Scanner;
 
 public class RobotServer {
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> cc8bb55ee04f80b7010595e2746634dcdf703925
     private final Scanner scanner;
     private final ServerSocket serverSocket;
 
@@ -131,4 +138,5 @@ public class RobotServer {
         server.startServer();
 
     }
+>>>>>>> 0ff6f1fe2d4010872a70fa4c5a474b98b7dbe0f8
 }

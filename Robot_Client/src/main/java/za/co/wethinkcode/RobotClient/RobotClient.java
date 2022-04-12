@@ -5,6 +5,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class RobotClient {
+<<<<<<< HEAD
+
+=======
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -75,4 +78,5 @@ public class RobotClient {
         // Infinite loop to read and send messages.
         robotClient.sendCommand();
     }
+>>>>>>> 0ff6f1fe2d4010872a70fa4c5a474b98b7dbe0f8
 }
