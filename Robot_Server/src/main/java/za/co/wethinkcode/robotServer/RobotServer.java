@@ -91,8 +91,8 @@ public class RobotServer {
     }
 
     public static void main(String[] args) throws IOException {
-            int port = portChoice();
-            myIp();
+        int port = portChoice();
+        myIp();
         ServerSocket serverSocket = new ServerSocket(1234);
         RobotServer server = new RobotServer(serverSocket);
         System.out.println("Server configuration successful starting server :)");
