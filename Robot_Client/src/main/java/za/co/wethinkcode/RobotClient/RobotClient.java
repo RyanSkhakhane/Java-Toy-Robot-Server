@@ -1,13 +1,13 @@
 package za.co.wethinkcode.RobotClient;
 
+import za.co.wethinkcode.RobotClient.ClientCommands.ClientCommands;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class RobotClient {
-<<<<<<< HEAD
 
-=======
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -55,10 +55,18 @@ public class RobotClient {
             bufferedWriter.flush();
             Scanner scanner = new Scanner(System.in);
             while(socket.isConnected()){
-                String messageToSend = scanner.nextLine();
-                bufferedWriter.write(messageToSend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
+                try {
+                    String messageToSend = scanner.nextLine();
+                    ClientCommands command = ClientCommands.create(messageToSend);
+                    String message = command.execute();
+                    bufferedWriter.write(message);
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+                }catch(IllegalArgumentException e){
+                    System.out.println("invalid command");
+                    continue;
+                }
+
             }
         }catch(IOException e){
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -78,5 +86,5 @@ public class RobotClient {
         // Infinite loop to read and send messages.
         robotClient.sendCommand();
     }
->>>>>>> 0ff6f1fe2d4010872a70fa4c5a474b98b7dbe0f8
+
 }

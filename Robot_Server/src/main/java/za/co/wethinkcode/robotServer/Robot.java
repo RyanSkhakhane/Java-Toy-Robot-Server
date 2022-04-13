@@ -11,10 +11,10 @@ public class Robot {
     private String robotName;
     private String robotType;
     private World world;
-    private Position startPosition;
+    private Position currentPosition;
 
     public Robot(World world, String robotName, String robotType){
-        this.startPosition = new Position(0,0);
+        this.currentPosition= new Position(0,0);
         this.currentDirection = STARTDIRECTION;
         this.robotName = robotName;
         this.robotType = robotType;
@@ -31,5 +31,10 @@ public class Robot {
 
     public Direction getCurrentDirection(){
         return currentDirection;
+    }
+
+    public String getRobotState(){
+        return "Position [" + currentPosition.getX() + "," + currentPosition.getY() + "] \n" +
+                "Direction [" + currentDirection + " ]";
     }
 }

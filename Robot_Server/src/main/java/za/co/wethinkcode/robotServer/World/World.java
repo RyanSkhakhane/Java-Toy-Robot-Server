@@ -26,4 +26,8 @@ public class World {
         obstacleList.add(new SquareObstacle(-1,2));
         return obstacleList;
     }
+
+    public ArrayList<Obstacle> getOBSTACLES(){
+        return OBSTACLES;
+    }
 }

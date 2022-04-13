@@ -1,5 +1,6 @@
 package za.co.wethinkcode.robotServer;
 
+import za.co.wethinkcode.robotServer.ClientCommands.ClientCommands;
 import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
 import za.co.wethinkcode.robotServer.World.World;
 
@@ -46,21 +47,22 @@ public class ClientHandler implements Runnable{
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
+                System.out.println("reader closed");
             }
             if (bufferedWriter != null) {
                 bufferedWriter.close();
+                System.out.println("writer closed");
             }
             if (socket != null) {
                 socket.close();
+                System.out.println("socket closed");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static ArrayList<Robot> getRobots(){
-        return robots;
-    }
+
 
     @Override
     public void run() {
@@ -82,6 +84,12 @@ public class ClientHandler implements Runnable{
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
                     }
+//                if(!adminCheck(this)){
+//                    try{
+//                        command = ClientCommands.create(commandFromClient)
+//                    }
+//
+//                }
                 }
                  // here we can handleCommand
             } catch (IOException e) {
@@ -106,6 +114,9 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    public ArrayList<Robot> getRobots(){
+        return robots;
+    }
     public String getClientUsername(){
         return clientUsername;
     }
@@ -113,6 +124,7 @@ public class ClientHandler implements Runnable{
     public Socket getSocket(){
         return socket;
     }
+
     public BufferedReader getBufferedReader() {
         return bufferedReader;
     }
