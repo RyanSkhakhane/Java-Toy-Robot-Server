@@ -80,6 +80,26 @@ public class RobotClient {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
+
+    public void listenForResponse(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String msgFromGroupChat;
+
+                while(socket.isConnected()){
+                    try{
+                        msgFromGroupChat = bufferedReader.readLine();
+                        System.out.println(msgFromGroupChat);
+                    }catch(IOException e){
+                        closeEverything(socket, bufferedReader, bufferedWriter);
+                    }
+                }
+            }
+        }).start();
+    }
+
+
     public static void main(String[] args) throws IOException {
 
         // Get a username for the user and a socket connection.
@@ -91,6 +111,7 @@ public class RobotClient {
         // Pass the socket and give the client a username.
         RobotClient robotClient = new RobotClient(socket, username);
         // Infinite loop to read and send messages.
+        robotClient.listenForResponse();
         robotClient.sendCommand();
     }
 

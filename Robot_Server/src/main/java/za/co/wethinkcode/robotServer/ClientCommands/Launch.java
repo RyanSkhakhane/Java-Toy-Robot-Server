@@ -18,13 +18,11 @@ public class Launch extends ClientCommands {
 
     @Override
     public String execute(ClientHandler clienthandler, World world) {
-        System.out.println("we are here");
         Robot robot = new Robot(world, getArgument2(), getArgument());
         Position freePosition = findFreeSpace(world);
-        System.out.println(freePosition.getX() + freePosition.getY());
         robot.setRobotPosition(freePosition.getX(),freePosition.getY());
-        clienthandler.addRobot(robot);
-        System.out.println(clienthandler.getRobots().size());
+//        clienthandler.addRobot(robot);
+        clienthandler.robots.add(robot);
         System.out.println(robot.getCurrentPosition().getX()+ robot.getCurrentPosition().getY());
         return "Your robot (" + robot.getRobotName() + ") has been launched into the world at " +
                 "position[" + robot.getCurrentPosition().getX() + "," + robot.getCurrentPosition().getY() + "]";
