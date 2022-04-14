@@ -1,10 +1,7 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
 import za.co.wethinkcode.robotServer.ClientHandler;
-import za.co.wethinkcode.robotServer.ServerCommands.Dump;
-import za.co.wethinkcode.robotServer.ServerCommands.Quit;
-import za.co.wethinkcode.robotServer.ServerCommands.Robots;
-import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
+
 import za.co.wethinkcode.robotServer.World.World;
 
 public abstract class ClientCommands implements CommandInterface {

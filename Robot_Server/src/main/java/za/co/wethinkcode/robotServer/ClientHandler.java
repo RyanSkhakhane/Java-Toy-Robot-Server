@@ -80,7 +80,6 @@ public class ClientHandler implements Runnable{
                     try {
                         command = ServerCommand.create(commandFromClient);
                         command.execute(users, robots, world);
-                        System.exit(0);
                     } catch (IllegalArgumentException e) {
                         bufferedWriter.write("This argument is not recognised)");
                         bufferedWriter.newLine();

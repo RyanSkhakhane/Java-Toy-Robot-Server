@@ -13,7 +13,7 @@ public class Robots extends ServerCommand{
         robots.add(new Robot(world, "Matt", "normal"));
         robots.add(new Robot(world, "Jill", "normal"));
         robots.add(new Robot(world, "Cindy", "normal"));
-        for (int i = 0; i <= robots.size(); i++) {
+        for (int i = 0; i <= robots.size() - 1; i++) {
             System.out.println(robots.get(i).getRobotName());
             System.out.println(robots.get(i).getRobotState());
         }
