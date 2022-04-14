@@ -48,7 +48,7 @@ public class Launch extends ClientCommands {
                 }
             }
             }
-            if(free == true){
+            if(free){
                 return freePosition;
             }
         }
