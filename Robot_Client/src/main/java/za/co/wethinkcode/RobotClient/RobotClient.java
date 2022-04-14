@@ -59,6 +59,7 @@ public class RobotClient {
                     String messageToSend = scanner.nextLine();
                     ClientCommands command = ClientCommands.create(messageToSend);
                     String message = command.execute();
+                    System.out.println(message);
                     bufferedWriter.write(message);
                     bufferedWriter.newLine();
                     bufferedWriter.flush();

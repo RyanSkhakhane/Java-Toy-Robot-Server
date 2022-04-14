@@ -20,7 +20,9 @@ public class Robot {
         this.robotType = robotType;
         this.world = world;
     }
-
+    public void setRobotPosition(int x , int y){
+        currentPosition = new Position(x , y);
+    }
     public String getRobotName(){
         return robotName;
     }
@@ -36,5 +38,9 @@ public class Robot {
     public String getRobotState(){
         return "Position [" + currentPosition.getX() + "," + currentPosition.getY() + "] \n" +
                 "Direction [" + currentDirection + " ]";
+    }
+
+    public Position getCurrentPosition() {
+        return currentPosition;
     }
 }

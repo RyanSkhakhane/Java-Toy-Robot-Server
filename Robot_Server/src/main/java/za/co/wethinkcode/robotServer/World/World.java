@@ -30,4 +30,16 @@ public class World {
     public ArrayList<Obstacle> getOBSTACLES(){
         return OBSTACLES;
     }
+
+    public Position getTOP_LEFT() {
+        return TOP_LEFT;
+    }
+
+    public Position getBOTTOM_RIGHT() {
+        return BOTTOM_RIGHT;
+    }
+
+    public ArrayList<Robot> getRobots() {
+        return robots;
+    }
 }

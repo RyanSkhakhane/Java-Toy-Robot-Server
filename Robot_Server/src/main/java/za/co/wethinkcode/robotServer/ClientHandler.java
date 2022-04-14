@@ -17,6 +17,7 @@ public class ClientHandler implements Runnable{
     private BufferedWriter bufferedWriter;
     private String clientUsername;
     ServerCommand command;
+    ClientCommands clientCommand;
 
     public ClientHandler(Socket socket) {
         try {
@@ -72,24 +73,37 @@ public class ClientHandler implements Runnable{
             try {
                 // Read what the client sent and then send it to every other client.
                 commandFromClient = bufferedReader.readLine();
-                broadcastMessage(commandFromClient);
-                if(adminCheck(this)){
+                System.out.println(commandFromClient);
+//                broadcastMessage(commandFromClient);
+                if(adminCheck(this)) {
                     System.out.println("admin access requested granting admin commands");
                     try {
                         command = ServerCommand.create(commandFromClient);
                         command.execute(users, robots, world);
                         System.exit(0);
-                    }catch(IllegalArgumentException e){
+                    } catch (IllegalArgumentException e) {
                         bufferedWriter.write("This argument is not recognised)");
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
                     }
-//                if(!adminCheck(this)){
-//                    try{
-//                        command = ClientCommands.create(commandFromClient)
-//                    }
-//
-//                }
+                }
+                else{
+                        try {
+                            clientCommand = ClientCommands.create(commandFromClient);
+                            String message = clientCommand.execute(this, world);
+                            bufferedWriter.write(message);
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                        } catch (IllegalArgumentException e) {
+                            try {
+                                bufferedWriter.write("This argument is not recognised)");
+                                bufferedWriter.newLine();
+                                bufferedWriter.flush();
+                            }catch(IOException f) {
+                                System.out.println("ioexception f");
+                        }
+
+                }
                 }
                  // here we can handleCommand
             } catch (IOException e) {
@@ -112,6 +126,11 @@ public class ClientHandler implements Runnable{
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }
         }
+    }
+
+
+    public void addRobot(Robot robot){
+        robots.add(robot);
     }
 
     public ArrayList<Robot> getRobots(){
