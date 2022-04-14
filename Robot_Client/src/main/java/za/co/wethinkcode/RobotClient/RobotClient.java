@@ -1,5 +1,6 @@
 package za.co.wethinkcode.RobotClient;
 
+import za.co.wethinkcode.RobotClient.AdminCommands.AdminCommands;
 import za.co.wethinkcode.RobotClient.ClientCommands.ClientCommands;
 
 import java.io.*;
@@ -49,6 +50,7 @@ public class RobotClient {
     }
 
     public void sendCommand(){
+        String message;
         try{
             bufferedWriter.write(userName);
             bufferedWriter.newLine();
@@ -57,8 +59,13 @@ public class RobotClient {
             while(socket.isConnected()){
                 try {
                     String messageToSend = scanner.nextLine();
-                    ClientCommands command = ClientCommands.create(messageToSend);
-                    String message = command.execute();
+                    if(userName.equals("admin")){
+                        AdminCommands adminCommand = AdminCommands.create(messageToSend);
+                         message = adminCommand.execute();
+                    }else{
+                        ClientCommands command = ClientCommands.create(messageToSend);
+                         message = command.execute();
+                    }
                     System.out.println(message);
                     bufferedWriter.write(message);
                     bufferedWriter.newLine();
