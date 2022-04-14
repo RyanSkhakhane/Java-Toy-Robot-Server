@@ -13,7 +13,9 @@ public class Robots extends ServerCommand{
         robots.add(new Robot(world, "Matt", "normal"));
         robots.add(new Robot(world, "Jill", "normal"));
         robots.add(new Robot(world, "Cindy", "normal"));
-        System.out.println(robots.get(0).getRobotName());
-        System.out.println(robots.get(0).getRobotState());
+        for (int i = 0; i <= robots.size(); i++) {
+            System.out.println(robots.get(i).getRobotName());
+            System.out.println(robots.get(i).getRobotState());
+        }
     }
 }

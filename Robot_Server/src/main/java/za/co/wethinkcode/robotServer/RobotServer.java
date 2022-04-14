@@ -1,5 +1,7 @@
 package za.co.wethinkcode.robotServer;
 
+import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
+
 import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
@@ -25,6 +27,7 @@ public class RobotServer {
                 Thread thread = new Thread(clientHandler);
                 thread.start();
             }
+
         }catch (IOException e) {
             closeServerSocket();
         }
