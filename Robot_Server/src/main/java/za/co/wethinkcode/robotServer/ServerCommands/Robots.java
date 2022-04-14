@@ -9,10 +9,6 @@ import java.util.ArrayList;
 public class Robots extends ServerCommand{
     @Override
     public void execute(ArrayList<ClientHandler> users, ArrayList<Robot> robots, World world) {
-        robots.add(new Robot(world, "Jack", "normal"));
-        robots.add(new Robot(world, "Matt", "normal"));
-        robots.add(new Robot(world, "Jill", "normal"));
-        robots.add(new Robot(world, "Cindy", "normal"));
         for (int i = 0; i <= robots.size() - 1; i++) {
             System.out.println(robots.get(i).getRobotName());
             System.out.println(robots.get(i).getRobotState());

@@ -33,36 +33,6 @@ public class RobotServer {
         }
     }
 
-//    public void listenForMessage() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                String instruction;
-//                ServerCommands command;
-//                // While there is still a connection with the server, continue to listen for messages on a separate thread.
-//                while (!serverSocket.isClosed()) {
-//                    try {
-//                        Socket socket = new Socket("10.200.108.209", 1234);
-//                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//                        BufferedWriter bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-//                        // Get the messages sent from other users and print it to the console.
-//                        String messageToSend = scanner.nextLine();
-//                        bufferedWriter.write(messageToSend);
-//                        bufferedWriter.newLine();
-//                        bufferedWriter.flush();
-//                        instruction = bufferedReader.readLine();
-//                        System.out.println(instruction);
-//                        command = ServerCommands.create(instruction);
-//                        command.execute();
-//                    } catch (IOException e) {
-//                        // Close everything gracefully.
-//                        closeServerSocket();
-//                    }
-//                }
-//            }
-//        }).start();
-//    }
 
     public void closeServerSocket() {
         try {

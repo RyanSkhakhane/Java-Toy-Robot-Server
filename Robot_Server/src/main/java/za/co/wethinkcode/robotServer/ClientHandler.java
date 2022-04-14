@@ -1,6 +1,7 @@
 package za.co.wethinkcode.robotServer;
 
 import za.co.wethinkcode.robotServer.ClientCommands.ClientCommands;
+import za.co.wethinkcode.robotServer.ServerCommands.Quit;
 import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
 import za.co.wethinkcode.robotServer.World.World;
 
@@ -79,6 +80,9 @@ public class ClientHandler implements Runnable{
                     System.out.println("admin access requested granting admin commands");
                     try {
                         command = ServerCommand.create(commandFromClient);
+                        if(command instanceof Quit){
+
+                        }
                         command.execute(users, robots, world);
                     } catch (IllegalArgumentException e) {
                         bufferedWriter.write("This argument is not recognised)");
@@ -116,11 +120,9 @@ public class ClientHandler implements Runnable{
     public void broadcastMessage(String messageToBroadcast){
         for(ClientHandler clientHandler : users) {
             try {
-                if (!clientHandler.getClientUsername().equals(clientUsername)) {
                     clientHandler.bufferedWriter.write(messageToBroadcast);
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
-                }
             }catch(IOException e) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }
