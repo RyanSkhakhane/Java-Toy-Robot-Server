@@ -134,9 +134,11 @@ public class ClientHandler implements Runnable{
         robots.add(robot);
     }
 
+
     public ArrayList<Robot> getRobots(){
         return robots;
     }
+
     public String getClientUsername(){
         return clientUsername;
     }

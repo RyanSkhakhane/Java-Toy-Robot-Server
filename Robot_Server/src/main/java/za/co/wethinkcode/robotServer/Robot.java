@@ -37,7 +37,7 @@ public class Robot {
 
     public String getRobotState(){
         return "Position [" + currentPosition.getX() + "," + currentPosition.getY() + "] \n" +
-                "Direction [" + currentDirection + " ]";
+                "Direction [" + currentDirection + "]";
     }
 
     public Position getCurrentPosition() {

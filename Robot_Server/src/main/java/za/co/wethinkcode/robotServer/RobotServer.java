@@ -90,7 +90,6 @@ public class RobotServer {
 
         } catch (NumberFormatException e) {
             System.out.println("you need to input a 4 digit number.");
-
         }
 
         return false;
