@@ -1,5 +1,7 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot;
@@ -17,15 +19,27 @@ public class Launch extends ClientCommands {
 
 
     @Override
-    public String execute(ClientHandler clienthandler, World world) {
+    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
         Robot robot = new Robot(world, getArgument2(), getArgument());
         Position freePosition = findFreeSpace(world);
         robot.setRobotPosition(freePosition.getX(),freePosition.getY());
 //        clienthandler.addRobot(robot);
         clienthandler.robots.add(robot);
-        System.out.println(robot.getCurrentPosition().getX()+ robot.getCurrentPosition().getY());
-        return "Your robot (" + robot.getRobotName() + ") has been launched into the world at " +
-                "position[" + robot.getCurrentPosition().getX() + "," + robot.getCurrentPosition().getY() + "]";
+        return responseFormulator(robot, world);
+//        return "Your robot (" + robot.getRobotName() + ") has been launched into the world at " +
+//                "position[" + robot.getCurrentPosition().getX() + "," + robot.getCurrentPosition().getY() + "]";
+    }
+
+    private String responseFormulator(Robot robot, World world){
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
+        StateRespone stateRespone = new StateRespone(position, robot.getCurrentDirection().toString(),
+                robot.getShields(), robot.getShots(), robot.getStatus());
+        DataResponse dataResponse = new DataResponse(position, 0, 0, 0, 0);
+        LaunchResponse launchResponse = new LaunchResponse("OK", dataResponse, stateRespone);
+        return gson.toJson(launchResponse);
     }
 
     private Position findFreeSpace(World world){
@@ -49,6 +63,50 @@ public class Launch extends ClientCommands {
             if(free){
                 return freePosition;
             }
+        }
+    }
+
+    public class LaunchResponse{
+        String result;
+        DataResponse data;
+        StateRespone state;
+        public LaunchResponse(String result, DataResponse data, StateRespone state){
+            this.result = result;
+            this.data = data;
+            this.state = state;
+        }
+    }
+
+    public class DataResponse{
+        int[] position;
+        int visibility;
+        int reload;
+        int repair;
+        int shields;
+
+
+        public DataResponse(int[] position, int visibility, int reload, int repair, int shields){
+            this.position = position;
+            this.visibility = visibility;
+            this.reload = reload;
+            this.repair = repair;
+            this.shields = shields;
+        }
+    }
+
+    public class StateRespone{
+        int[] position;
+        String direction;
+        int shields;
+        int shots;
+        String status;
+
+        public StateRespone(int[] position, String direction, int shields, int shots, String status){
+            this.position = position;
+            this.direction = direction;
+            this.shields = shields;
+            this.shots = shots;
+            this.status = status;
         }
     }
 }

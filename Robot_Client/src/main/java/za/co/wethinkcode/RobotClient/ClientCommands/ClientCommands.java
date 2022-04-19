@@ -35,7 +35,7 @@ public abstract class ClientCommands implements ClientCommandsInterface{
     }
 
 
-    public abstract String execute();
+    public abstract String execute(String robotName);
 
     public static ClientCommands create(String instruction) {
         String[] args = instruction.toLowerCase().trim().split(" ");

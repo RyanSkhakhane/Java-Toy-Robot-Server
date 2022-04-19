@@ -1,8 +1,7 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
-
 import za.co.wethinkcode.robotServer.ClientHandler;
-
 import za.co.wethinkcode.robotServer.World.World;
+import com.google.gson.Gson;
 
 public abstract class ClientCommands implements CommandInterface {
 
@@ -39,14 +38,16 @@ public abstract class ClientCommands implements CommandInterface {
         return argument2;
     }
 
-    public abstract String execute(ClientHandler clienthandler, World world);
+    public abstract String execute(ClientHandler clienthandler, World world, String[] arguments);
 
     public static ClientCommands create(String instruction) {
-        String[] args = instruction.toLowerCase().trim().split(" ");
-        switch (args[0]) {
+        Gson gson = new Gson();
+        RequestMessage requestMessage = gson.fromJson(instruction, RequestMessage.class);
+
+        switch (requestMessage.command) {
             case "launch":
                 System.out.println("Launch command passed");
-                return new Launch(args[1], args[2]);
+                return new Launch(requestMessage.arguments[0], requestMessage.robot);
             case "look":
                 System.out.println("Look command passed");
                 return new Look();
@@ -57,4 +58,6 @@ public abstract class ClientCommands implements CommandInterface {
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }
     }
+
+
 }

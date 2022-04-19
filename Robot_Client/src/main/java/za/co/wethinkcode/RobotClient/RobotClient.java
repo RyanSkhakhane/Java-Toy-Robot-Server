@@ -64,7 +64,7 @@ public class RobotClient {
                          message = adminCommand.execute();
                     }else{
                         ClientCommands command = ClientCommands.create(messageToSend);
-                         message = command.execute();
+                         message = command.execute(userName);
                     }
                     System.out.println(message);
                     bufferedWriter.write(message);

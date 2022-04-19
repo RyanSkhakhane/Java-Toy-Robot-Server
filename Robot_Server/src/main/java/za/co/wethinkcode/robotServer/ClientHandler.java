@@ -1,6 +1,8 @@
 package za.co.wethinkcode.robotServer;
 
+import com.google.gson.Gson;
 import za.co.wethinkcode.robotServer.ClientCommands.ClientCommands;
+import za.co.wethinkcode.robotServer.ClientCommands.RequestMessage;
 import za.co.wethinkcode.robotServer.ServerCommands.Quit;
 import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
 import za.co.wethinkcode.robotServer.World.World;
@@ -13,6 +15,8 @@ public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> users = new ArrayList<>();
     public static ArrayList<Robot> robots = new ArrayList<>();
     World world = new World(robots);
+    Gson gson = new Gson();
+    RequestMessage requestMessage;
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -93,7 +97,8 @@ public class ClientHandler implements Runnable{
                 else{
                         try {
                             clientCommand = ClientCommands.create(commandFromClient);
-                            String message = clientCommand.execute(this, world);
+                            requestMessage = gson.fromJson(commandFromClient, RequestMessage.class);
+                            String message = clientCommand.execute(this, world, requestMessage.arguments);
                             bufferedWriter.write(message);
                             bufferedWriter.newLine();
                             bufferedWriter.flush();

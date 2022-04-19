@@ -13,6 +13,8 @@ class PositionTest {
         assertEquals(20, p.getY());
 
     }
+
+
     @Test
     public void equality() {
         assertEquals(new Position(-44, 63), new Position(-44, 63));
@@ -20,6 +22,8 @@ class PositionTest {
         assertNotEquals(new Position(-44, 63), new Position(-44, 0));
         assertNotEquals(new Position(-44, 63), new Position(0, 0));
     }
+
+
     @Test
     public void insideRectangularRegion() {
         Position topLeft = new Position(-20, 20);
