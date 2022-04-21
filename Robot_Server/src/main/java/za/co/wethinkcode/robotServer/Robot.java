@@ -61,4 +61,23 @@ public class Robot {
     public Position getCurrentPosition() {
         return currentPosition;
     }
+
+    public void updatePosition(int steps) {
+        switch (currentDirection) {
+            case NORTH:
+                currentPosition = new Position(currentPosition.getX(), currentPosition.getY() + steps);
+                break;
+            case SOUTH:
+                currentPosition = new Position(currentPosition.getX(), currentPosition.getY() - steps);
+                break;
+            case EAST:
+                currentPosition = new Position(currentPosition.getX() + steps, currentPosition.getY());
+                break;
+            case WEST:
+                currentPosition = new Position(currentPosition.getX() - steps, currentPosition.getY());
+                break;
+        }
+    }
+
+
 }
