@@ -77,6 +77,42 @@ public class Robot {
                 currentPosition = new Position(currentPosition.getX() - steps, currentPosition.getY());
                 break;
         }
+
+    }
+
+    public void updateDirection(boolean right){
+        if(right){
+            switch (currentDirection){
+                case NORTH:
+                    currentDirection = Direction.EAST;
+                    break;
+                case EAST:
+                    currentDirection = Direction.SOUTH;
+                    break;
+                case SOUTH:
+                    currentDirection = Direction.WEST;
+                    break;
+                case WEST:
+                    currentDirection = Direction.NORTH;
+                    break;
+
+            }
+        }else {
+            switch (currentDirection){
+                case NORTH:
+                    currentDirection = Direction.WEST;
+                    break;
+                case WEST:
+                    currentDirection = Direction.SOUTH;
+                    break;
+                case SOUTH:
+                    currentDirection = Direction.EAST;
+                    break;
+                case EAST:
+                    currentDirection = Direction.NORTH;
+                    break;
+            }
+        }
     }
 
 
