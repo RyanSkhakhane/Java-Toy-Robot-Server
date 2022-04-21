@@ -81,6 +81,8 @@ public class Robot {
     }
 
     public void updateDirection(boolean right){
+        //This section is to account for if the robot is turning right.
+        //If it is facing NORTH and turns to the right is then facing east and so forth
         if(right){
             switch (currentDirection){
                 case NORTH:
