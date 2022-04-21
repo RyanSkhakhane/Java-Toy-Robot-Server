@@ -100,6 +100,8 @@ public class Robot {
 
             }
         }else {
+            //This section is to account for if the robot is turning left.
+            //If it is facing NORTH and turns to the left is then facing west and so forth
             switch (currentDirection){
                 case NORTH:
                     currentDirection = Direction.WEST;
