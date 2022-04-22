@@ -10,7 +10,7 @@ public class Dump extends ServerCommand {
     @Override
     public void execute(ArrayList<ClientHandler> users, ArrayList<Robot> robots, World world) {
         world.showObstacles();
-
+        System.out.println("ROBOTS:");
         if (robots.size() == 0) {
             System.out.println("There are no robots in the world");
         } else {

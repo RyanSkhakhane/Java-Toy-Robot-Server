@@ -15,8 +15,8 @@ public class State extends ClientCommands{
                 .create();
         String[] arguments = {};
         StateCommandJson stateCommandJson = new StateCommandJson(robotName, "state", arguments);
-        String status = gson.toJson(stateCommandJson);
-        System.out.println(status);
+//        String status = gson.toJson(stateCommandJson);
+//        System.out.println(status);
         return gson.toJson(stateCommandJson);
     }
 

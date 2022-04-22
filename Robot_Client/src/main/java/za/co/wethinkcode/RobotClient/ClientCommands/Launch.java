@@ -21,6 +21,7 @@ public class Launch extends ClientCommands{
         LaunchCommandJson launchCommandJson = new LaunchCommandJson(robotName, commandName, arguments);
         Gson gson = new Gson();
         String json = gson.toJson(launchCommandJson);
+        System.out.println(json);
         return json;
     }
 
@@ -33,19 +34,6 @@ public class Launch extends ClientCommands{
             this.robot = robotName;
             this.command = robotCommand;
             this.arguments = launchArguments;
-        }
-    }
-
-
-    public class Arguments{
-        String robotKind;
-        Integer maxShieldStrength;
-        Integer maxShots;
-
-        public Arguments(String robotKind, Integer maxShieldStrength, Integer maxShots){
-            this.robotKind = robotKind;
-            this.maxShieldStrength = maxShieldStrength;
-            this.maxShots = maxShots;
         }
     }
 

@@ -3,6 +3,7 @@ package za.co.wethinkcode.robotServer;
 import org.junit.jupiter.api.Test;
 import za.co.wethinkcode.robotServer.World.World;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +12,7 @@ class RobotTest {
 
 
     @Test
-    void getRobotState(){
+    void getRobotState() throws FileNotFoundException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
         Robot test = new Robot(worldTest, "Bob", "normal");

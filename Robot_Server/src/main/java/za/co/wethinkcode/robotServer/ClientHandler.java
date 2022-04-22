@@ -14,14 +14,22 @@ import java.util.ArrayList;
 public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> users = new ArrayList<>();
     public static ArrayList<Robot> robots = new ArrayList<>();
-    World world = new World(robots);
+    public static World world;
+
+    static {
+        try {
+            world = new World(robots);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     Gson gson = new Gson();
     RequestMessage requestMessage;
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String clientUsername;
-    ServerCommand command;
     ClientCommands clientCommand;
 
     public ClientHandler(Socket socket) {
@@ -79,22 +87,6 @@ public class ClientHandler implements Runnable{
                 // Read what the client sent and then send it to every other client.
                 commandFromClient = bufferedReader.readLine();
                 System.out.println(commandFromClient);
-//                broadcastMessage(commandFromClient);
-                if(adminCheck(this)) {
-                    System.out.println("admin access requested granting admin commands");
-                    try {
-                        command = ServerCommand.create(commandFromClient);
-                        if(command instanceof Quit){
-
-                        }
-                        command.execute(users, robots, world);
-                    } catch (IllegalArgumentException e) {
-                        bufferedWriter.write("This argument is not recognised)");
-                        bufferedWriter.newLine();
-                        bufferedWriter.flush();
-                    }
-                }
-                else{
                         try {
                             clientCommand = ClientCommands.create(commandFromClient);
                             requestMessage = gson.fromJson(commandFromClient, RequestMessage.class);
@@ -110,10 +102,7 @@ public class ClientHandler implements Runnable{
                             }catch(IOException f) {
                                 System.out.println("ioexception f");
                         }
-
                 }
-                }
-                 // here we can handleCommand
             } catch (IOException e) {
                 // Close everything gracefully.
                 closeEverything(socket, bufferedReader, bufferedWriter);
@@ -160,10 +149,4 @@ public class ClientHandler implements Runnable{
         return bufferedWriter;
     }
 
-    public boolean adminCheck(ClientHandler clientHandler){
-        if(clientHandler.getClientUsername().equals("admin")){
-            return true;
-        }
-        return false;
-    }
 }
