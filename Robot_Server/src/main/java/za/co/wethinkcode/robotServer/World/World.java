@@ -2,11 +2,8 @@ package za.co.wethinkcode.robotServer.World;
 
 import com.google.gson.Gson;
 import za.co.wethinkcode.robotServer.ConfigFileJson;
-import za.co.wethinkcode.robotServer.Direction;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -14,8 +11,8 @@ import java.util.Arrays;
 
 public class World {
 
-    protected final Position TOP_LEFT = new Position(-5, 5);
-    protected final Position BOTTOM_RIGHT = new Position(5, -5);
+    protected final Position TOP_LEFT = new Position(-(getEdge(true)), getEdge(false));
+    protected final Position BOTTOM_RIGHT = new Position(getEdge(true), -(getEdge(false)));
     public static final Position CENTRE = new Position(0, 0);
     protected SquareObstacle[] OBSTACLES;
     protected ArrayList<Robot> robots;
@@ -26,15 +23,9 @@ public class World {
         this.robots = robotArrayList;
     }
 
-
-//    public SquareObstacle[] makeObstacles(){
-//        SquareObstacle[] obstaclesList = {new SquareObstacle(0,0)};
-//        return obstaclesList;
-//    }
     public SquareObstacle[] readObstacles() throws FileNotFoundException {
         Gson gson = new Gson();
         try {
-            File file = new File("Config.json");
             FileReader fileReader = new FileReader("Config.json");
             ConfigFileJson json = gson.fromJson(fileReader, ConfigFileJson.class);
             return json.getObstacles();
@@ -53,6 +44,25 @@ public class World {
 
         }
     }
+
+    public int getEdge(boolean xCheck){
+        Gson gson = new Gson();
+        try {
+            FileReader fileReader = new FileReader("Config.json");
+            ConfigFileJson json = gson.fromJson(fileReader, ConfigFileJson.class);
+            ConfigFileJson.GridJson grid = json.getGridSize();
+            if (xCheck){
+                return grid.getX();
+            }else{
+                return grid.getY();
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No config file present");
+        }
+        return 0;
+    }
+
 
     public SquareObstacle[] getOBSTACLES(){
         return OBSTACLES;

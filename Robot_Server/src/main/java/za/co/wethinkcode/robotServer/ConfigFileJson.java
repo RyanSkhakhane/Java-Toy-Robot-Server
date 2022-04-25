@@ -46,13 +46,21 @@ public class ConfigFileJson {
         }
 
 
-    static class GridJson{
+    public static class GridJson{
         int x;
         int y;
 
         public GridJson(int x, int y){
             this.x = x;
             this.y = y;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
         }
     }
     }

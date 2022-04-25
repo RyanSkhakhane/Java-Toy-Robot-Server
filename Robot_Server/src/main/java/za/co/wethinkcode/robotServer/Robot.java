@@ -14,6 +14,7 @@ public class Robot {
     private Position currentPosition;
     private int shields;
     private int shots;
+    private int shotDistance;
     private String status;
 
     public Robot(World world, String robotName, String robotType){
@@ -23,7 +24,8 @@ public class Robot {
         this.robotType = robotType;
         this.world = world;
         this.shields = 0;
-        this.shots = 0;
+        this.shots = 3;
+        this.shotDistance = 3;
         this.status = "normal";
     }
     public void setRobotPosition(int x , int y){
@@ -92,6 +94,10 @@ public class Robot {
 
     public String getStatus() {
         return status;
+    }
+
+    public int getShotDistance(){
+        return shotDistance;
     }
 
     public Position getCurrentPosition() {
