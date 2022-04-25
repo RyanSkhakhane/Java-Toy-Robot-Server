@@ -1,6 +1,7 @@
 package za.co.wethinkcode.RobotClient.ClientCommands;
 
 
+
 public class ForwardCommand {
     int steps;
 
@@ -8,7 +9,4 @@ public class ForwardCommand {
         this.steps = steps;
     }
 
-    public void execute(Robots robot) {
-
-    }
 }
