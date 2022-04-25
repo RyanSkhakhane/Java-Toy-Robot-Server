@@ -64,7 +64,8 @@ public class Robot {
     enum UpdateResponse {
         SUCCESS, //position was updated successfully
         FAILED_OUTSIDE_WORLD, //robot will go outside world limits if allowed, so it failed to update the position
-        FAILED_OBSTRUCTED, //robot obstructed by at least one obstacle, thus cannot proceed.
+        FAILED_OBSTRUCTED_OBSTACLE, //robot obstructed by at least one obstacle, thus cannot proceed.
+        FAILED_OBSTRUCTED_ROBOT
     }
 
     public String getRobotName(){
