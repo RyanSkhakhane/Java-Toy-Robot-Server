@@ -2,10 +2,10 @@ package za.co.wethinkcode.robotServer;
 
 import za.co.wethinkcode.robotServer.World.World;
 
+import java.util.Arrays;
+
 public class Robot {
 
-    protected final Position TOP_LEFT = new Position(-5, 5);
-    protected final Position BOTTOM_RIGHT = new Position(5, -5);
     public static final Direction STARTDIRECTION = Direction.NORTH;
     private Direction currentDirection;
     private String robotName;
@@ -33,39 +33,11 @@ public class Robot {
     }
 
 
-//    public UpdateResponse updatePosition(int nrSteps) {
-//
-//        int newX = this.position.getX();
-//        int newY = this.position.getY();
-//
-//        if (za.co.wethinkcode.toyrobot.world.IWorld.Direction.UP.equals(this.currentDirection)) {
-//            newY = newY + nrSteps;
-//        } else if (za.co.wethinkcode.toyrobot.world.IWorld.Direction.RIGHT.equals(this.currentDirection)) {
-//            newX = newX + nrSteps;
-//        } else if (za.co.wethinkcode.toyrobot.world.IWorld.Direction.DOWN.equals(this.currentDirection)) {
-//            newY = newY - nrSteps;
-//        } else if (za.co.wethinkcode.toyrobot.world.IWorld.Direction.LEFT.equals(this.currentDirection)) {
-//            newX = newX - nrSteps;
-//        }
-//
-//        Position newPosition = new Position(newX, newY);
-//        for(int i=0; i< obstacles.size(); i++){
-//            if(obstacles.get(i).blocksPath(this.position, newPosition)){
-//                return UpdateResponse.FAILED_OBSTRUCTED;
-//            }
-//        }
-//        if (isNewPositionAllowed(newPosition)) {
-//            this.position = newPosition;
-//            return UpdateResponse.SUCCESS;
-//        }
-//        return UpdateResponse.FAILED_OUTSIDE_WORLD;
-//    }
-
     enum UpdateResponse {
         SUCCESS, //position was updated successfully
         FAILED_OUTSIDE_WORLD, //robot will go outside world limits if allowed, so it failed to update the position
         FAILED_OBSTRUCTED_OBSTACLE, //robot obstructed by at least one obstacle, thus cannot proceed.
-        FAILED_OBSTRUCTED_ROBOT
+        FAILED_OBSTRUCTED_ROBOT // robot obstructed by at least one robot, thus cannot proceed.
     }
 
     public String getRobotName(){
@@ -105,22 +77,44 @@ public class Robot {
         return currentPosition;
     }
 
-    public void updatePosition(int steps) {
+    public UpdateResponse updatePosition(int steps) {
+
+        int newX = this.currentPosition.getX();
+        int newY = this.currentPosition.getY();
+
+
         switch (currentDirection) {
             case NORTH:
-                currentPosition = new Position(currentPosition.getX(), currentPosition.getY() + steps);
+                newY = newY + steps;
                 break;
             case SOUTH:
-                currentPosition = new Position(currentPosition.getX(), currentPosition.getY() - steps);
+                newY = newY - steps;
                 break;
             case EAST:
-                currentPosition = new Position(currentPosition.getX() + steps, currentPosition.getY());
+                newX = newX + steps;
                 break;
             case WEST:
-                currentPosition = new Position(currentPosition.getX() - steps, currentPosition.getY());
+                newX = newX - steps;
                 break;
         }
-
+        Position newPosition = new Position(newX, newY);
+        for (int i = 0; i < world.getOBSTACLES().length; i++) {
+            if (Arrays.asList(world.getOBSTACLES()).get(i).blocksPath(this.currentPosition, newPosition)) {
+                return UpdateResponse.FAILED_OBSTRUCTED_OBSTACLE;
+            }
+        }
+        for (int i = 0; i < world.getRobots().size(); i++){
+            if (!world.getRobots().get(i).getRobotName().equals(this.robotName)){
+                if(world.getRobots().get(i).robotBlocksPath(this.currentPosition, newPosition, world.getRobots().get(i))){
+                    return UpdateResponse.FAILED_OBSTRUCTED_ROBOT;
+                }
+            }
+        }
+        if (isNewPositionAllowed(newPosition)) {
+            this.currentPosition = newPosition;
+            return UpdateResponse.SUCCESS;
+        }
+        return UpdateResponse.FAILED_OUTSIDE_WORLD;
     }
 
     public void updateDirection(boolean right){
@@ -161,6 +155,58 @@ public class Robot {
             }
         }
     }
+
+    public boolean robotBlocksPosition(Position position, Robot robot) {
+        if(robot.getCurrentPosition().getX() == position.getX() && robot.getCurrentPosition().getY() == position.getY()){
+                return true;
+        }
+        return false;
+    }
+
+    public boolean robotBlocksPath(Position a, Position b , Robot robot){
+        if(a.getX() > b.getX()){
+            int path = a.getX() - b.getX();
+            for(int i = 0; i < path; i++){
+                if(this.robotBlocksPosition(new Position(b.getX()+i, b.getY()), robot)){
+                    return true;
+                }
+            }
+        }
+        else if(a.getX() < b.getX()){
+            int path = b.getX() - a.getX();
+            for(int i = 0; i < path; i++){
+                if(this.robotBlocksPosition(new Position(a.getX()+i, a.getY()), robot)){
+                    return true;
+                }
+            }
+        }
+        else if(a.getY() > b.getY()){
+            int path = a.getY() - b.getY();
+            for(int i = 0; i < path; i++){
+                if(this.robotBlocksPosition(new Position(b.getX(), b.getY()+ i), robot)){
+                    return true;
+                }
+            }
+        }
+        else if(a.getY() < b.getY()){
+            int path = b.getY() - a.getY();
+            for(int i = 0; i < path; i++){
+                if(this.robotBlocksPosition(new Position(a.getX(), a.getY()+ i), robot)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isNewPositionAllowed(Position position) {
+        if (position.isIn(world.getTOP_LEFT(), world.getBOTTOM_RIGHT())) {
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 }

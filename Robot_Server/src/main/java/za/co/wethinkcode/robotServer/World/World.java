@@ -64,6 +64,8 @@ public class World {
     }
 
 
+
+
     public SquareObstacle[] getOBSTACLES(){
         return OBSTACLES;
     }
