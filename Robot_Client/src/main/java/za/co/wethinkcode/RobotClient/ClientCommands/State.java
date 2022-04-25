@@ -15,8 +15,6 @@ public class State extends ClientCommands{
                 .create();
         String[] arguments = {};
         StateCommandJson stateCommandJson = new StateCommandJson(robotName, "state", arguments);
-        String status = gson.toJson(stateCommandJson);
-        System.out.println(status);
         return gson.toJson(stateCommandJson);
     }
 //
@@ -38,10 +36,10 @@ public class State extends ClientCommands{
         String command;
         String[] arguments;
 
-        private StateCommandJson(String robotName, String robotCommand, String[] launchArguments){
+        private StateCommandJson(String robotName, String robotCommand, String[] stateArguments){
             this.robot = robotName;
             this.command = robotCommand;
-            this.arguments = launchArguments;
+            this.arguments = stateArguments;
         }
     }
 

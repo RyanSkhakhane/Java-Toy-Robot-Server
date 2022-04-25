@@ -11,4 +11,15 @@ public class RequestMessage {
         this.arguments = arguments;
     }
 
+    public String getRobot() {
+        return robot;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public String[] getArguments() {
+        return arguments;
+    }
 }

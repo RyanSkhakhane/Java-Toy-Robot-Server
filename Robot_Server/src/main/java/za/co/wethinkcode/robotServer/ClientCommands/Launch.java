@@ -23,14 +23,12 @@ public class Launch extends ClientCommands {
         Robot robot = new Robot(world, getArgument2(), getArgument());
         Position freePosition = findFreeSpace(world);
         robot.setRobotPosition(freePosition.getX(),freePosition.getY());
-//        clienthandler.addRobot(robot);
         clienthandler.robots.add(robot);
-        return responseFormulator(robot, world);
-//        return "Your robot (" + robot.getRobotName() + ") has been launched into the world at " +
-//                "position[" + robot.getCurrentPosition().getX() + "," + robot.getCurrentPosition().getY() + "]";
+        return responseFormulator(robot);
+
     }
 
-    private String responseFormulator(Robot robot, World world){
+    private String responseFormulator(Robot robot){
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
