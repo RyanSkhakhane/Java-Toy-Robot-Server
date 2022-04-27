@@ -33,7 +33,7 @@ public class Robot {
     }
 
 
-    enum UpdateResponse {
+    public enum UpdateResponse {
         SUCCESS, //position was updated successfully
         FAILED_OUTSIDE_WORLD, //robot will go outside world limits if allowed, so it failed to update the position
         FAILED_OBSTRUCTED_OBSTACLE, //robot obstructed by at least one obstacle, thus cannot proceed.
@@ -206,7 +206,7 @@ public class Robot {
         return false;
     }
 
-
-
-
+    public void setCurrentDirection(Direction currentDirection) {
+        this.currentDirection = currentDirection;
+    }
 }

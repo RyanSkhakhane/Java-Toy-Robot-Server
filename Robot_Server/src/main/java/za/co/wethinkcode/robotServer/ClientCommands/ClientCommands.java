@@ -50,7 +50,7 @@ public abstract class ClientCommands implements CommandInterface {
                 return new Launch(requestMessage.arguments[0], requestMessage.robot);
             case "look":
                 System.out.println("Look command passed");
-                return new Look();
+                return new Look(requestMessage.robot);
             case "state":
                 System.out.println("State command passed");
                 return new State();

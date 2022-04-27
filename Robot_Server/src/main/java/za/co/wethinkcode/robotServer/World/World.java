@@ -13,6 +13,7 @@ public class World {
 
     protected final Position TOP_LEFT = new Position(-(getEdge(true)), getEdge(false));
     protected final Position BOTTOM_RIGHT = new Position(getEdge(true), -(getEdge(false)));
+    protected final int VISIBILITY = getVISIBILITY();
     public static final Position CENTRE = new Position(0, 0);
     protected SquareObstacle[] OBSTACLES;
     protected ArrayList<Robot> robots;
@@ -63,6 +64,17 @@ public class World {
         return 0;
     }
 
+    public int getVISIBILITY() {
+        Gson gson = new Gson();
+        try {
+            FileReader fileReader = new FileReader("Config.json");
+            ConfigFileJson json = gson.fromJson(fileReader, ConfigFileJson.class);
+            return json.getVisibility();
+        } catch (FileNotFoundException e) {
+            System.out.println("No config file present");
+        }
+        return 5;
+    }
 
 
 
