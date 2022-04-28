@@ -42,6 +42,7 @@ public abstract class ClientCommands implements CommandInterface {
 
     public static ClientCommands create(String instruction) {
         Gson gson = new Gson();
+        System.out.println(instruction);
         RequestMessage requestMessage = gson.fromJson(instruction, RequestMessage.class);
 
         switch (requestMessage.command) {
@@ -53,7 +54,8 @@ public abstract class ClientCommands implements CommandInterface {
                 return new Look(requestMessage.robot);
             case "state":
                 System.out.println("State command passed");
-                return new State();
+                return new State(requestMessage.robot);
+
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }

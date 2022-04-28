@@ -205,8 +205,8 @@ public class RobotServer {
         ArrayList<SquareObstacle> obstaclesArrayList = new ArrayList<>();
         while(obstaclesArrayList.size()!= obstaclesAmount){
             sharesPosition = false;
-            SquareObstacle newObstacle = new SquareObstacle((random.nextInt(xSize/2 - (-xSize/2)) + (-xSize/2)),
-                    random.nextInt(ySize/2 - (-ySize/2)) + (-ySize/2));
+            SquareObstacle newObstacle = new SquareObstacle((random.nextInt(xSize - (-xSize)) + (-xSize)),
+                    random.nextInt(ySize - (-ySize)) + (-ySize));
             for(SquareObstacle squareObstacle : obstaclesArrayList){
                sharesPosition = sharesPosition(squareObstacle, newObstacle);
             }
@@ -223,8 +223,8 @@ public class RobotServer {
     }
 
     static boolean sharesPosition(SquareObstacle existingObstacle , SquareObstacle newObstacle){
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
                 if(newObstacle.getBottomLeftX() + i == existingObstacle.getBottomLeftX() + j) {
                     return true;
                 }

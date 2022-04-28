@@ -11,9 +11,9 @@ import java.util.Arrays;
 
 public class World {
 
-    protected final Position TOP_LEFT = new Position(-(getEdge(true)), getEdge(false));
-    protected final Position BOTTOM_RIGHT = new Position(getEdge(true), -(getEdge(false)));
-    protected final int VISIBILITY = getVISIBILITY();
+    public Position TOP_LEFT = new Position(-(getEdge(true)), getEdge(false));
+    public Position BOTTOM_RIGHT = new Position(getEdge(true), -(getEdge(false)));
+    public final int VISIBILITY;
     public static final Position CENTRE = new Position(0, 0);
     protected SquareObstacle[] OBSTACLES;
     protected ArrayList<Robot> robots;
@@ -22,6 +22,7 @@ public class World {
     public World(ArrayList<Robot> robotArrayList) throws FileNotFoundException {
         this.OBSTACLES = readObstacles();
         this.robots = robotArrayList;
+        this.VISIBILITY = getVISIBILITY();
     }
 
     public SquareObstacle[] readObstacles() throws FileNotFoundException {
@@ -88,6 +89,18 @@ public class World {
 
     public Position getBOTTOM_RIGHT() {
         return BOTTOM_RIGHT;
+    }
+
+    public void setOBSTACLES(SquareObstacle[] OBSTACLES) {
+        this.OBSTACLES = OBSTACLES;
+    }
+
+    public void setTOP_LEFT(Position TOP_LEFT) {
+        this.TOP_LEFT = TOP_LEFT;
+    }
+
+    public void setBOTTOM_RIGHT(Position BOTTOM_RIGHT) {
+        this.BOTTOM_RIGHT = BOTTOM_RIGHT;
     }
 
     public ArrayList<Robot> getRobots() {

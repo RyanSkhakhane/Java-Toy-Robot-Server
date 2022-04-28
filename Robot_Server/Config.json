@@ -1,1 +1,1 @@
-{"gridSize":{"x":5,"y":5},"visibility":2,"obstacles":[{"bottomLeftX":0,"bottomLeftY":1}],"shieldRepairTime":2,"reloadTime":2,"maxShieldStrength":2}
+{"gridSize":{"x":5,"y":5},"visibility":5,"obstacles":[{"bottomLeftX":-5,"bottomLeftY":1},{"bottomLeftX":0,"bottomLeftY":-3},{"bottomLeftX":4,"bottomLeftY":4}],"shieldRepairTime":5,"reloadTime":5,"maxShieldStrength":5}

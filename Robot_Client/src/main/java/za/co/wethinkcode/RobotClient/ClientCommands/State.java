@@ -10,9 +10,7 @@ public class State extends ClientCommands{
     }
 
     public String execute(String robotName) {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+        Gson gson = new Gson();
         String[] arguments = {};
         StateCommandJson stateCommandJson = new StateCommandJson(robotName, "state", arguments);
         return gson.toJson(stateCommandJson);
