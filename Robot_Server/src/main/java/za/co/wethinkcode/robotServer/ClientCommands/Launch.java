@@ -34,7 +34,6 @@ public class Launch extends ClientCommands {
         robot.setRobotPosition(freePosition.getX(),freePosition.getY());
         robot.setCurrentPosition(new Position(0,0));
         return responseFormulator(robot);
-
     }
 
     private String responseFormulator(Robot robot){

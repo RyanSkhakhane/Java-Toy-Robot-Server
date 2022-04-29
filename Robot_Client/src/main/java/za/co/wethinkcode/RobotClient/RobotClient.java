@@ -2,6 +2,7 @@ package za.co.wethinkcode.RobotClient;
 
 
 import za.co.wethinkcode.RobotClient.ClientCommands.ClientCommands;
+import za.co.wethinkcode.RobotClient.ClientCommands.Launch;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,12 +14,16 @@ public class RobotClient {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String userName;
+    public String robotName;
+    public static boolean launchCheck;
 
 
     public RobotClient(Socket socket, String userName) {
         try {
             this.socket = socket;
             this.userName = userName;
+            this.robotName = "";
+            this.launchCheck = false;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
@@ -60,11 +65,25 @@ public class RobotClient {
                 try {
                     String messageToSend = scanner.nextLine();
                     ClientCommands command = ClientCommands.create(messageToSend);
-                    message = command.execute(userName);
-                    System.out.println(message);
-                    bufferedWriter.write(message);
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
+                    if(command instanceof Launch && !launchCheck){
+                        robotName = command.getArgument2();
+                        message = command.execute(robotName);
+                        System.out.println(message);
+                        bufferedWriter.write(message);
+                        bufferedWriter.newLine();
+                        bufferedWriter.flush();
+                    }
+                    else if(command instanceof Launch && launchCheck){
+                        System.out.println("robot already launched");
+                    }
+                    else if(!(command instanceof Launch) && launchCheck){
+                        message = command.execute(robotName);
+                        System.out.println(message);
+                        bufferedWriter.write(message);
+                        bufferedWriter.newLine();
+                        bufferedWriter.flush();
+                    }
+                    
                 }catch(IllegalArgumentException e){
                     System.out.println("invalid command");
                     continue;
@@ -102,7 +121,7 @@ public class RobotClient {
         System.out.print("Enter your username for the group chat: ");
         String username = scanner.nextLine();
         // Create a socket to connect to the server.
-        Socket socket = new Socket("localhost", 1234);
+        Socket socket = new Socket("10.200.108.209", 1234);
         // Pass the socket and give the client a username.
         RobotClient robotClient = new RobotClient(socket, username);
         // Infinite loop to read and send messages.

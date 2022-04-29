@@ -3,6 +3,7 @@ package za.co.wethinkcode.RobotClient.ClientCommands;
 //import com.google.gson.GsonBuilder;
 
 import com.google.gson.Gson;
+import za.co.wethinkcode.RobotClient.RobotClient;
 
 import java.lang.reflect.Array;
 
@@ -22,6 +23,7 @@ public class Launch extends ClientCommands{
         Gson gson = new Gson();
         String json = gson.toJson(launchCommandJson);
         System.out.println(json);
+        RobotClient.launchCheck = true;
         return json;
     }
 
