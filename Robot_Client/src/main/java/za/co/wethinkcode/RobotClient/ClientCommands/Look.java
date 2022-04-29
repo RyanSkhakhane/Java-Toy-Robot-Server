@@ -10,9 +10,7 @@ public class Look extends ClientCommands{
 
     @Override
     public String execute(String robotName) {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+        Gson gson = new Gson();
         String[] arguments = {};
         LookCommandJson lookCommandJson = new LookCommandJson(robotName, "look", arguments);
         String status = gson.toJson(lookCommandJson);
