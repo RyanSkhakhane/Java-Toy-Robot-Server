@@ -209,4 +209,8 @@ public class Robot {
     public void setCurrentDirection(Direction currentDirection) {
         this.currentDirection = currentDirection;
     }
+
+    public void setCurrentPosition(Position currentPosition) {
+        this.currentPosition = currentPosition;
+    }
 }
