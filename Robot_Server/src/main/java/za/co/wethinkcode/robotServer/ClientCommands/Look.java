@@ -108,7 +108,7 @@ public class Look extends ClientCommands{
         Position newPosition = new Position(newX, newY);
         for (int i = 0; i < world.getOBSTACLES().length; i++) {
             if (blocksPath(myRobot.getCurrentPosition(), newPosition, Arrays.asList(world.getOBSTACLES()).get(i))) {
-                ObjectJson object = new ObjectJson(directionCheck(direction), "OBSTACLE", i);
+                ObjectJson object = new ObjectJson(directionCheck(direction), "OBSTACLE", i+ 1);
                 objects.add(object);
                 return true;
             }
@@ -116,7 +116,7 @@ public class Look extends ClientCommands{
         for (int i = 0; i < world.getRobots().size(); i++){
             if (!world.getRobots().get(i).getRobotName().equals(myRobot.getRobotName())){
                 if(robotBlocksPath(myRobot.getCurrentPosition(), newPosition, world.getRobots().get(i))){
-                    ObjectJson object = new ObjectJson(directionCheck(direction), "ROBOT", i);
+                    ObjectJson object = new ObjectJson(directionCheck(direction), "ROBOT", i + 1);
                     objects.add(object);
                     return true;
                 }
@@ -323,7 +323,7 @@ public class Look extends ClientCommands{
                 objects.add(objectJson);
                 break;
             case 4:
-                if((-(world.getBOTTOM_RIGHT().getX()) - (-myRobot.getCurrentPosition().getX()))<= world.VISIBILITY){
+                if(((world.getBOTTOM_RIGHT().getX()) - (myRobot.getCurrentPosition().getX()))<= world.VISIBILITY){
                     objectJson = new ObjectJson(directionCheck(4), "EDGE",
                             -(world.getBOTTOM_RIGHT().getX()) - (-myRobot.getCurrentPosition().getX()));
                     objects.add(objectJson);
