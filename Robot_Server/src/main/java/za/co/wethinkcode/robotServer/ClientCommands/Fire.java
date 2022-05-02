@@ -4,11 +4,10 @@ import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Direction;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot;
-import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
-public class FireCommand extends ClientCommands{
-    public FireCommand(String name) {
+public class Fire extends ClientCommands{
+    public Fire(String name) {
         super(name);
     }
 

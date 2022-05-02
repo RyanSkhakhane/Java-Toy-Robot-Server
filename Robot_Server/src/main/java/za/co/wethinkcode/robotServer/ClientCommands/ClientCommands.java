@@ -55,6 +55,9 @@ public abstract class ClientCommands implements CommandInterface {
             case "state":
                 System.out.println("State command passed");
                 return new State(requestMessage.robot);
+            case "fire":
+                System.out.println("Fire command passed");
+                return new Fire(requestMessage.robot);
 
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
