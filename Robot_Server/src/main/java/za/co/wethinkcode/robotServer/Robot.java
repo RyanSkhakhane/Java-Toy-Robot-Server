@@ -23,7 +23,7 @@ public class Robot {
         this.robotName = robotName;
         this.robotType = robotType;
         this.world = world;
-        this.shields = 0;
+        this.shields = 4;
         this.shots = 3;
         this.shotDistance = 3;
         this.status = "normal";
@@ -212,5 +212,8 @@ public class Robot {
 
     public void setCurrentPosition(Position currentPosition) {
         this.currentPosition = currentPosition;
+    }
+    public void loseShield(){
+        this.shields -= 1;
     }
 }
