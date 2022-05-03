@@ -114,11 +114,10 @@ public class RobotClient {
     }
 
     public static void main(String[] args) throws IOException {
-
-        // Get a username for the user and a socket connection.
+        System.out.print("Welcome to team CPT18 client please enter your username ");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your username for the group chat: ");
         String username = scanner.nextLine();
+        System.out.println("Thank you " + username + " please launch your robot when you are ready.");
         // Create a socket to connect to the server.
         Socket socket = new Socket("10.200.108.209", 1234);
         // Pass the socket and give the client a username.

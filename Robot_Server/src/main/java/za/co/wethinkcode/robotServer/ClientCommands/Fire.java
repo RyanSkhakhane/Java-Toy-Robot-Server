@@ -27,6 +27,11 @@ public class Fire extends ClientCommands {
         for (int i = 0; i < world.getRobots().size(); i++) {
             if (getArgument().equals(world.getRobots().get(i).getRobotName())) {
                 robot = world.getRobots().get(i);
+                if(robot.getShots() == 0){
+                    String noShots = "You have no shots left please reload.";
+                    return noShots;
+                }
+                world.getRobots().get(i).loseShot();
             }
         }
         for (int i = 0; i < world.getRobots().size(); i++) {
@@ -34,12 +39,16 @@ public class Fire extends ClientCommands {
                 if (hitCheck(robot.getShotDistance(), robot, world,
                         world.getRobots().get(i))) {
                     world.getRobots().get(i).loseShield();
-                    StateJson stateJson = new StateJson(world.getRobots().get(i).getShots());
+                    if(world.getRobots().get(i).getShields() == -1){
+                        world.getRobots().get(i).setStatus("Destroyed");
+                    }
+                    StateJson stateJson = new StateJson(robot.getShots());
                     int[] position = {world.getRobots().get(i).getCurrentPosition().getX(), world.getRobots().get(i).getCurrentPosition().getY()};
                     EnemyRobotStateJson enemyRobotStateJson = new EnemyRobotStateJson(position, world.getRobots().get(i).getCurrentDirection().toString(),
                             world.getRobots().get(i).getShields(), world.getRobots().get(i).getShots(), world.getRobots().get(i).getStatus());
                     DataJson dataJson = new DataJson("Hit", shotDistance, world.getRobots().get(i).getRobotName(), enemyRobotStateJson);
                     HitJson hitJson = new HitJson("OK", dataJson, stateJson);
+                    robotDestroyed(clienthandler, world.getRobots().get(i));
                     return gson.toJson(hitJson);
                 }
         }
@@ -94,7 +103,7 @@ public class Fire extends ClientCommands {
     private boolean robotBlocksPath(Position a, Position b, Robot robot) {
         if (a.getX() > b.getX()) {
             int path = a.getX() - b.getX();
-            for (int i = 0; i < path; i++) {
+            for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(b.getX() + i, b.getY()), robot)) {
                     setShotDistance(i);
                     return true;
@@ -102,22 +111,25 @@ public class Fire extends ClientCommands {
             }
         } else if (a.getX() < b.getX()) {
             int path = b.getX() - a.getX();
-            for (int i = 0; i < path; i++) {
+            for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(a.getX() + i, a.getY()), robot)) {
+                    setShotDistance(i);
                     return true;
                 }
             }
         } else if (a.getY() > b.getY()) {
             int path = a.getY() - b.getY();
-            for (int i = 0; i < path; i++) {
+            for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(b.getX(), b.getY() + i), robot)) {
+                    setShotDistance(i);
                     return true;
                 }
             }
         } else if (a.getY() < b.getY()) {
             int path = b.getY() - a.getY();
-            for (int i = 0; i < path; i++) {
+            for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(a.getX(), a.getY() + i), robot)) {
+                    setShotDistance(i);
                     return true;
                 }
             }
@@ -125,8 +137,15 @@ public class Fire extends ClientCommands {
         return false;
     }
 
-    public void setShotDistance(int shotDistance) {
-        this.shotDistance = shotDistance;
+    public static void robotDestroyed(ClientHandler clientHandler, Robot robot){
+        if(robot.getShields() == -1){
+            clientHandler.getRobots().remove(robot);
+            clientHandler.broadcastMessage("ROBOT: "+ robot.getRobotName() + " has been destroyed.");
+        }
+    }
+
+    public void setShotDistance(int shotDistance1) {
+        shotDistance = shotDistance1;
     }
 
     public class HitJson {
@@ -199,5 +218,6 @@ public class Fire extends ClientCommands {
             this.message = message;
         }
     }
+
 }
 
