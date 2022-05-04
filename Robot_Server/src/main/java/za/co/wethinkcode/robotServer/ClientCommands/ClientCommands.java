@@ -61,6 +61,9 @@ public abstract class ClientCommands implements CommandInterface {
             case "forward":
                 System.out.println("Forward command passed");
                 return new Forward(requestMessage.robot, Integer.parseInt(requestMessage.arguments[0]));
+            case "back":
+                System.out.println("Back command passed");
+                return new Back(requestMessage.robot, Integer.parseInt(requestMessage.arguments[0]));
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }
