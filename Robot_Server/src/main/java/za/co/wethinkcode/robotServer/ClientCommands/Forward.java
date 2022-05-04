@@ -49,7 +49,7 @@ public class Forward extends ClientCommands{
 
                         return gson.toJson(movementJson1);
 
-                    case FAILED_OBSTRUCTED_OBSTACLE:
+                    case FAILED_OBSTRUCTED:
                         int[] place = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
 
                         StateJson stateJson2 = new StateJson(place, robot.getCurrentDirection().toString(),
@@ -59,17 +59,6 @@ public class Forward extends ClientCommands{
 
                         MovementJson movementJson2 = new MovementJson("OK", dataJson2, stateJson2);
                         return gson.toJson(movementJson2);
-
-                    case FAILED_OBSTRUCTED_ROBOT:
-                        int[] coordinates = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
-
-                        StateJson stateJson3 = new StateJson(coordinates, robot.getCurrentDirection().toString(),
-                                robot.getShields(), robot.getShots(), robot.getStatus());
-
-                        DataJson dataJson3 = new DataJson("Obstructedx"); //change this
-
-                        MovementJson movementJson3 = new MovementJson("OK", dataJson3, stateJson3);
-                        return gson.toJson(movementJson3);
                 }
             }
         }

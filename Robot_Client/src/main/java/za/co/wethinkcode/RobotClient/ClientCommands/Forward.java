@@ -1,27 +1,38 @@
 package za.co.wethinkcode.RobotClient.ClientCommands;
 
 
+import com.google.gson.Gson;
+
+import javax.swing.*;
 
 public class Forward extends ClientCommands{
-    int steps;
 
-    public Forward(int steps) {
-        super("forward");
-        this.steps = steps;
+
+    public Forward(String steps) {
+        super("forward", steps);
     }
+
 
     @Override
     public String execute(String robotName) {
+        int steps = Integer.parseInt(getArgument());
+        Integer[] arguments = {steps};
 
+        ForwardCommandJson forwardCommandJson = new ForwardCommandJson(robotName, "forward", arguments);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(forwardCommandJson);
+
+        return json;
     }
 
 
-    private class ForwardCommandJson{
+    public class ForwardCommandJson{
         String robot;
         String command;
-        String[] arguments;
+        Integer[] arguments;
 
-        private ForwardCommandJson(String robotName, String robotCommand, String[] launchArguments){
+        public ForwardCommandJson(String robotName, String robotCommand, Integer[] launchArguments){
             this.robot = robotName;
             this.command = robotCommand;
             this.arguments = launchArguments;
