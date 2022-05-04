@@ -33,7 +33,7 @@ class RobotTest {
         worldTest.setOBSTACLES(obstacles);
         worldTest.setTOP_LEFT(new Position(-10, 10));
         worldTest.setBOTTOM_RIGHT(new Position(10, -10));
-        assertEquals(Robot.UpdateResponse.FAILED_OBSTRUCTED_OBSTACLE, test.updatePosition(5));
+        assertEquals(Robot.UpdateResponse.FAILED_OBSTRUCTED, test.updatePosition(5));
         assertEquals(Robot.UpdateResponse.SUCCESS, test.updatePosition(1));
         test.setCurrentDirection(Direction.SOUTH);
         assertEquals(Robot.UpdateResponse.SUCCESS, test.updatePosition(5));

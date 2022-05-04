@@ -1,5 +1,6 @@
 package za.co.wethinkcode.robotServer;
 
+import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.util.Arrays;
@@ -34,10 +35,9 @@ public class Robot {
 
 
     public enum UpdateResponse {
-        SUCCESS, //position was updated successfully
-        FAILED_OUTSIDE_WORLD, //robot will go outside world limits if allowed, so it failed to update the position
-        FAILED_OBSTRUCTED_OBSTACLE, //robot obstructed by at least one obstacle, thus cannot proceed.
-        FAILED_OBSTRUCTED_ROBOT // robot obstructed by at least one robot, thus cannot proceed.
+        SUCCESS,
+        FAILED_OUTSIDE_WORLD,
+        FAILED_OBSTRUCTED;
     }
 
     public String getRobotName(){
@@ -85,31 +85,43 @@ public class Robot {
 
         switch (currentDirection) {
             case NORTH:
+                if(blockCheckNorth(steps)){
+                    return UpdateResponse.FAILED_OBSTRUCTED;
+                }
                 newY = newY + steps;
                 break;
             case SOUTH:
+                if(blockCheckSouth(steps)){
+                    return UpdateResponse.FAILED_OBSTRUCTED;
+                }
                 newY = newY - steps;
                 break;
             case EAST:
+                if(blockCheckEast(steps)){
+                    return UpdateResponse.FAILED_OBSTRUCTED;
+                }
                 newX = newX + steps;
                 break;
             case WEST:
+                if(blockCheckWest(steps)){
+                    return UpdateResponse.FAILED_OBSTRUCTED;
+                }
                 newX = newX - steps;
                 break;
         }
         Position newPosition = new Position(newX, newY);
-        for (int i = 0; i < world.getOBSTACLES().length; i++) {
-            if (Arrays.asList(world.getOBSTACLES()).get(i).blocksPath(this.currentPosition, newPosition)) {
-                return UpdateResponse.FAILED_OBSTRUCTED_OBSTACLE;
-            }
-        }
-        for (int i = 0; i < world.getRobots().size(); i++){
-            if (!world.getRobots().get(i).getRobotName().equals(this.robotName)){
-                if(world.getRobots().get(i).robotBlocksPath(this.currentPosition, newPosition, world.getRobots().get(i))){
-                    return UpdateResponse.FAILED_OBSTRUCTED_ROBOT;
-                }
-            }
-        }
+//        for (int i = 0; i < world.getOBSTACLES().length; i++) {
+//            if (Arrays.asList(world.getOBSTACLES()).get(i).blocksPath(this.currentPosition, newPosition)) {
+//                return UpdateResponse.FAILED_OBSTRUCTED_OBSTACLE;
+//            }
+//        }
+//        for (int i = 0; i < world.getRobots().size(); i++){
+//            if (!world.getRobots().get(i).getRobotName().equals(this.robotName)){
+//                if(world.getRobots().get(i).robotBlocksPath(this.currentPosition, newPosition, world.getRobots().get(i))){
+//                    return UpdateResponse.FAILED_OBSTRUCTED_ROBOT;
+//                }
+//            }
+//        }
         if (isNewPositionAllowed(newPosition)) {
             this.currentPosition = newPosition;
             return UpdateResponse.SUCCESS;
@@ -156,6 +168,82 @@ public class Robot {
         }
     }
 
+    public boolean blockCheckNorth(int steps){
+        for(int i = 1 ; i < steps + 1 ; i++){
+            Position position = new Position(this.currentPosition.getX(), this.currentPosition.getY()+ i);
+            for (SquareObstacle obstacle : world.getOBSTACLES()) {
+                if (obstacle.blocksPosition(position)) {
+                    return true;
+                }
+            }
+            for(Robot robot : world.getRobots()){
+                if(!robot.getRobotName().equals(this.robotName)){
+                    if(robot.robotBlocksPosition(position, robot)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean blockCheckWest(int steps){
+        for(int i = 1 ; i < steps + 1 ; i++){
+            Position position = new Position(this.currentPosition.getX() - i, this.currentPosition.getY());
+            for (SquareObstacle obstacle : world.getOBSTACLES()) {
+                if (obstacle.blocksPosition(position)) {
+                    return true;
+                }
+            }
+            for(Robot robot : world.getRobots()){
+                if(!robot.getRobotName().equals(this.robotName)){
+                    if(robot.robotBlocksPosition(position, robot)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean blockCheckEast(int steps){
+        for(int i = 1 ; i < steps + 1 ; i++){
+            Position position = new Position(this.currentPosition.getX() + i, this.currentPosition.getY());
+            for (SquareObstacle obstacle : world.getOBSTACLES()) {
+                if (obstacle.blocksPosition(position)) {
+                    return true;
+                }
+            }
+            for(Robot robot : world.getRobots()){
+                if(!robot.getRobotName().equals(this.robotName)){
+                    if(robot.robotBlocksPosition(position, robot)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean blockCheckSouth(int steps){
+        for(int i = 1 ; i < steps + 1 ; i++){
+            Position position = new Position(this.currentPosition.getX(), this.currentPosition.getY() - i);
+            for (SquareObstacle obstacle : world.getOBSTACLES()) {
+                if (obstacle.blocksPosition(position)) {
+                    return true;
+                }
+            }
+            for(Robot robot : world.getRobots()){
+                if(!robot.getRobotName().equals(this.robotName)){
+                    if(robot.robotBlocksPosition(position, robot)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean robotBlocksPosition(Position position, Robot robot) {
         if(robot.getCurrentPosition().getX() == position.getX() && robot.getCurrentPosition().getY() == position.getY()){
                 return true;
@@ -163,41 +251,41 @@ public class Robot {
         return false;
     }
 
-    public boolean robotBlocksPath(Position a, Position b , Robot robot){
-        if(a.getX() > b.getX()){
-            int path = a.getX() - b.getX();
-            for(int i = 0; i < path; i++){
-                if(this.robotBlocksPosition(new Position(b.getX()+i, b.getY()), robot)){
-                    return true;
-                }
-            }
-        }
-        else if(a.getX() < b.getX()){
-            int path = b.getX() - a.getX();
-            for(int i = 0; i < path; i++){
-                if(this.robotBlocksPosition(new Position(a.getX()+i, a.getY()), robot)){
-                    return true;
-                }
-            }
-        }
-        else if(a.getY() > b.getY()){
-            int path = a.getY() - b.getY();
-            for(int i = 0; i < path; i++){
-                if(this.robotBlocksPosition(new Position(b.getX(), b.getY()+ i), robot)){
-                    return true;
-                }
-            }
-        }
-        else if(a.getY() < b.getY()){
-            int path = b.getY() - a.getY();
-            for(int i = 0; i < path; i++){
-                if(this.robotBlocksPosition(new Position(a.getX(), a.getY()+ i), robot)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    public boolean robotBlocksPath(Position a, Position b , Robot robot){
+//        if(a.getX() > b.getX()){
+//            int path = a.getX() - b.getX();
+//            for(int i = 0; i < path; i++){
+//                if(this.robotBlocksPosition(new Position(b.getX()+i, b.getY()), robot)){
+//                    return true;
+//                }
+//            }
+//        }
+//        else if(a.getX() < b.getX()){
+//            int path = b.getX() - a.getX();
+//            for(int i = 0; i < path; i++){
+//                if(this.robotBlocksPosition(new Position(a.getX()+i, a.getY()), robot)){
+//                    return true;
+//                }
+//            }
+//        }
+//        else if(a.getY() > b.getY()){
+//            int path = a.getY() - b.getY();
+//            for(int i = 0; i < path; i++){
+//                if(this.robotBlocksPosition(new Position(b.getX(), b.getY()+ i), robot)){
+//                    return true;
+//                }
+//            }
+//        }
+//        else if(a.getY() < b.getY()){
+//            int path = b.getY() - a.getY();
+//            for(int i = 0; i < path; i++){
+//                if(this.robotBlocksPosition(new Position(a.getX(), a.getY()+ i), robot)){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     public boolean isNewPositionAllowed(Position position) {
         if (position.isIn(world.getTOP_LEFT(), world.getBOTTOM_RIGHT())) {
