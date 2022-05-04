@@ -1,5 +1,7 @@
 package za.co.wethinkcode.RobotClient.ClientCommands;
 
+import javax.sound.midi.Soundbank;
+
 public abstract class ClientCommands implements ClientCommandsInterface{
     private final String name;
     private String argument;
@@ -52,6 +54,9 @@ public abstract class ClientCommands implements ClientCommandsInterface{
             case "fire":
                 System.out.println("Fire command passed");
                 return new Fire("robot");
+            case "forward":
+                System.out.println("Forward command passed");
+                return new Forward(Integer.parseInt(args[1]));
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }
