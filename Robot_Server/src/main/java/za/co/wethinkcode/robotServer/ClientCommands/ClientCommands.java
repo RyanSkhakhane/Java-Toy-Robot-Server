@@ -67,6 +67,12 @@ public abstract class ClientCommands implements CommandInterface {
             case "turn":
                 System.out.println("Turn command passed");
                 return new Turn(requestMessage.robot, requestMessage.arguments[0]);
+            case "reload":
+                System.out.println("Reload command passed");
+                return new Reload(requestMessage.robot);
+            case "repair":
+                System.out.println("Repair command passed");
+                return new Repair(requestMessage.robot);
             default:
                 throw new CommandNotFoundException("Unsupported command: " + instruction);
         }

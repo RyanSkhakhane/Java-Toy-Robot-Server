@@ -3,8 +3,9 @@ package za.co.wethinkcode.robotServer.ClientCommands;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientHandler;
-import za.co.wethinkcode.robotServer.World.World;
 import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.World.World;
+
 import java.awt.*;
 
 public class Turn extends ClientCommands{
@@ -21,7 +22,7 @@ public class Turn extends ClientCommands{
                 .create();
         for (Robot robot : clienthandler.getRobots()) {
             if (robot.getRobotName().equals(getArgument())){
-                switch(getArgument2()){
+                switch(turnDirection){
                     case "left":
                         robot.updateDirection(false);
                         break;

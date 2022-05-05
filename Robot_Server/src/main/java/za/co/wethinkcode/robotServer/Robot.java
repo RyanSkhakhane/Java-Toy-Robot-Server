@@ -114,18 +114,7 @@ public class Robot {
                 break;
         }
         Position newPosition = new Position(newX, newY);
-//        for (int i = 0; i < world.getOBSTACLES().length; i++) {
-//            if (Arrays.asList(world.getOBSTACLES()).get(i).blocksPath(this.currentPosition, newPosition)) {
-//                return UpdateResponse.FAILED_OBSTRUCTED_OBSTACLE;
-//            }
-//        }
-//        for (int i = 0; i < world.getRobots().size(); i++){
-//            if (!world.getRobots().get(i).getRobotName().equals(this.robotName)){
-//                if(world.getRobots().get(i).robotBlocksPath(this.currentPosition, newPosition, world.getRobots().get(i))){
-//                    return UpdateResponse.FAILED_OBSTRUCTED_ROBOT;
-//                }
-//            }
-//        }
+
         if (isNewPositionAllowed(newPosition)) {
             this.currentPosition = newPosition;
             return UpdateResponse.SUCCESS;
@@ -255,41 +244,6 @@ public class Robot {
         return false;
     }
 
-//    public boolean robotBlocksPath(Position a, Position b , Robot robot){
-//        if(a.getX() > b.getX()){
-//            int path = a.getX() - b.getX();
-//            for(int i = 0; i < path; i++){
-//                if(this.robotBlocksPosition(new Position(b.getX()+i, b.getY()), robot)){
-//                    return true;
-//                }
-//            }
-//        }
-//        else if(a.getX() < b.getX()){
-//            int path = b.getX() - a.getX();
-//            for(int i = 0; i < path; i++){
-//                if(this.robotBlocksPosition(new Position(a.getX()+i, a.getY()), robot)){
-//                    return true;
-//                }
-//            }
-//        }
-//        else if(a.getY() > b.getY()){
-//            int path = a.getY() - b.getY();
-//            for(int i = 0; i < path; i++){
-//                if(this.robotBlocksPosition(new Position(b.getX(), b.getY()+ i), robot)){
-//                    return true;
-//                }
-//            }
-//        }
-//        else if(a.getY() < b.getY()){
-//            int path = b.getY() - a.getY();
-//            for(int i = 0; i < path; i++){
-//                if(this.robotBlocksPosition(new Position(a.getX(), a.getY()+ i), robot)){
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
     public boolean isNewPositionAllowed(Position position) {
         if (position.isIn(world.getTOP_LEFT(), world.getBOTTOM_RIGHT())) {
@@ -305,6 +259,7 @@ public class Robot {
     public void setCurrentPosition(Position currentPosition) {
         this.currentPosition = currentPosition;
     }
+
     public void loseShield(){
         this.shields -= 1;
     }
@@ -324,4 +279,5 @@ public class Robot {
     public void repairShields(){
         this.shields = maxShields;
     }
+
 }

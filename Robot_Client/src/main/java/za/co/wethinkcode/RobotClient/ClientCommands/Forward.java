@@ -16,7 +16,6 @@ public class Forward extends ClientCommands{
     public String execute(String robotName) {
         int steps = Integer.parseInt(getArgument());
         Integer[] arguments = {steps};
-
         ForwardCommandJson forwardCommandJson = new ForwardCommandJson(robotName, "forward", arguments);
 
         Gson gson = new Gson();

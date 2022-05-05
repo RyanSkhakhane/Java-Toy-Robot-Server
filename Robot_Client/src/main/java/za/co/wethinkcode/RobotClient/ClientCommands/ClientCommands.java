@@ -63,6 +63,12 @@ public abstract class ClientCommands implements ClientCommandsInterface{
             case"turn":
                 System.out.println("Turn command passed");
                   return new Turn(args[1]);
+            case "reload":
+                System.out.println("Reload command passed");
+                return new Reload();
+            case "repair":
+                System.out.println("Repair command passed");
+                return new Repair();
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }

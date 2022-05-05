@@ -25,18 +25,20 @@ public class Reload extends ClientCommands{
                 robot.reloadShots();
                 int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
                 stateJson = new StateJson(position, robot.getCurrentDirection().toString(), robot.getShields(), robot.getShots(), "RELOAD");
-
+                DataJson dataJson = new DataJson("Done");
+                ReloadJson reloadJson = new ReloadJson("OK", dataJson, stateJson);
+                return gson.toJson(reloadJson);
             }
         }
-        return "fall";
+        return "Error";
     }
 
     public class ReloadJson{
         String result;
-        Forward.DataJson data;
-        Forward.StateJson state;
+        DataJson data;
+        StateJson state;
 
-        public ReloadJson(String result, Forward.DataJson data, Forward.StateJson state){
+        public ReloadJson(String result, DataJson data, StateJson state){
             this.result = result;
             this.data = data;
             this.state = state;
