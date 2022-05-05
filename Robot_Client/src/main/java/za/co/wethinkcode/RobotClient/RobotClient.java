@@ -119,7 +119,7 @@ public class RobotClient {
         String username = scanner.nextLine();
         System.out.println("Thank you " + username + " please launch your robot when you are ready.");
         // Create a socket to connect to the server.
-        Socket socket = new Socket("localhost", 1234);
+        Socket socket = new Socket("10.200.108.209", 1234);
         // Pass the socket and give the client a username.
         RobotClient robotClient = new RobotClient(socket, username);
         // Infinite loop to read and send messages.
