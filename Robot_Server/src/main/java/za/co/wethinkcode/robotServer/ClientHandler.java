@@ -1,10 +1,11 @@
 package za.co.wethinkcode.robotServer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientCommands.ClientCommands;
+import za.co.wethinkcode.robotServer.ClientCommands.ErrorResponseJson;
+import za.co.wethinkcode.robotServer.ClientCommands.Forward;
 import za.co.wethinkcode.robotServer.ClientCommands.RequestMessage;
-import za.co.wethinkcode.robotServer.ServerCommands.Quit;
-import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.io.*;
@@ -15,7 +16,8 @@ public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> users = new ArrayList<>();
     public static ArrayList<Robot> robots = new ArrayList<>();
     public static World world;
-
+    public Gson gsonPretty = new GsonBuilder()
+            .setPrettyPrinting().create();
     static {
         try {
             world = new World(robots);
@@ -96,13 +98,21 @@ public class ClientHandler implements Runnable{
                             bufferedWriter.flush();
                         } catch (IllegalArgumentException e) {
                             try {
-                                bufferedWriter.write("This argument is not recognised)");
+                                Forward.DataJson dataJson = new Forward.DataJson("Could not parse arguments");
+                                ErrorResponseJson errorResponseJson = new ErrorResponseJson("ERROR", dataJson);
+                                bufferedWriter.write(gsonPretty.toJson(errorResponseJson));
                                 bufferedWriter.newLine();
                                 bufferedWriter.flush();
                             }catch(IOException f) {
                                 System.out.println("ioexception f");
                         }
-                }
+                } catch (ClientCommands.CommandNotFoundException e) {
+                            Forward.DataJson dataJson = new Forward.DataJson("Unsupported command");
+                            ErrorResponseJson errorResponseJson = new ErrorResponseJson("ERROR", dataJson);
+                            bufferedWriter.write(gsonPretty.toJson(errorResponseJson));
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                        }
             } catch (IOException e) {
                 // Close everything gracefully.
                 closeEverything(socket, bufferedReader, bufferedWriter);

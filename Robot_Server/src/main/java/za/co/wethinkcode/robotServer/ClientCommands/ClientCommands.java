@@ -40,7 +40,7 @@ public abstract class ClientCommands implements CommandInterface {
 
     public abstract String execute(ClientHandler clienthandler, World world, String[] arguments);
 
-    public static ClientCommands create(String instruction) {
+    public static ClientCommands create(String instruction) throws CommandNotFoundException {
         Gson gson = new Gson();
         System.out.println(instruction);
         RequestMessage requestMessage = gson.fromJson(instruction, RequestMessage.class);
@@ -65,7 +65,14 @@ public abstract class ClientCommands implements CommandInterface {
                 System.out.println("Back command passed");
                 return new Back(requestMessage.robot, Integer.parseInt(requestMessage.arguments[0]));
             default:
-                throw new IllegalArgumentException("Unsupported command: " + instruction);
+                throw new CommandNotFoundException("Unsupported command: " + instruction);
+        }
+    }
+
+    public static class CommandNotFoundException extends Exception {
+
+        public CommandNotFoundException(String message) {
+            super(message);
         }
     }
 

@@ -79,7 +79,7 @@ public class Forward extends ClientCommands{
         }
 
     }
-    public class DataJson{
+    public static class DataJson{
         String message;
 
         public DataJson(String message){

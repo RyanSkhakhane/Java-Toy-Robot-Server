@@ -16,6 +16,8 @@ public class Robot {
     private int shields;
     private int shots;
     private int shotDistance;
+    private int maxShields;
+    private int maxShots;
     private String status;
 
     public Robot(World world, String robotName, String robotType){
@@ -27,6 +29,8 @@ public class Robot {
         this.shields = 3;
         this.shots = 3;
         this.shotDistance = 3;
+        this.maxShields = shields;
+        this.maxShots = 3;
         this.status = "normal";
     }
     public void setRobotPosition(int x , int y){
@@ -311,5 +315,13 @@ public class Robot {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void reloadShots(){
+        this.shots = maxShots;
+    }
+
+    public void repairShields(){
+        this.shields = maxShields;
     }
 }
