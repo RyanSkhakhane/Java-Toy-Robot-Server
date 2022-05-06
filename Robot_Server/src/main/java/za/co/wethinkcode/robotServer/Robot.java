@@ -162,8 +162,14 @@ public class Robot {
     }
 
     public boolean blockCheckNorth(int steps){
-        for(int i = 1 ; i < steps + 1 ; i++){
-            Position position = new Position(this.currentPosition.getX(), this.currentPosition.getY()+ i);
+        Position position;
+        for(int i = 1 ; i < Math.abs(steps) + 1 ; i++){
+            if(steps > 0){
+                position = new Position(this.currentPosition.getX(), this.currentPosition.getY()+ i);
+            }
+            else{
+                position = new Position(this.currentPosition.getX(), this.currentPosition.getY()+ (-1*i));
+            }
             for (SquareObstacle obstacle : world.getOBSTACLES()) {
                 if (obstacle.blocksPosition(position)) {
                     return true;
@@ -181,8 +187,14 @@ public class Robot {
     }
 
     public boolean blockCheckWest(int steps){
-        for(int i = 1 ; i < steps + 1 ; i++){
-            Position position = new Position(this.currentPosition.getX() - i, this.currentPosition.getY());
+        Position position;
+        for(int i = 1 ; i < Math.abs(steps) + 1 ; i++){
+            if(steps > 0){
+                position = new Position(this.currentPosition.getX()+ i, this.currentPosition.getY());
+            }
+            else{
+                position = new Position(this.currentPosition.getX()+ (-1*i), this.currentPosition.getY());
+            }
             for (SquareObstacle obstacle : world.getOBSTACLES()) {
                 if (obstacle.blocksPosition(position)) {
                     return true;
@@ -200,8 +212,14 @@ public class Robot {
     }
 
     public boolean blockCheckEast(int steps){
-        for(int i = 1 ; i < steps + 1 ; i++){
-            Position position = new Position(this.currentPosition.getX() + i, this.currentPosition.getY());
+        Position position;
+        for(int i = 1 ; i < Math.abs(steps) + 1 ; i++){
+            if(steps > 0){
+                position = new Position(this.currentPosition.getX()+ i, this.currentPosition.getY());
+            }
+            else{
+                position = new Position(this.currentPosition.getX()+ (-1*i), this.currentPosition.getY());
+            }
             for (SquareObstacle obstacle : world.getOBSTACLES()) {
                 if (obstacle.blocksPosition(position)) {
                     return true;
@@ -219,8 +237,14 @@ public class Robot {
     }
 
     public boolean blockCheckSouth(int steps){
-        for(int i = 1 ; i < steps + 1 ; i++){
-            Position position = new Position(this.currentPosition.getX(), this.currentPosition.getY() - i);
+        Position position;
+        for(int i = 1 ; i < Math.abs(steps) + 1 ; i++){
+            if(steps > 0){
+                position = new Position(this.currentPosition.getX(), this.currentPosition.getY()+ i);
+            }
+            else{
+                position = new Position(this.currentPosition.getX(), this.currentPosition.getY()+ (-1*i));
+            }
             for (SquareObstacle obstacle : world.getOBSTACLES()) {
                 if (obstacle.blocksPosition(position)) {
                     return true;

@@ -1,7 +1,6 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 

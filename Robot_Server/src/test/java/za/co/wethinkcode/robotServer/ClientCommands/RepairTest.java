@@ -12,22 +12,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class RepairTest {
 
     @Test
-    void executeTest() throws IOException {
+    void executeTestRepair() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
         Robot test = new Robot(worldTest, "Bob", "normal");
         robots.add(test);
-        State testState = new State("Bob");
+        test.loseShield();
+        test.loseShield();
+        Repair repairTest = new Repair("Bob");
         String[] args = {};
         assertEquals("{\n" +
-                "  \"position\": [\n" +
-                "    0,\n" +
-                "    0\n" +
-                "  ],\n" +
-                "  \"direction\": \"NORTH\",\n" +
-                "  \"shields\": 0,\n" +
-                "  \"shots\": 3,\n" +
-                "  \"status\": \"normal\"\n" +
-                "}", testState.execute(worldTest, args));
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"position\": [\n" +
+                "      0,\n" +
+                "      0\n" +
+                "    ],\n" +
+                "    \"direction\": \"NORTH\",\n" +
+                "    \"shields\": 3,\n" +
+                "    \"shots\": 3,\n" +
+                "    \"status\": \"REPAIR\"\n" +
+                "  }\n" +
+                "}", repairTest.execute(worldTest, args));
     }
 }

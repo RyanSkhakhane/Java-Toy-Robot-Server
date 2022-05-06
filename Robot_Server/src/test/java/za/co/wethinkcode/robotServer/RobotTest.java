@@ -30,7 +30,7 @@ class RobotTest {
         World worldTest = new World(robots);
         Robot test = new Robot(worldTest, "Bob", "normal");
         SquareObstacle[] obstacles = {new SquareObstacle(0,2)};
-        worldTest.setOBSTACLES(obstacles);
+        worldTest.setObstacles(obstacles);
         worldTest.setTOP_LEFT(new Position(-10, 10));
         worldTest.setBOTTOM_RIGHT(new Position(10, -10));
         assertEquals(Robot.UpdateResponse.FAILED_OBSTRUCTED, test.updatePosition(5));

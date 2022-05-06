@@ -12,24 +12,130 @@ import static org.junit.jupiter.api.Assertions.*;
 class TurnTest {
 
     @Test
-    void executeTest() throws IOException {
-
+    void executeTestTurnRight() throws IOException {
 
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
         Robot test = new Robot(worldTest, "Bob", "normal");
         robots.add(test);
-        State testState = new State("Bob");
+        Turn turnTest = new Turn("Bob", "right");
         String[] args = {};
         assertEquals("{\n" +
-                "  \"position\": [\n" +
-                "    0,\n" +
-                "    0\n" +
-                "  ],\n" +
-                "  \"direction\": \"NORTH\",\n" +
-                "  \"shields\": 0,\n" +
-                "  \"shots\": 3,\n" +
-                "  \"status\": \"normal\"\n" +
-                "}", testState.execute(worldTest, args));
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"direction\": \"EAST\"\n" +
+                "  }\n" +
+                "}", turnTest.execute(worldTest, args));
+    }
+
+    @Test
+    void executeTestTurnRightTwice() throws IOException {
+
+        ArrayList<Robot> robots = new ArrayList<>();
+        World worldTest = new World(robots);
+        Robot test = new Robot(worldTest, "Bob", "normal");
+        robots.add(test);
+        Turn turnTest = new Turn("Bob", "right");
+        String[] args = {};
+        turnTest.execute(worldTest, args);
+        assertEquals("{\n" +
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"direction\": \"SOUTH\"\n" +
+                "  }\n" +
+                "}", turnTest.execute(worldTest, args));
+    }
+
+    @Test
+    void executeTestTurnRightFourTimes() throws IOException {
+
+        ArrayList<Robot> robots = new ArrayList<>();
+        World worldTest = new World(robots);
+        Robot test = new Robot(worldTest, "Bob", "normal");
+        robots.add(test);
+        Turn turnTest = new Turn("Bob", "right");
+        String[] args = {};
+        turnTest.execute(worldTest, args);
+        turnTest.execute(worldTest, args);
+        turnTest.execute(worldTest, args);
+        assertEquals("{\n" +
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"direction\": \"NORTH\"\n" +
+                "  }\n" +
+                "}", turnTest.execute(worldTest, args));
+    }
+
+    @Test
+    void executeTestTurnLeft() throws IOException {
+
+        ArrayList<Robot> robots = new ArrayList<>();
+        World worldTest = new World(robots);
+        Robot test = new Robot(worldTest, "Bob", "normal");
+        robots.add(test);
+        Turn turnTest = new Turn("Bob", "left");
+        String[] args = {};
+        assertEquals("{\n" +
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"direction\": \"WEST\"\n" +
+                "  }\n" +
+                "}", turnTest.execute(worldTest, args));
+    }
+
+    @Test
+    void executeTestTurnLeftTwice() throws IOException {
+
+        ArrayList<Robot> robots = new ArrayList<>();
+        World worldTest = new World(robots);
+        Robot test = new Robot(worldTest, "Bob", "normal");
+        robots.add(test);
+        Turn turnTest = new Turn("Bob", "left");
+        String[] args = {};
+        turnTest.execute(worldTest, args);
+        assertEquals("{\n" +
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"direction\": \"SOUTH\"\n" +
+                "  }\n" +
+                "}", turnTest.execute(worldTest, args));
+    }
+
+    @Test
+    void executeTestTurnLeftFourTimes() throws IOException {
+
+        ArrayList<Robot> robots = new ArrayList<>();
+        World worldTest = new World(robots);
+        Robot test = new Robot(worldTest, "Bob", "normal");
+        robots.add(test);
+        Turn turnTest = new Turn("Bob", "left");
+        String[] args = {};
+        turnTest.execute(worldTest,args);
+        turnTest.execute(worldTest,args);
+        turnTest.execute(worldTest,args);
+        assertEquals("{\n" +
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"direction\": \"NORTH\"\n" +
+                "  }\n" +
+                "}", turnTest.execute(worldTest, args));
     }
 }

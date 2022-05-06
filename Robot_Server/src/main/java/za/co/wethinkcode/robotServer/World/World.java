@@ -91,9 +91,6 @@ public class World {
         return BOTTOM_RIGHT;
     }
 
-    public void setOBSTACLES(SquareObstacle[] OBSTACLES) {
-        this.OBSTACLES = OBSTACLES;
-    }
 
     public void setTOP_LEFT(Position TOP_LEFT) {
         this.TOP_LEFT = TOP_LEFT;
@@ -105,5 +102,9 @@ public class World {
 
     public ArrayList<Robot> getRobots() {
         return robots;
+    }
+
+    public void setObstacles(SquareObstacle[] listNow){
+        this.OBSTACLES = listNow;
     }
 }

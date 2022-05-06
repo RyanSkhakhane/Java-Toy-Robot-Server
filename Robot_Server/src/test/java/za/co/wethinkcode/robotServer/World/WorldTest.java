@@ -22,7 +22,7 @@ class WorldTest {
         SquareObstacle[] obstacles = {new SquareObstacle(0,2)};
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        worldTest.setOBSTACLES(obstacles);
+        worldTest.setObstacles(obstacles);
         assertEquals(1, worldTest.getOBSTACLES().length);
     }
 

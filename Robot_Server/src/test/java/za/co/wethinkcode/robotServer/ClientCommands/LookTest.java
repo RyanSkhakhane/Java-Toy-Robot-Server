@@ -17,7 +17,7 @@ class LookTest {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
         SquareObstacle[] obstacles = {new SquareObstacle(2,2), new SquareObstacle(-3,-4)};
-        worldTest.setOBSTACLES(obstacles);
+        worldTest.setObstacles(obstacles);
         Robot test = new Robot(worldTest, "Bob", "normal");
         test.setCurrentPosition(new Position(1,1));
         robots.add(test);

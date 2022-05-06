@@ -13,22 +13,30 @@ class ReloadTest {
 
 
     @Test
-    void executeTest() throws IOException {
+    void executeTestReload() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
         Robot test = new Robot(worldTest, "Bob", "normal");
         robots.add(test);
-        State testState = new State("Bob");
+        Fire fireTest = new Fire("Bob");
         String[] args = {};
+        fireTest.execute(worldTest, args);
+        Reload reloadTest = new Reload("Bob");
         assertEquals("{\n" +
-                "  \"position\": [\n" +
-                "    0,\n" +
-                "    0\n" +
-                "  ],\n" +
-                "  \"direction\": \"NORTH\",\n" +
-                "  \"shields\": 0,\n" +
-                "  \"shots\": 3,\n" +
-                "  \"status\": \"normal\"\n" +
-                "}", testState.execute(worldTest, args));
+                "  \"result\": \"OK\",\n" +
+                "  \"data\": {\n" +
+                "    \"message\": \"Done\"\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"position\": [\n" +
+                "      0,\n" +
+                "      0\n" +
+                "    ],\n" +
+                "    \"direction\": \"NORTH\",\n" +
+                "    \"shields\": 3,\n" +
+                "    \"shots\": 3,\n" +
+                "    \"status\": \"RELOAD\"\n" +
+                "  }\n" +
+                "}", reloadTest.execute(worldTest, args));
     }
 }
