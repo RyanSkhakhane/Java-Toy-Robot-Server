@@ -9,6 +9,7 @@ import za.co.wethinkcode.robotServer.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public class Fire extends ClientCommands {
     public int shotDistance;
@@ -19,7 +20,7 @@ public class Fire extends ClientCommands {
     }
 
     @Override
-    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
+    public String execute(World world, String[] arguments) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -48,7 +49,8 @@ public class Fire extends ClientCommands {
                             world.getRobots().get(i).getShields(), world.getRobots().get(i).getShots(), world.getRobots().get(i).getStatus());
                     DataJson dataJson = new DataJson("Hit", shotDistance, world.getRobots().get(i).getRobotName(), enemyRobotStateJson);
                     HitJson hitJson = new HitJson("OK", dataJson, stateJson);
-                    robotDestroyed(clienthandler, world.getRobots().get(i));
+                    robotDestroyed(world.getRobots().get(i));
+
                     return gson.toJson(hitJson);
                 }
         }
@@ -137,10 +139,10 @@ public class Fire extends ClientCommands {
         return false;
     }
 
-    public static void robotDestroyed(ClientHandler clientHandler, Robot robot){
+    public static void robotDestroyed(Robot robot){
         if(robot.getShields() == -1){
-            clientHandler.getRobots().remove(robot);
-            clientHandler.broadcastMessage("ROBOT: "+ robot.getRobotName() + " has been destroyed.");
+            ClientHandler.robots.remove(robot);
+            ClientHandler.broadcastMessage("[" +robot.getRobotName().toUpperCase() + "]: has been destroyed.");
         }
     }
 

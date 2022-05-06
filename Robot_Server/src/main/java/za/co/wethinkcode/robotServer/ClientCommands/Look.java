@@ -24,9 +24,9 @@ public class Look extends ClientCommands{
     }
 
     @Override
-    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
+    public String execute(World world, String[] arguments) {
         StateResponseJSon state;
-        for(Robot robot : clienthandler.getRobots()){
+        for(Robot robot : world.getRobots()){
             if(robot.getRobotName().equals(getArgument())){
                 int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
                 state = new StateResponseJSon(position, robot.getCurrentDirection().toString(),
@@ -55,36 +55,6 @@ public class Look extends ClientCommands{
         return null;
     }
 
-    public String execute(World world, String[] arguments) {
-        StateResponseJSon state;
-        for(Robot robot : world.getRobots()){
-            if(robot.getRobotName().equals(getArgument())){
-                int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
-                state = new StateResponseJSon(position, robot.getCurrentDirection().toString(),
-                        robot.getShields(),robot.getShots(), "normal");
-                switch (robot.getCurrentDirection()){
-                    case NORTH:
-                        startNorth(world.VISIBILITY, robot, world);
-                        break;
-                    case EAST:
-                        startEast(world.VISIBILITY, robot, world);
-                        break;
-                    case SOUTH:
-                        startSouth(world.VISIBILITY, robot, world);
-                        break;
-                    case WEST:
-                        startWest(world.VISIBILITY, robot, world);
-                        break;
-                }
-                ObjectJson[] objectJsons = objects.toArray(new ObjectJson[0]);
-                DataJson data = new DataJson(objectJsons);
-                LookResponseJson lookResponseJson = new LookResponseJson("ok", data, state);
-                objects.clear();
-                return gson.toJson(lookResponseJson);
-            }
-        }
-        return null;
-    }
 
     public boolean lookCommand(int visibility, Robot myRobot, World world , int direction) {
         int newX = myRobot.getCurrentPosition().getX();

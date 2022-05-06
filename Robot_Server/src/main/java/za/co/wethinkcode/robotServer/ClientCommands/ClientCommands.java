@@ -38,7 +38,7 @@ public abstract class ClientCommands implements CommandInterface {
         return argument2;
     }
 
-    public abstract String execute(ClientHandler clienthandler, World world, String[] arguments);
+    public abstract String execute(World world, String[] arguments);
 
     public static ClientCommands create(String instruction) throws CommandNotFoundException {
         Gson gson = new Gson();

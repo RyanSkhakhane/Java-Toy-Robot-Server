@@ -15,12 +15,12 @@ public class Turn extends ClientCommands{
         this.turnDirection = turnDirection;
     }
     @Override
-    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
+    public String execute(World world, String[] arguments) {
         StateResponseJson stateResponseJson = null;
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
-        for (Robot robot : clienthandler.getRobots()) {
+        for (Robot robot : world.getRobots()) {
             if (robot.getRobotName().equals(getArgument())){
                 switch(turnDirection){
                     case "left":
@@ -50,6 +50,8 @@ public class Turn extends ClientCommands{
 
         }
     }
+
+
 
     public class DataResponseJson{
         String message;

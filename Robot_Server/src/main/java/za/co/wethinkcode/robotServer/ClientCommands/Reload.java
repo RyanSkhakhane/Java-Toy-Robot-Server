@@ -14,13 +14,13 @@ public class Reload extends ClientCommands{
 
 
     @Override
-    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
+    public String execute(World world, String[] arguments) {
 
         StateJson stateJson;
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
-        for (Robot robot : clienthandler.getRobots()) {
+        for (Robot robot : world.getRobots()) {
             if (robot.getRobotName().equals(getArgument())) {
                 robot.reloadShots();
                 int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};

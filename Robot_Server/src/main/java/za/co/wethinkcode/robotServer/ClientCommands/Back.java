@@ -18,11 +18,11 @@ public class Back extends ClientCommands{
     }
 
     @Override
-    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
+    public String execute(World world, String[] arguments) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
-        for (Robot robot: clienthandler.getRobots()) {
+        for (Robot robot: world.getRobots()) {
             if (robot.getRobotName().equals(getArgument())){
                 switch(robot.updatePosition(steps)){
                     case SUCCESS:

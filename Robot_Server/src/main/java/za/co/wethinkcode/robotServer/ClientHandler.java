@@ -92,7 +92,7 @@ public class ClientHandler implements Runnable{
                         try {
                             clientCommand = ClientCommands.create(commandFromClient);
                             requestMessage = gson.fromJson(commandFromClient, RequestMessage.class);
-                            String message = clientCommand.execute(this, world, requestMessage.arguments);
+                            String message = clientCommand.execute(world, requestMessage.arguments);
                             bufferedWriter.write(message);
                             bufferedWriter.newLine();
                             bufferedWriter.flush();
@@ -121,14 +121,13 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void broadcastMessage(String messageToBroadcast){
+    public static void broadcastMessage(String messageToBroadcast){
         for(ClientHandler clientHandler : users) {
             try {
                     clientHandler.bufferedWriter.write(messageToBroadcast);
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
             }catch(IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
             }
         }
     }

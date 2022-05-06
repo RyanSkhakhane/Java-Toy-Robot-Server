@@ -19,22 +19,15 @@ public class Launch extends ClientCommands {
 
 
     @Override
-    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
-        Robot robot = new Robot(world, getArgument2(), getArgument());
-        Position freePosition = findFreeSpace(world);
-        robot.setRobotPosition(freePosition.getX(),freePosition.getY());
-        clienthandler.robots.add(robot);
-        return responseFormulator(robot);
-
-    }
-
     public String execute(World world, String[] arguments) {
         Robot robot = new Robot(world, getArgument2(), getArgument());
         Position freePosition = findFreeSpace(world);
         robot.setRobotPosition(freePosition.getX(),freePosition.getY());
-        robot.setCurrentPosition(new Position(0,0));
+        ClientHandler.robots.add(robot);
         return responseFormulator(robot);
+
     }
+
 
     private String responseFormulator(Robot robot){
         Gson gson = new GsonBuilder()

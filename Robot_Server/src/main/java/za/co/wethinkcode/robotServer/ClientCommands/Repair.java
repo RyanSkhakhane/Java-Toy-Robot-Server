@@ -15,13 +15,13 @@ public class Repair extends ClientCommands{
 
 
     @Override
-    public String execute(ClientHandler clienthandler, World world, String[] arguments) {
+    public String execute(World world, String[] arguments) {
 
         Repair.StateJson stateJson;
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
-        for (Robot robot : clienthandler.getRobots()) {
+        for (Robot robot : world.getRobots()) {
             if (robot.getRobotName().equals(getArgument())) {
                 robot.repairShields();
                 int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
