@@ -203,13 +203,13 @@ public class Fire extends ClientCommands {
 
     public class MissJson{
         String result;
-        MissDataJson missDataJson;
-        StateJson stateJson;
+        MissDataJson miss;
+        StateJson state;
 
-        public MissJson(String result, MissDataJson missDataJson, StateJson stateJson){
+        public MissJson(String result, MissDataJson miss, StateJson state){
             this.result = result;
-            this.missDataJson = missDataJson;
-            this.stateJson = stateJson;
+            this.miss = miss;
+            this.state = state;
         }
     }
 

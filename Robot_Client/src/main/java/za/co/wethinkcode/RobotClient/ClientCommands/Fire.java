@@ -12,8 +12,6 @@ public class Fire extends ClientCommands{
         Gson gson = new Gson();
         String[] arguments = {};
         FireCommandJson fireCommandJson = new FireCommandJson(robotName, "fire", arguments);
-        String status = gson.toJson(fireCommandJson);
-        System.out.println(status);
         return gson.toJson(fireCommandJson);
     }
     private class FireCommandJson{

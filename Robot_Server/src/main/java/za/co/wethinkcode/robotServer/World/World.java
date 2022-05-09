@@ -13,7 +13,7 @@ public class World {
 
     public Position TOP_LEFT = new Position(-(getEdge(true)), getEdge(false));
     public Position BOTTOM_RIGHT = new Position(getEdge(true), -(getEdge(false)));
-    public final int VISIBILITY;
+    public int VISIBILITY;
     public static final Position CENTRE = new Position(0, 0);
     protected SquareObstacle[] OBSTACLES;
     protected ArrayList<Robot> robots;
@@ -34,7 +34,7 @@ public class World {
         } catch (FileNotFoundException e) {
             System.out.println("No config file present");
         }
-        SquareObstacle[] obstaclesList = {new SquareObstacle(0, 0)};
+        SquareObstacle[] obstaclesList = {new SquareObstacle(5, 5)};
         return obstaclesList;
     }
 
@@ -106,5 +106,9 @@ public class World {
 
     public void setObstacles(SquareObstacle[] listNow){
         this.OBSTACLES = listNow;
+    }
+
+    public void setVISIBILITY(int VISIBILITY) {
+        this.VISIBILITY = VISIBILITY;
     }
 }

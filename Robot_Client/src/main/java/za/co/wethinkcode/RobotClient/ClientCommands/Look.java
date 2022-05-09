@@ -13,7 +13,6 @@ public class Look extends ClientCommands{
         Gson gson = new Gson();
         String[] arguments = {};
         LookCommandJson lookCommandJson = new LookCommandJson(robotName, "look", arguments);
-        String status = gson.toJson(lookCommandJson);
         return gson.toJson(lookCommandJson);
     }
 
