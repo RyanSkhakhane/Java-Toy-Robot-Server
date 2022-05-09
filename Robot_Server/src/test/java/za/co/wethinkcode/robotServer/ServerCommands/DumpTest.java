@@ -43,9 +43,10 @@ class DumpTest {
                     "- At position 0,-3 (to 3,0)\n" +
                     "- At position 4,4 (to 7,7)\n" +
                     "ROBOTS:\n" +
-                    "Bob\n" +
+                    "Robot : Bob\n" +
                     "Position [0,0] \n" +
-                    "Direction [NORTH]\n";
+                    "Direction [NORTH]\n"+
+                    " \n";
             simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
         }
     }

@@ -17,13 +17,10 @@ public abstract class ServerCommand {
         String[] args = instruction.toLowerCase().trim().split(" ");
         switch (args[0]) {
             case "quit":
-                System.out.println("quit command passed");
                 return new Quit();
             case "robots":
-                System.out.println("robots command passed");
                 return new Robots();
             case "dump":
-                System.out.println("dump command passed");
                 return new Dump();
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);

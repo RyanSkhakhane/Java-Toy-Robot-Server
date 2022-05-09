@@ -22,7 +22,6 @@ public class Launch extends ClientCommands{
         LaunchCommandJson launchCommandJson = new LaunchCommandJson(robotName, commandName, arguments);
         Gson gson = new Gson();
         String json = gson.toJson(launchCommandJson);
-        System.out.println(json);
         RobotClient.launchCheck = true;
         return json;
     }

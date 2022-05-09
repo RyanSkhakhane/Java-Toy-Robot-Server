@@ -14,7 +14,6 @@ public class Look extends ClientCommands{
         String[] arguments = {};
         LookCommandJson lookCommandJson = new LookCommandJson(robotName, "look", arguments);
         String status = gson.toJson(lookCommandJson);
-        System.out.println(status);
         return gson.toJson(lookCommandJson);
     }
 

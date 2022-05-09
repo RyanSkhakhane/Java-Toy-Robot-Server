@@ -43,31 +43,22 @@ public abstract class ClientCommands implements ClientCommandsInterface{
         String[] args = instruction.toLowerCase().trim().split(" ");
         switch (args[0]) {
             case "launch":
-                System.out.println("Launch command passed");
                 return new Launch(args[1], args[2]);
             case "look":
-                System.out.println("look command passed");
                 return new Look();
             case "state":
-                System.out.println("state command passed");
                 return new State();
             case "fire":
-                System.out.println("Fire command passed");
                 return new Fire("robot");
             case "forward":
-                System.out.println("Forward command passed");
                 return new Forward(args[1]);
             case "back":
-                System.out.println("Back command passed");
                 return new Back(args[1]);
             case"turn":
-                System.out.println("Turn command passed");
-                  return new Turn(args[1]);
+                return new Turn(args[1]);
             case "reload":
-                System.out.println("Reload command passed");
                 return new Reload();
             case "repair":
-                System.out.println("Repair command passed");
                 return new Repair();
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);

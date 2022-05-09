@@ -36,9 +36,12 @@ class RobotsTest {
     void areRobots() throws FileNotFoundException {
         String simulatedUserInput = "";
         String expectedOutput =
-                        "Bob\n" +
+                        "Robot : Bob\n" +
                         "Position [0,0] \n" +
-                        "Direction [NORTH]\n";
+                        "Direction [NORTH]\n"+
+                        "Shots : 3\n"+
+                        "Shields : 3\n"+
+                        " \n";
         simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
     }
 }

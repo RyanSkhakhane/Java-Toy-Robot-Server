@@ -88,7 +88,6 @@ public class ClientHandler implements Runnable{
             try {
                 // Read what the client sent and then send it to every other client.
                 commandFromClient = bufferedReader.readLine();
-                System.out.println(commandFromClient);
                         try {
                             clientCommand = ClientCommands.create(commandFromClient);
                             requestMessage = gson.fromJson(commandFromClient, RequestMessage.class);

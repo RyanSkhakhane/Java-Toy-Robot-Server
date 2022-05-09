@@ -12,11 +12,13 @@ public class Dump extends ServerCommand {
         world.showObstacles();
         System.out.println("ROBOTS:");
         if (robots.size() == 0) {
-            System.out.println("There are no robots in the world");
+            System.out.println("There are no robots in the world.");
         } else {
             for (int i = 0; i <= robots.size() - 1; i++) {
-                System.out.println(robots.get(i).getRobotName());
+                System.out.println("Robot : "+ robots.get(i).getRobotName().substring(0, 1).toUpperCase()
+                        + robots.get(i).getRobotName().substring(1));
                 System.out.println(robots.get(i).getRobotState());
+                System.out.println(" ");
             }
 
         }

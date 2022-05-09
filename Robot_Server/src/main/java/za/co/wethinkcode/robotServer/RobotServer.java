@@ -216,9 +216,6 @@ public class RobotServer {
             obstaclesArrayList.add(newObstacle);
         }
         obstaclesArrayList.toArray(obstacles);
-        for(SquareObstacle squareObstacle : obstacles){
-            System.out.println("x" + squareObstacle.getBottomLeftX() + "y " + squareObstacle.getBottomLeftY());
-        }
         return obstacles;
     }
 

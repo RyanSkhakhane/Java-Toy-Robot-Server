@@ -42,36 +42,26 @@ public abstract class ClientCommands implements CommandInterface {
 
     public static ClientCommands create(String instruction) throws CommandNotFoundException {
         Gson gson = new Gson();
-        System.out.println(instruction);
         RequestMessage requestMessage = gson.fromJson(instruction, RequestMessage.class);
 
         switch (requestMessage.command) {
             case "launch":
-                System.out.println("Launch command passed");
                 return new Launch(requestMessage.arguments[0], requestMessage.robot);
             case "look":
-                System.out.println("Look command passed");
                 return new Look(requestMessage.robot);
             case "state":
-                System.out.println("State command passed");
                 return new State(requestMessage.robot);
             case "fire":
-                System.out.println("Fire command passed");
                 return new Fire(requestMessage.robot);
             case "forward":
-                System.out.println("Forward command passed");
                 return new Forward(requestMessage.robot, Integer.parseInt(requestMessage.arguments[0]));
             case "back":
-                System.out.println("Back command passed");
                 return new Back(requestMessage.robot, Integer.parseInt(requestMessage.arguments[0]));
             case "turn":
-                System.out.println("Turn command passed");
                 return new Turn(requestMessage.robot, requestMessage.arguments[0]);
             case "reload":
-                System.out.println("Reload command passed");
                 return new Reload(requestMessage.robot);
             case "repair":
-                System.out.println("Repair command passed");
                 return new Repair(requestMessage.robot);
             default:
                 throw new CommandNotFoundException("Unsupported command: " + instruction);

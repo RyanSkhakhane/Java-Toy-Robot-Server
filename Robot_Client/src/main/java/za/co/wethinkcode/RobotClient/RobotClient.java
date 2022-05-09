@@ -68,7 +68,6 @@ public class RobotClient {
                     if(command instanceof Launch && !launchCheck){
                         robotName = command.getArgument2();
                         message = command.execute(robotName);
-                        System.out.println(message);
                         bufferedWriter.write(message);
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
@@ -78,7 +77,6 @@ public class RobotClient {
                     }
                     else if(!(command instanceof Launch) && launchCheck){
                         message = command.execute(robotName);
-                        System.out.println(message);
                         bufferedWriter.write(message);
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
