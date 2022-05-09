@@ -24,6 +24,7 @@ class RobotTest {
         assertEquals(test2.getRobotState(), "Position [10,10] \n" +
                 "Direction [NORTH]");
     }
+
     @Test
     void updateResponse() throws FileNotFoundException {
         ArrayList<Robot> robots = new ArrayList<>();
@@ -39,6 +40,7 @@ class RobotTest {
         assertEquals(Robot.UpdateResponse.SUCCESS, test.updatePosition(5));
         assertEquals(Robot.UpdateResponse.FAILED_OUTSIDE_WORLD, test.updatePosition(600));
     }
+
     @Test
     void updateDirection() throws FileNotFoundException{
         ArrayList<Robot> robots = new ArrayList<>();
