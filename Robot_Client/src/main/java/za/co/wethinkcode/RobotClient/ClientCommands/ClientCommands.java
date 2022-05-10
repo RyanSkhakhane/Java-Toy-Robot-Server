@@ -60,6 +60,8 @@ public abstract class ClientCommands implements ClientCommandsInterface{
                 return new Reload();
             case "repair":
                 return new Repair();
+            case "quit":
+                return new Quit("robot");
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }

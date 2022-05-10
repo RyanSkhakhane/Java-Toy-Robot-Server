@@ -111,11 +111,17 @@ public class RobotClient {
     }
 
     public static void main(String[] args) throws IOException {
+        if (args.length< 2){
+            return;
+        }
+        String hostname = args[0];
+        int port = Integer.parseInt(args[1]);
+
         System.out.print("Welcome to team CPT18 client please enter your username ");
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
         System.out.println("Thank you " + username + " please launch your robot when you are ready.");
-        Socket socket = new Socket("localhost", 1234);
+        Socket socket = new Socket(hostname, port);
         RobotClient robotClient = new RobotClient(socket, username);
         robotClient.listenForResponse();
         robotClient.sendCommand();
