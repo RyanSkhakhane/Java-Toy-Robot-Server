@@ -33,12 +33,7 @@ public class RobotClient {
     }
 
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
-        // Note you only need to close the outer wrapper as the underlying streams are closed when you close the wrapper.
-        // Note you want to close the outermost wrapper so that everything gets flushed.
-        // Note that closing a socket will also close the socket's InputStream and OutputStream.
-        // Closing the input stream closes the socket. You need to use shutdownInput() on socket to just close the input stream.
-        // Closing the socket will also close the socket's input stream and output stream.
-        // Close the socket after closing the streams.
+        System.out.println("Server has terminated connection shutting down.");
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
@@ -52,6 +47,7 @@ public class RobotClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.exit(0);
     }
 
     public void sendCommand(){
@@ -102,7 +98,11 @@ public class RobotClient {
                 while(socket.isConnected()){
                     try{
                         msgFromGroupChat = bufferedReader.readLine();
+                        if(msgFromGroupChat == null){
+                            closeEverything(socket, bufferedReader, bufferedWriter);
+                        }
                         System.out.println(msgFromGroupChat);
+
                     }catch(IOException e){
                         closeEverything(socket, bufferedReader, bufferedWriter);
                     }
@@ -112,12 +112,18 @@ public class RobotClient {
     }
 
     public static void main(String[] args) throws IOException {
+        if (args.length< 2){
+            return;
+        }
+        String hostname = args[0];
+        int port = Integer.parseInt(args[1]);
+
         System.out.print("Welcome to team CPT18 client please enter your username ");
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
         System.out.println("Thank you " + username + " please launch your robot when you are ready.");
         // Create a socket to connect to the server.
-        Socket socket = new Socket("localhost", 1234);
+        Socket socket = new Socket(hostname, port);
         // Pass the socket and give the client a username.
         RobotClient robotClient = new RobotClient(socket, username);
         // Infinite loop to read and send messages.

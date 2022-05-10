@@ -3,13 +3,11 @@ package za.co.wethinkcode.robotServer.ClientCommands;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientHandler;
-import za.co.wethinkcode.robotServer.Direction;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
-import java.util.Arrays;
-import java.util.Locale;
+
 
 public class Fire extends ClientCommands {
     public int shotDistance;

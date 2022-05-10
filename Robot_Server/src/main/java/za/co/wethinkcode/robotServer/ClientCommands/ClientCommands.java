@@ -63,6 +63,8 @@ public abstract class ClientCommands implements CommandInterface {
                 return new Reload(requestMessage.robot);
             case "repair":
                 return new Repair(requestMessage.robot);
+            case "quit":
+                return new Quit(requestMessage.robot);
             default:
                 throw new CommandNotFoundException("Unsupported command: " + instruction);
         }
