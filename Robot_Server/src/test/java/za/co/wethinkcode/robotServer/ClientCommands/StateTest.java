@@ -25,7 +25,7 @@ class StateTest {
                 "    0\n" +
                 "  ],\n" +
                 "  \"direction\": \"NORTH\",\n" +
-                "  \"shields\": 0,\n" +
+                "  \"shields\": 3,\n" +
                 "  \"shots\": 3,\n" +
                 "  \"status\": \"normal\"\n" +
                 "}", testState.execute(worldTest, args));

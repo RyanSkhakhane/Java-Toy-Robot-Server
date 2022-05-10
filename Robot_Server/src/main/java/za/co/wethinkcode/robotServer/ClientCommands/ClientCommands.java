@@ -10,7 +10,7 @@ public abstract class ClientCommands implements CommandInterface {
     private String argument2;
 
     public ClientCommands(String name){
-        this.name = name.trim().toLowerCase();
+        this.name = name;
         //this.argument="";
     }
 

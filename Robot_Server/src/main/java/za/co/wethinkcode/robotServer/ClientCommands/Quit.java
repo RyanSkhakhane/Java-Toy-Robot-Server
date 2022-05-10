@@ -4,21 +4,26 @@ import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
+import java.util.ConcurrentModificationException;
+
 public class Quit extends ClientCommands{
     public Quit(String name) {
-        super(name);
+        super("quit" ,name);
     }
 
     @Override
     public String execute(World world, String[] arguments) {
-        for (Robot robot : ClientHandler.robots) {
-            if (robot.getRobotName().equals(getArgument())) {
-                ClientHandler.broadcastMessage(robot.getRobotName()+" has left the game.");
-                ClientHandler.robots.remove(robot);
-            }
+        try {
+            for (Robot robot : world.getRobots()) {
+                if (robot.getRobotName().equals(getArgument())) {
+                    ClientHandler.broadcastMessage(robot.getRobotName() + " has left the game.");
+                    ClientHandler.robots.remove(robot);
+                }
 
+            }
+        }catch(ConcurrentModificationException e){
         }
-        return " System shutting down";
+        return "Bye bye";
 
     }
 }
