@@ -33,12 +33,7 @@ public class RobotClient {
     }
 
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
-        // Note you only need to close the outer wrapper as the underlying streams are closed when you close the wrapper.
-        // Note you want to close the outermost wrapper so that everything gets flushed.
-        // Note that closing a socket will also close the socket's InputStream and OutputStream.
-        // Closing the input stream closes the socket. You need to use shutdownInput() on socket to just close the input stream.
-        // Closing the socket will also close the socket's input stream and output stream.
-        // Close the socket after closing the streams.
+        System.out.println("Server has terminated connection shutting down.");
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
@@ -52,6 +47,7 @@ public class RobotClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.exit(0);
     }
 
     public void sendCommand(){
@@ -102,7 +98,11 @@ public class RobotClient {
                 while(socket.isConnected()){
                     try{
                         msgFromGroupChat = bufferedReader.readLine();
+                        if(msgFromGroupChat == null){
+                            closeEverything(socket, bufferedReader, bufferedWriter);
+                        }
                         System.out.println(msgFromGroupChat);
+
                     }catch(IOException e){
                         closeEverything(socket, bufferedReader, bufferedWriter);
                     }
