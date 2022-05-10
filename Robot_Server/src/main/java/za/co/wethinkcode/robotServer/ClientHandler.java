@@ -95,6 +95,9 @@ public class ClientHandler implements Runnable{
                     bufferedWriter.newLine();
                     bufferedWriter.flush();
                     reloadAndRepairTimerCheck();
+                    if(clientCommand instanceof Quit){
+                        this.closeEverything(socket,bufferedReader,bufferedWriter);
+                    }
                     } catch (IllegalArgumentException e) {
                     try {
                         Forward.DataJson dataJson = new Forward.DataJson("Could not parse arguments");

@@ -3,8 +3,8 @@ package za.co.wethinkcode.RobotClient.ClientCommands;
 import com.google.gson.Gson;
 
 public class Fire extends ClientCommands{
-    public Fire(String name) {
-        super(name);
+    public Fire() {
+        super("fire");
     }
 
     @Override

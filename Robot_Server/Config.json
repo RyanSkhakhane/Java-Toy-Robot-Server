@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"gridSize":{"x":5,"y":5},"visibility":5,"obstacles":[{"bottomLeftX":0,"bottomLeftY":1}],"shieldRepairTime":15,"reloadTime":15,"maxShieldStrength":15}
-=======
-{"gridSize":{"x":5,"y":5},"visibility":5,"obstacles":[{"bottomLeftX":0,"bottomLeftY":-4}],"shieldRepairTime":5,"reloadTime":5,"maxShieldStrength":5}
->>>>>>> 7184e3c3eeb1a9b406d111e5c4a64b4f68e137ed
+{"gridSize":{"x":5,"y":5},"visibility":5,"obstacles":[{"bottomLeftX":4,"bottomLeftY":3}],"shieldRepairTime":5,"reloadTime":5,"maxShieldStrength":5}

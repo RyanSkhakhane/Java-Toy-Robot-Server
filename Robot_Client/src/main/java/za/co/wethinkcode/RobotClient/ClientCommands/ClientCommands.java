@@ -49,7 +49,7 @@ public abstract class ClientCommands implements ClientCommandsInterface{
             case "state":
                 return new State();
             case "fire":
-                return new Fire("robot");
+                return new Fire();
             case "forward":
                 return new Forward(args[1]);
             case "back":
@@ -61,7 +61,7 @@ public abstract class ClientCommands implements ClientCommandsInterface{
             case "repair":
                 return new Repair();
             case "quit":
-                return new Quit("robot");
+                return new Quit();
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }
