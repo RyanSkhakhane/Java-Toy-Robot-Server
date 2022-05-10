@@ -27,7 +27,6 @@ public class RobotClient {
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
-            // Gracefully close everything.
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
@@ -116,11 +115,8 @@ public class RobotClient {
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
         System.out.println("Thank you " + username + " please launch your robot when you are ready.");
-        // Create a socket to connect to the server.
         Socket socket = new Socket("localhost", 1234);
-        // Pass the socket and give the client a username.
         RobotClient robotClient = new RobotClient(socket, username);
-        // Infinite loop to read and send messages.
         robotClient.listenForResponse();
         robotClient.sendCommand();
     }

@@ -5,8 +5,6 @@ package za.co.wethinkcode.RobotClient.ClientCommands;
 import com.google.gson.Gson;
 import za.co.wethinkcode.RobotClient.RobotClient;
 
-import java.lang.reflect.Array;
-
 public class Launch extends ClientCommands{
 
     public Launch(String make, String name) {
@@ -26,7 +24,7 @@ public class Launch extends ClientCommands{
         return json;
     }
 
-    public class LaunchCommandJson{
+    public static class LaunchCommandJson{
         String robot;
         String command;
         String[] arguments;
