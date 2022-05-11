@@ -118,10 +118,11 @@ public class RobotClient {
         String hostname = args[0];
         int port = Integer.parseInt(args[1]);
 
-        System.out.print("Welcome to team CPT18 client please enter your username ");
+        System.out.print("Welcome to Robot Worlds CPT18 client please enter your username : ");
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
-        System.out.println("Thank you " + username + " please launch your robot when you are ready.");
+        System.out.println("Thank you " + username.substring(0,1).toUpperCase() + username
+                .substring(1)+ " please launch your robot when you are ready.");
         Socket socket = new Socket(hostname, port);
         RobotClient robotClient = new RobotClient(socket, username);
         robotClient.listenForResponse();

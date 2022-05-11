@@ -6,6 +6,8 @@ import za.co.wethinkcode.robotServer.World.World;
 import java.util.Arrays;
 
 public class Robot {
+    //Types of robots , sniper , rifle, pistol , basic/normal robot
+    //
 
     public static final Direction STARTDIRECTION = Direction.NORTH;
     private Direction currentDirection;

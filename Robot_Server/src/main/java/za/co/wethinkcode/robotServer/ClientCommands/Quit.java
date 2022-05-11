@@ -16,7 +16,8 @@ public class Quit extends ClientCommands{
         try {
             for (Robot robot : world.getRobots()) {
                 if (robot.getRobotName().equals(getArgument())) {
-                    ClientHandler.broadcastMessage(robot.getRobotName() + " has left the game.");
+                    ClientHandler.broadcastMessage(robot.getRobotName().substring(0, 1).toUpperCase()
+                            + robot.getRobotName().substring(1)+ " has left the game.");
                     world.getRobots().remove(robot);
                 }
 
