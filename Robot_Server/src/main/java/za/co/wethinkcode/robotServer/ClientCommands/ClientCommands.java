@@ -12,6 +12,7 @@ public abstract class ClientCommands implements CommandInterface {
     public ClientCommands(String name){
         this.name = name;
         //this.argument="";
+
     }
 
     public ClientCommands(String name, String argument){
