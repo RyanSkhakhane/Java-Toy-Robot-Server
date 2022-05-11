@@ -11,9 +11,9 @@ public abstract class Robot  {
 
     public static final Direction STARTDIRECTION = Direction.NORTH;
     private Direction currentDirection;
-    private String robotName;
-    private String robotType;
-    private World world;
+    private final String robotName;
+    private final String robotType;
+    private final World world;
     private Position currentPosition;
     protected int shields;
     protected int shots;
@@ -38,16 +38,13 @@ public abstract class Robot  {
     public enum UpdateResponse {
         SUCCESS,
         FAILED_OUTSIDE_WORLD,
-        FAILED_OBSTRUCTED;
+        FAILED_OBSTRUCTED
     }
 
     public String getRobotName(){
         return robotName;
     }
 
-    public String getRobotType(){
-        return robotType;
-    }
 
     public Direction getCurrentDirection(){
         return currentDirection;

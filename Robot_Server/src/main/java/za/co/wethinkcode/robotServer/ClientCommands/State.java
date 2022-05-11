@@ -30,7 +30,7 @@ public class State extends ClientCommands{
     }
 
 
-    public class StateResponseJSon{
+    public static class StateResponseJSon{
         int[] position;
         String direction;
         int shields;

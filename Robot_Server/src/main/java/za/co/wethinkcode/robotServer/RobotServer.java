@@ -1,23 +1,21 @@
 package za.co.wethinkcode.robotServer;
 
 import com.google.gson.Gson;
-import za.co.wethinkcode.robotServer.ServerCommands.Quit;
 import za.co.wethinkcode.robotServer.ServerCommands.ServerCommand;
 import za.co.wethinkcode.robotServer.World.SquareObstacle;
 
 import java.io.*;
 import java.net.*;
-import java.time.LocalTime;
 import java.util.*;
 
 public class RobotServer {
     
 
-    private ServerInput serverInput;
+    private final ServerInput serverInput;
     private final ServerSocket serverSocket;
 
 
-    public RobotServer(ServerSocket serverSocket) throws IOException {
+    public RobotServer(ServerSocket serverSocket){
         this.serverSocket = serverSocket;
         this.serverInput = new ServerInput();
     }
@@ -52,12 +50,9 @@ public class RobotServer {
         Scanner scanner = new Scanner(System.in);
         String portChosen;
         System.out.println("What Port would you like to use(4 digit number)");
-        while(true){
+        do {
             portChosen = scanner.nextLine();
-            if(portCheck(portChosen)){
-                break;
-            }
-        }
+        } while (!portCheck(portChosen));
         return Integer.parseInt(portChosen);
     }
 
@@ -66,16 +61,16 @@ public class RobotServer {
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
             while (interfaces.hasMoreElements()) {
-                NetworkInterface iface = interfaces.nextElement();
+                NetworkInterface iFace = interfaces.nextElement();
                 // filters out 127.0.0.1 and inactive interfaces
-                if (iface.isLoopback() || !iface.isUp())
+                if (iFace.isLoopback() || !iFace.isUp())
                     continue;
                 System.out.println("Here are you ip addresses for users to connect to: ");
-                Enumeration<InetAddress> addresses = iface.getInetAddresses();
+                Enumeration<InetAddress> addresses = iFace.getInetAddresses();
                 while (addresses.hasMoreElements()) {
-                    InetAddress addr = addresses.nextElement();
-                    ip = addr.getHostAddress();
-                    System.out.println(iface.getDisplayName() + " " + ip);
+                    InetAddress address = addresses.nextElement();
+                    ip = address.getHostAddress();
+                    System.out.println(iFace.getDisplayName() + " " + ip);
                 }
             }
         } catch (SocketException e) {
@@ -119,25 +114,11 @@ public class RobotServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        try {
-//            File myObj = new File("Config.json");
-//            Scanner myReader = new Scanner(myObj);
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                System.out.println(data);
-//            }
-//            myReader.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
     }
 
     static ConfigFileJson.GridJson mapSizeChooser(){
         Scanner scanner = new Scanner(System.in);
         String[] mapSizes = {"small", "medium" , "large"};
-        int x;
-        int y;
         String mapSize;
         System.out.println("First how large would you like the grid?\n" +
                 "small(10 by 10) , medium(30 by 30) or large(50 by 50).");
@@ -259,7 +240,9 @@ public class RobotServer {
 
         @Override
         public void run() {
+
             super.run();
+
             while (true) {
                 String serverCommand = scanner.nextLine();
                 try {

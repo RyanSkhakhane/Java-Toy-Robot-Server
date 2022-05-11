@@ -54,7 +54,7 @@ public class Look extends ClientCommands{
     }
 
 
-    public boolean lookCommand(int visibility, Robot myRobot, World world , int direction) {
+    public void lookCommand(int visibility, Robot myRobot, World world , int direction) {
         int newX = myRobot.getCurrentPosition().getX();
         int newY = myRobot.getCurrentPosition().getY();
 
@@ -62,25 +62,25 @@ public class Look extends ClientCommands{
         switch (myRobot.getCurrentDirection()) {
             case NORTH:
                 if(SightCheckNorth(visibility,myRobot,world,direction)){
-                    return true;
+                    return;
                 }
                 newY = newY + visibility;
                 break;
             case SOUTH:
                 if(SightCheckSouth(visibility,myRobot,world,direction)){
-                    return true;
+                    return;
                 }
                 newY = newY - visibility;
                 break;
             case EAST:
                 if(SightCheckEast(visibility,myRobot,world,direction)){
-                    return true;
+                    return;
                 }
                 newX = newX + visibility;
                 break;
             case WEST:
                 if(SightCheckWest(visibility,myRobot,world,direction)){
-                    return true;
+                    return;
                 }
                 newX = newX - visibility;
                 break;
@@ -93,7 +93,6 @@ public class Look extends ClientCommands{
             edge(myRobot, world, direction);
 
         }
-        return false;
     }
 
     public boolean isNewPositionAllowed(Position position , World world) {
@@ -342,7 +341,7 @@ public class Look extends ClientCommands{
     }
 
 
-    public class ObjectJson {
+    public static class ObjectJson {
         String direction;
         String objectType;
         int steps;
@@ -353,14 +352,14 @@ public class Look extends ClientCommands{
             this.steps = steps;
         }
     }
-    public class DataJson {
+    public static class DataJson {
         ObjectJson[] objects;
         public DataJson(ObjectJson[] objects) {
             this.objects = objects;
         }
     }
 
-    public class StateResponseJSon{
+    public static class StateResponseJSon{
             int[] position;
             String direction;
             int shields;
@@ -375,7 +374,7 @@ public class Look extends ClientCommands{
                 this.status = status;
             }
         }
-    public class LookResponseJson{
+    public static class LookResponseJson{
             String result;
             DataJson data;
             StateResponseJSon state;

@@ -11,19 +11,8 @@ public class Reload extends ClientCommands{
     public String execute(String robotName) {
         Gson gson = new Gson();
         String[] arguments = {};
-        ReloadCommandJson reloadCommandJson = new ReloadCommandJson(robotName, "reload", arguments);
+        RequestJson reloadCommandJson = new RequestJson(robotName, "reload", arguments);
         return gson.toJson(reloadCommandJson);
     }
 
-    class ReloadCommandJson {
-        String robot;
-        String command;
-        String[] arguments;
-
-        private ReloadCommandJson(String robotName, String robotCommand, String[] stateArguments) {
-            this.robot = robotName;
-            this.command = robotCommand;
-            this.arguments = stateArguments;
-        }
-    }
 }

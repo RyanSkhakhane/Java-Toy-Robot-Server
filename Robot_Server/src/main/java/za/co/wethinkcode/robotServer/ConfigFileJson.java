@@ -31,12 +31,10 @@ public class ConfigFileJson {
         return reloadTime;
     }
 
-    public int getMaxShieldStrength() {
-        return maxShieldStrength;
-    }
 
     public ConfigFileJson(GridJson gridSize, int visibility, SquareObstacle[] obstacles,
                           int shieldRepairTime, int reloadTime, int maxShieldStrength) {
+
             this.gridSize = gridSize;
             this.visibility = visibility;
             this.obstacles = obstacles;
@@ -44,7 +42,6 @@ public class ConfigFileJson {
             this.reloadTime = reloadTime;
             this.maxShieldStrength = maxShieldStrength;
         }
-
 
     public static class GridJson{
         int x;

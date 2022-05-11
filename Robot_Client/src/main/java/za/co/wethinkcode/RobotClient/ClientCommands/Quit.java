@@ -13,19 +13,9 @@ public class Quit extends ClientCommands{
     public String execute(String robotName) {
         Gson gson = new Gson();
         String[] arguments = {};
-        QuitCommandJson quitCommandJson = new QuitCommandJson(robotName,"quit",arguments);
+        RequestJson quitCommandJson = new RequestJson(robotName, "quit", arguments);
         return gson.toJson(quitCommandJson);
     }
-    private class QuitCommandJson{
-        String robot;
-        String command;
-        String[] arguments;
 
-        private QuitCommandJson(String robotName, String robotCommand, String[] launchArguments){
-            this.robot = robotName;
-            this.command = robotCommand;
-            this.arguments = launchArguments;
-        }
-    }
 }
 

@@ -33,7 +33,7 @@ public class Repair extends ClientCommands{
         return "Error";
     }
 
-    public class ReloadJson{
+    public static class ReloadJson{
         String result;
         Repair.DataJson data;
         Repair.StateJson state;
@@ -46,7 +46,7 @@ public class Repair extends ClientCommands{
         }
 
     }
-    public class DataJson{
+    public static class DataJson{
         String message;
 
         public DataJson(String message){
@@ -54,7 +54,7 @@ public class Repair extends ClientCommands{
         }
     }
 
-    public class StateJson{
+    public static class StateJson{
         int[] position;
         String direction;
         int shields;

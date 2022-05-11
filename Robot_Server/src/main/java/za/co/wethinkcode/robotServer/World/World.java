@@ -14,7 +14,6 @@ public class World {
     public Position TOP_LEFT = new Position(-(getEdge(true)), getEdge(false));
     public Position BOTTOM_RIGHT = new Position(getEdge(true), -(getEdge(false)));
     public int VISIBILITY;
-    public static final Position CENTRE = new Position(0, 0);
     protected SquareObstacle[] OBSTACLES;
     protected ArrayList<Robot> robots;
 
@@ -25,7 +24,7 @@ public class World {
         this.VISIBILITY = getVISIBILITY();
     }
 
-    public SquareObstacle[] readObstacles() throws FileNotFoundException {
+    public SquareObstacle[] readObstacles(){
         Gson gson = new Gson();
         try {
             FileReader fileReader = new FileReader("Config.json");
@@ -34,8 +33,7 @@ public class World {
         } catch (FileNotFoundException e) {
             System.out.println("No config file present");
         }
-        SquareObstacle[] obstaclesList = {new SquareObstacle(5, 5)};
-        return obstaclesList;
+        return new SquareObstacle[]{new SquareObstacle(5, 5)};
     }
 
     public void showObstacles() {

@@ -97,7 +97,7 @@ public class Launch extends ClientCommands {
         }
     }
 
-    public class DataResponse{
+    public static class DataResponse{
         int[] position;
         int visibility;
         int reload;
@@ -114,7 +114,7 @@ public class Launch extends ClientCommands {
         }
     }
 
-    public class StateRespone{
+    public static class StateRespone{
         int[] position;
         String direction;
         int shields;

@@ -7,6 +7,7 @@ import za.co.wethinkcode.robotServer.World.World;
 import java.util.ConcurrentModificationException;
 
 public class Quit extends ClientCommands{
+
     public Quit(String name) {
         super("quit" ,name);
     }
@@ -22,7 +23,7 @@ public class Quit extends ClientCommands{
                 }
 
             }
-        }catch(ConcurrentModificationException e){
+        }catch(ConcurrentModificationException ignored){
         }
         return "Bye bye";
 

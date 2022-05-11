@@ -33,8 +33,7 @@ public class Turn extends ClientCommands{
         }
         DataResponseJson dataResponseJson = new DataResponseJson("Done");
         TurnResponseJson turnResponseJson = new TurnResponseJson("OK",dataResponseJson,stateResponseJson);
-        String json = gson.toJson(turnResponseJson);
-        return json;
+        return gson.toJson(turnResponseJson);
     }
     public class TurnResponseJson{
         String result;
@@ -50,14 +49,14 @@ public class Turn extends ClientCommands{
 
 
 
-    public class DataResponseJson{
+    public static class DataResponseJson{
         String message;
         public DataResponseJson(String message){
             this.message = message;
         }
 
     }
-    public class StateResponseJson{
+    public static class StateResponseJson{
         String direction;
         public StateResponseJson(String direction){
             this.direction = direction;

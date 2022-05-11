@@ -17,23 +17,10 @@ public class Launch extends ClientCommands{
         String robotMake = getArgument();
         String robotName = getArgument2();
         String[] arguments = {robotMake, "3" , "3"};
-        LaunchCommandJson launchCommandJson = new LaunchCommandJson(robotName, commandName, arguments);
+        RequestJson launchCommandJson = new RequestJson(robotName, commandName, arguments);
         Gson gson = new Gson();
         String json = gson.toJson(launchCommandJson);
         RobotClient.launchCheck = true;
         return json;
     }
-
-    public static class LaunchCommandJson{
-        String robot;
-        String command;
-        String[] arguments;
-
-        public LaunchCommandJson(String robotName, String robotCommand, String[] launchArguments){
-            this.robot = robotName;
-            this.command = robotCommand;
-            this.arguments = launchArguments;
-        }
-    }
-
 }

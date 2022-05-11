@@ -11,11 +11,11 @@ public class State extends ClientCommands {
     public String execute(String robotName) {
         Gson gson = new Gson();
         String[] arguments = {};
-        StateCommandJson stateCommandJson = new StateCommandJson(robotName, "state", arguments);
+        RequestJson stateCommandJson = new RequestJson(robotName, "state", arguments);
         return gson.toJson(stateCommandJson);
     }
 
-    class StateCommandJson {
+    static class StateCommandJson {
         String robot;
         String command;
         String[] arguments;

@@ -11,6 +11,6 @@ public class Sniper extends Robot{
         this.shots = 2;
         this.shotDistance = 5;
         this.maxShields = shields;
-        this.maxShots = 3;
+        this.maxShots = 2;
     }
 }

@@ -66,7 +66,7 @@ public class Back extends ClientCommands{
     }
 
 
-    public class MovementJson{
+    public static class MovementJson{
         String result;
         DataJson data;
         StateJson state;
@@ -79,7 +79,7 @@ public class Back extends ClientCommands{
         }
 
     }
-    public class DataJson{
+    public static class DataJson{
         String message;
 
         public DataJson(String message){
@@ -87,7 +87,7 @@ public class Back extends ClientCommands{
         }
     }
 
-    public class StateJson{
+    public static class StateJson{
         int[] position;
         String direction;
         int shields;

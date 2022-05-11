@@ -86,7 +86,7 @@ public class Forward extends ClientCommands{
         }
     }
 
-    public class StateJson{
+    public static class StateJson{
         int[] position;
         String direction;
         int shields;

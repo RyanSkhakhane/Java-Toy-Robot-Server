@@ -1,18 +1,13 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
-import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.World.World;
 import com.google.gson.Gson;
 
 public abstract class ClientCommands implements CommandInterface {
 
-    private final String name;
     private String argument;
     private String argument2;
 
     public ClientCommands(String name){
-        this.name = name;
-        //this.argument="";
-
     }
 
     public ClientCommands(String name, String argument){
@@ -24,11 +19,6 @@ public abstract class ClientCommands implements CommandInterface {
         this(name);
         this.argument=argument.trim();
         this.argument2 = argument2.trim();
-    }
-
-    public String getName(){
-
-        return name;
     }
 
     public String getArgument() {

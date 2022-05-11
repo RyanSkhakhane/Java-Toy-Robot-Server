@@ -25,8 +25,7 @@ public class SquareObstacle implements Obstacle {
 
     @Override
     public int getSize() {
-        int size = 5;
-        return size;
+        return 5;
     }
 
     @Override

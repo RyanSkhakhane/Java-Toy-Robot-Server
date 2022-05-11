@@ -1,6 +1,5 @@
 package za.co.wethinkcode.RobotClient.ClientCommands;
 
-import javax.sound.midi.Soundbank;
 
 public abstract class ClientCommands implements ClientCommandsInterface{
     private final String name;
@@ -9,7 +8,6 @@ public abstract class ClientCommands implements ClientCommandsInterface{
 
     public ClientCommands(String name){
         this.name = name.trim().toLowerCase();
-        //this.argument="";
     }
 
     public ClientCommands(String name, String argument){

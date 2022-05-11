@@ -33,8 +33,8 @@ public class ClientHandler implements Runnable{
     private String clientUsername;
     ClientCommands clientCommand;
     LocalTime localTime;
-    private int shieldRepairTime = readShieldRepairTime();
-    private int reloadTime = readReloadTime();
+    private final int shieldRepairTime = readShieldRepairTime();
+    private final int reloadTime = readReloadTime();
     private boolean shieldRepairCheck;
     private boolean reloadCheck;
 
@@ -137,8 +137,7 @@ public class ClientHandler implements Runnable{
         } catch (FileNotFoundException e) {
             System.out.println("No config file present");
         }
-        int defaultTime = 5;
-        return defaultTime;
+        return 5;
     }
 
     public int readShieldRepairTime(){
@@ -150,8 +149,7 @@ public class ClientHandler implements Runnable{
         } catch (FileNotFoundException e) {
             System.out.println("No config file present");
         }
-        int defaultTime = 5;
-        return defaultTime;
+        return 5;
     }
 
     public boolean reloadFinished() throws IOException {
@@ -193,28 +191,8 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void addRobot(Robot robot){
-        robots.add(robot);
-    }
-
     public ArrayList<Robot> getRobots(){
         return robots;
-    }
-
-    public String getClientUsername(){
-        return clientUsername;
-    }
-
-    public Socket getSocket(){
-        return socket;
-    }
-
-    public BufferedReader getBufferedReader() {
-        return bufferedReader;
-    }
-
-    public BufferedWriter getBufferedWriter(){
-        return bufferedWriter;
     }
 
 }

@@ -11,19 +11,8 @@ public class Repair extends ClientCommands{
     public String execute(String robotName) {
         Gson gson = new Gson();
         String[] arguments = {};
-        RepairCommandJson repairCommandJson = new RepairCommandJson(robotName, "repair", arguments);
+        RequestJson repairCommandJson = new RequestJson(robotName, "repair", arguments);
         return gson.toJson(repairCommandJson);
     }
 
-    class RepairCommandJson {
-        String robot;
-        String command;
-        String[] arguments;
-
-        private RepairCommandJson(String robotName, String robotCommand, String[] stateArguments) {
-            this.robot = robotName;
-            this.command = robotCommand;
-            this.arguments = stateArguments;
-        }
-    }
 }

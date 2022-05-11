@@ -3,7 +3,6 @@ package za.co.wethinkcode.RobotClient;
 
 import za.co.wethinkcode.RobotClient.ClientCommands.ClientCommands;
 import za.co.wethinkcode.RobotClient.ClientCommands.Launch;
-import za.co.wethinkcode.RobotClient.ClientCommands.Quit;
 
 import java.io.*;
 import java.net.Socket;
@@ -24,7 +23,7 @@ public class RobotClient {
             this.socket = socket;
             this.userName = userName;
             this.robotName = "";
-            this.launchCheck = false;
+            launchCheck = false;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {

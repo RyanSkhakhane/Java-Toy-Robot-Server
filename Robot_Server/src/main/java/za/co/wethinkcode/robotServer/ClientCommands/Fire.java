@@ -28,14 +28,14 @@ public class Fire extends ClientCommands {
             if (getArgument().equals(world.getRobots().get(i).getRobotName())) {
                 robot = world.getRobots().get(i);
                 if(robot.getShots() == 0){
-                    String noShots = "You have no shots left please reload.";
-                    return noShots;
+                    return "You have no shots left please reload.";
                 }
                 world.getRobots().get(i).loseShot();
             }
         }
         for (int i = 0; i < world.getRobots().size(); i++) {
             if (!getArgument().equals(world.getRobots().get(i).getRobotName())) {
+                assert robot != null;
                 if (hitCheck(robot.getShotDistance(), robot, world,
                         world.getRobots().get(i))) {
                     world.getRobots().get(i).loseShield();
@@ -199,7 +199,7 @@ public class Fire extends ClientCommands {
         shotDistance = shotDistance1;
     }
 
-    public class HitJson {
+    public static class HitJson {
 
         String result;
         DataJson data;
@@ -212,7 +212,7 @@ public class Fire extends ClientCommands {
         }
     }
 
-    public class DataJson {
+    public static class DataJson {
         String message;
         int distance;
         String robot;
@@ -226,7 +226,7 @@ public class Fire extends ClientCommands {
         }
     }
 
-    public class EnemyRobotStateJson {
+    public static class EnemyRobotStateJson {
         int[] position;
         String direction;
         int shields;
@@ -242,7 +242,7 @@ public class Fire extends ClientCommands {
         }
     }
 
-    public class StateJson {
+    public static class StateJson {
         int shots;
 
         public StateJson(int shots) {
@@ -250,7 +250,7 @@ public class Fire extends ClientCommands {
         }
     }
 
-    public class MissJson{
+    public static class MissJson{
         String result;
         MissDataJson miss;
         StateJson state;
@@ -262,7 +262,7 @@ public class Fire extends ClientCommands {
         }
     }
 
-    public class MissDataJson{
+    public static class MissDataJson{
         String message;
 
         public MissDataJson(String message){
