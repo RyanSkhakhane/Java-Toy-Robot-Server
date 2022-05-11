@@ -3,18 +3,13 @@ package za.co.wethinkcode.robotServer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientCommands.*;
-import za.co.wethinkcode.robotServer.World.SquareObstacle;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.io.*;
 import java.net.Socket;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Timer;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> users = new ArrayList<>();

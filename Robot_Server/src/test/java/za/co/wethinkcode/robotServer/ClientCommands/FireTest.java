@@ -2,7 +2,8 @@ package za.co.wethinkcode.robotServer.ClientCommands;
 
 import org.junit.jupiter.api.Test;
 import za.co.wethinkcode.robotServer.Position;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Normal;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
@@ -18,9 +19,9 @@ class FireTest {
     void executeFireTestHit() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
-        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        Robot test2 = new Normal(worldTest, "Bill", "normal");
         robots.add(test2);
         test2.setCurrentPosition(new Position(0, 2));
         Fire testFire = new Fire("Bob");
@@ -52,7 +53,7 @@ class FireTest {
     void executeFireTestMiss() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Fire testFire = new Fire("Bob");
         String[] args = {};
@@ -71,9 +72,9 @@ class FireTest {
     void executeFireTestNotEnoughRange() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
-        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        Robot test2 = new Normal(worldTest, "Bill", "normal");
         robots.add(test2);
         test2.setCurrentPosition(new Position(0, 4));
         Fire testFire = new Fire("Bob");
@@ -93,9 +94,9 @@ class FireTest {
     void executeFireTestHitMaxRange() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
-        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        Robot test2 = new Normal(worldTest, "Bill", "normal");
         robots.add(test2);
         test2.setCurrentPosition(new Position(0, 3));
         Fire testFire = new Fire("Bob");
@@ -127,13 +128,13 @@ class FireTest {
     void executeFireTestMissObstacle() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         SquareObstacle[] obstacles = {new SquareObstacle(0,3), new SquareObstacle(2,1)};
         worldTest.setObstacles(obstacles);
         robots.add(test);
         test.setShotDistance(20);
         test.setCurrentPosition(new Position(0, -4));
-        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        Robot test2 = new Normal(worldTest, "Bill", "normal");
         robots.add(test2);
         test2.setCurrentPosition(new Position(0, 9));
         Fire testFire = new Fire("Bob");

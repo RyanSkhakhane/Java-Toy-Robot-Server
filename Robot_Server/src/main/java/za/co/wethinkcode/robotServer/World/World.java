@@ -3,7 +3,7 @@ package za.co.wethinkcode.robotServer.World;
 import com.google.gson.Gson;
 import za.co.wethinkcode.robotServer.ConfigFileJson;
 import za.co.wethinkcode.robotServer.Position;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;

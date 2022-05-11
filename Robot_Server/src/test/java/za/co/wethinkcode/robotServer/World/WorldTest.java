@@ -1,7 +1,7 @@
 package za.co.wethinkcode.robotServer.World;
 
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

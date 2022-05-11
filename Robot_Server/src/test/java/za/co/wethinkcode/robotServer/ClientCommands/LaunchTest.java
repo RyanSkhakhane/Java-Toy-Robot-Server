@@ -1,7 +1,7 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.io.FileNotFoundException;

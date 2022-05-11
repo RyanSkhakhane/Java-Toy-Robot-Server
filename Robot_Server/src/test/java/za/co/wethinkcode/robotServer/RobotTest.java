@@ -1,6 +1,8 @@
 package za.co.wethinkcode.robotServer;
 
 import org.junit.jupiter.api.Test;
+import za.co.wethinkcode.robotServer.Robot.Normal;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
@@ -16,10 +18,10 @@ class RobotTest {
     void getRobotState() throws FileNotFoundException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Normal test = new Normal(worldTest, "Bob", "normal");
         assertEquals(test.getRobotState(), "Position [0,0] \n" +
                 "Direction [NORTH]");
-        Robot test2 = new Robot(worldTest, "Ray", "normal");
+        Robot test2 = new Normal(worldTest, "Ray", "normal");
         test2.setRobotPosition(10, 10);
         assertEquals(test2.getRobotState(), "Position [10,10] \n" +
                 "Direction [NORTH]");
@@ -29,7 +31,7 @@ class RobotTest {
     void updateResponse() throws FileNotFoundException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         SquareObstacle[] obstacles = {new SquareObstacle(0,2)};
         worldTest.setObstacles(obstacles);
         worldTest.setTOP_LEFT(new Position(-10, 10));
@@ -45,7 +47,7 @@ class RobotTest {
     void updateDirection() throws FileNotFoundException{
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         assertEquals(Direction.NORTH, test.getCurrentDirection());
         test.updateDirection(true);
         assertEquals(Direction.EAST, test.getCurrentDirection());

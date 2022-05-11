@@ -3,7 +3,8 @@ package za.co.wethinkcode.robotServer.ClientCommands;
 import org.junit.jupiter.api.Test;
 import za.co.wethinkcode.robotServer.Direction;
 import za.co.wethinkcode.robotServer.Position;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Normal;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
@@ -19,7 +20,7 @@ class ForwardTest {
     void executeForwardValid() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Forward testForward = new Forward("Bob", 5);
         String[] args = {};
@@ -45,7 +46,7 @@ class ForwardTest {
     void executeForwardInvalidEdge() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Forward testForward = new Forward("Bob", 100);
         String[] args = {};
@@ -71,9 +72,9 @@ class ForwardTest {
     void executeForwardInvalidRobot() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
-        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        Robot test2 = new Normal(worldTest, "Bill", "normal");
         test2.setCurrentPosition(new Position(0 , 2));
         robots.add(test2);
         Forward testForward = new Forward("Bob", 5);
@@ -100,7 +101,7 @@ class ForwardTest {
     void executeForwardInvalidObstacle() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         SquareObstacle squareObstacle = new SquareObstacle(0, 2);
         SquareObstacle[] newList = {squareObstacle};
@@ -129,10 +130,10 @@ class ForwardTest {
     void executeBackInvalidRobotXAxis() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         test.setCurrentDirection(Direction.EAST);
-        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        Robot test2 = new Normal(worldTest, "Bill", "normal");
         test2.setCurrentPosition(new Position(2 , 0));
         robots.add(test2);
         Forward testForward = new Forward("Bob", 5);
@@ -159,7 +160,7 @@ class ForwardTest {
     void executeBackInvalidObstacleXAxis() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         test.setCurrentDirection(Direction.EAST);
         robots.add(test);
         SquareObstacle squareObstacle = new SquareObstacle(2, 0);
@@ -189,7 +190,7 @@ class ForwardTest {
     void executeBackInvalidEdgeXAxis() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         test.setCurrentDirection(Direction.EAST);
         robots.add(test);
         Forward testForward = new Forward("Bob", 100);
@@ -216,7 +217,7 @@ class ForwardTest {
     void executeBackValidEdgeXAxis() throws IOException {
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         test.setCurrentDirection(Direction.EAST);
         robots.add(test);
         Forward testForward = new Forward("Bob", 5);

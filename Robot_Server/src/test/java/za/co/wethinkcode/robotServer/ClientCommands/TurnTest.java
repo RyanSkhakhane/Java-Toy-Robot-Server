@@ -1,7 +1,8 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Normal;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ class TurnTest {
 
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Turn turnTest = new Turn("Bob", "right");
         String[] args = {};
@@ -36,7 +37,7 @@ class TurnTest {
 
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Turn turnTest = new Turn("Bob", "right");
         String[] args = {};
@@ -57,7 +58,7 @@ class TurnTest {
 
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Turn turnTest = new Turn("Bob", "right");
         String[] args = {};
@@ -80,7 +81,7 @@ class TurnTest {
 
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Turn turnTest = new Turn("Bob", "left");
         String[] args = {};
@@ -100,7 +101,7 @@ class TurnTest {
 
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Turn turnTest = new Turn("Bob", "left");
         String[] args = {};
@@ -121,7 +122,7 @@ class TurnTest {
 
         ArrayList<Robot> robots = new ArrayList<>();
         World worldTest = new World(robots);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         Turn turnTest = new Turn("Bob", "left");
         String[] args = {};

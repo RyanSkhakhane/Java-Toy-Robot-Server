@@ -1,11 +1,11 @@
-package za.co.wethinkcode.robotServer;
+package za.co.wethinkcode.robotServer.Robot;
 
+import za.co.wethinkcode.robotServer.Direction;
+import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
-import java.util.Arrays;
-
-public class Robot {
+public abstract class Robot  {
     //Types of robots , sniper , rifle, pistol , basic/normal robot
     //
 
@@ -15,11 +15,11 @@ public class Robot {
     private String robotType;
     private World world;
     private Position currentPosition;
-    private int shields;
-    private int shots;
-    private int shotDistance;
-    private int maxShields;
-    private int maxShots;
+    protected int shields;
+    protected int shots;
+    protected int shotDistance;
+    protected int maxShields;
+    protected int maxShots;
     private String status;
 
     public Robot(World world, String robotName, String robotType){
@@ -28,11 +28,6 @@ public class Robot {
         this.robotName = robotName;
         this.robotType = robotType;
         this.world = world;
-        this.shields = 3;
-        this.shots = 3;
-        this.shotDistance = 3;
-        this.maxShields = shields;
-        this.maxShots = 3;
         this.status = "normal";
     }
     public void setRobotPosition(int x , int y){

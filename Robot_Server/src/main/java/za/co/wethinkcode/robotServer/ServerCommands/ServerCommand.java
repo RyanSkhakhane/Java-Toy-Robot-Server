@@ -1,7 +1,7 @@
 package za.co.wethinkcode.robotServer.ServerCommands;
 
 import za.co.wethinkcode.robotServer.ClientHandler;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
 

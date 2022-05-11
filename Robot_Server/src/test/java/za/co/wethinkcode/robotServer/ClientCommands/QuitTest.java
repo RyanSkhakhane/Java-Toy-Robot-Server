@@ -2,7 +2,8 @@ package za.co.wethinkcode.robotServer.ClientCommands;
 
 import org.junit.jupiter.api.Test;
 import za.co.wethinkcode.robotServer.Position;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.Normal;
+import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
@@ -21,13 +22,13 @@ class QuitTest {
         worldTest.setVISIBILITY(7);
         SquareObstacle[] obstacles = {new SquareObstacle(1,3), new SquareObstacle(2,1)};
         worldTest.setObstacles(obstacles);
-        Robot test = new Robot(worldTest, "Bob", "normal");
+        Robot test = new Normal(worldTest, "Bob", "normal");
         test.setCurrentPosition(new Position(1,1));
         robots.add(test);
-        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        Robot test2 = new Normal(worldTest, "Bill", "normal");
         robots.add(test2);
         test2.setCurrentPosition(new Position(1,2));
-        Robot test3 = new Robot(worldTest,"Tim", "normal");
+        Robot test3 = new Normal(worldTest,"Tim", "normal");
         test3.setCurrentPosition(new Position(1, -2));
         robots.add(test3);
         Quit quit = new Quit("Bill");

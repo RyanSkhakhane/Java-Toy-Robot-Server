@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Position;
-import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.Robot.*;
 import za.co.wethinkcode.robotServer.World.Obstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
@@ -20,12 +20,33 @@ public class Launch extends ClientCommands {
 
     @Override
     public String execute(World world, String[] arguments) {
-        Robot robot = new Robot(world, getArgument2(), getArgument());
-        Position freePosition = findFreeSpace(world);
-        robot.setRobotPosition(freePosition.getX(),freePosition.getY());
-        ClientHandler.robots.add(robot);
-        return responseFormulator(robot);
-
+        switch (getArgument()){
+            case "normal":
+                Normal robot = new Normal(world, getArgument2(), getArgument());
+                Position freePosition = findFreeSpace(world);
+                robot.setRobotPosition(freePosition.getX(),freePosition.getY());
+                ClientHandler.robots.add(robot);
+                return responseFormulator(robot);
+            case "machinegun":
+                MachineGun machineGun = new MachineGun(world, getArgument2(), getArgument());
+                freePosition = findFreeSpace(world);
+                machineGun.setRobotPosition(freePosition.getX(),freePosition.getY());
+                ClientHandler.robots.add(machineGun);
+                return responseFormulator(machineGun);
+            case "sniper":
+                Sniper sniper = new Sniper(world, getArgument2(), getArgument());
+                freePosition = findFreeSpace(world);
+                sniper.setRobotPosition(freePosition.getX(),freePosition.getY());
+                ClientHandler.robots.add(sniper);
+                return responseFormulator(sniper);
+            case "tank":
+                Tank tank = new Tank(world, getArgument2(), getArgument());
+                freePosition = findFreeSpace(world);
+                tank.setRobotPosition(freePosition.getX(),freePosition.getY());
+                ClientHandler.robots.add(tank);
+                return responseFormulator(tank);
+        }
+    return "Invalid tank type selected";
     }
 
 
