@@ -11,7 +11,6 @@ public class Reload extends ClientCommands{
         super("reload", robotName);
     }
 
-
     @Override
     public String execute(World world, String[] arguments) {
 
@@ -41,9 +40,7 @@ public class Reload extends ClientCommands{
             this.result = result;
             this.data = data;
             this.state = state;
-
         }
-
     }
     public static class DataJson{
         String message;

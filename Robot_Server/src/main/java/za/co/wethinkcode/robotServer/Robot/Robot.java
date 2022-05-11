@@ -6,8 +6,6 @@ import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
 public abstract class Robot  {
-    //Types of robots , sniper , rifle, pistol , basic/normal robot
-    //
 
     public static final Direction STARTDIRECTION = Direction.NORTH;
     private Direction currentDirection;
@@ -34,7 +32,6 @@ public abstract class Robot  {
         currentPosition = new Position(x , y);
     }
 
-
     public enum UpdateResponse {
         SUCCESS,
         FAILED_OUTSIDE_WORLD,
@@ -44,7 +41,6 @@ public abstract class Robot  {
     public String getRobotName(){
         return robotName;
     }
-
 
     public Direction getCurrentDirection(){
         return currentDirection;
@@ -79,7 +75,6 @@ public abstract class Robot  {
 
         int newX = this.currentPosition.getX();
         int newY = this.currentPosition.getY();
-
 
         switch (currentDirection) {
             case NORTH:
@@ -117,8 +112,6 @@ public abstract class Robot  {
     }
 
     public void updateDirection(boolean right){
-        //This section is to account for if the robot is turning right.
-        //If it is facing NORTH and turns to the right is then facing east and so forth
         if(right){
             switch (currentDirection){
                 case NORTH:
@@ -133,11 +126,8 @@ public abstract class Robot  {
                 case WEST:
                     currentDirection = Direction.NORTH;
                     break;
-
             }
         }else {
-            //This section is to account for if the robot is turning left.
-            //If it is facing NORTH and turns to the left is then facing west and so forth
             switch (currentDirection){
                 case NORTH:
                     currentDirection = Direction.WEST;
@@ -261,7 +251,6 @@ public abstract class Robot  {
         }
         return false;
     }
-
 
     public boolean isNewPositionAllowed(Position position) {
         if (position.isIn(world.getTOP_LEFT(), world.getBOTTOM_RIGHT())) {

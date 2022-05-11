@@ -1,16 +1,12 @@
 package za.co.wethinkcode.RobotClient.ClientCommands;
 
-
 import com.google.gson.Gson;
 
-
 public class Forward extends ClientCommands{
-
 
     public Forward(String steps) {
         super("forward", steps);
     }
-
 
     @Override
     public String execute(String robotName) {

@@ -1,9 +1,7 @@
 package za.co.wethinkcode.RobotClient;
 
-
 import za.co.wethinkcode.RobotClient.ClientCommands.ClientCommands;
 import za.co.wethinkcode.RobotClient.ClientCommands.Launch;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;

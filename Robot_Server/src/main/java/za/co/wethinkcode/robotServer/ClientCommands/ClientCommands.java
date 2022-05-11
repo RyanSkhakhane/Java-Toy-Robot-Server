@@ -1,4 +1,5 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
+
 import za.co.wethinkcode.robotServer.World.World;
 import com.google.gson.Gson;
 
@@ -24,7 +25,6 @@ public abstract class ClientCommands implements CommandInterface {
     public String getArgument() {
         return argument;
     }
-
 
     public String getArgument2() {
         return argument2;
@@ -68,6 +68,4 @@ public abstract class ClientCommands implements CommandInterface {
             super(message);
         }
     }
-
-
 }

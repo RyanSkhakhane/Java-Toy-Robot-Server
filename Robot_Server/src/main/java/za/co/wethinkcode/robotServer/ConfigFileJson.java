@@ -31,7 +31,6 @@ public class ConfigFileJson {
         return reloadTime;
     }
 
-
     public ConfigFileJson(GridJson gridSize, int visibility, SquareObstacle[] obstacles,
                           int shieldRepairTime, int reloadTime, int maxShieldStrength) {
 

@@ -12,7 +12,6 @@ public abstract class ServerCommand {
 
     public abstract void execute(ArrayList<ClientHandler> users, ArrayList<Robot> robots, World world);
 
-
     public static ServerCommand create(String instruction) {
         String[] args = instruction.toLowerCase().trim().split(" ");
         switch (args[0]) {

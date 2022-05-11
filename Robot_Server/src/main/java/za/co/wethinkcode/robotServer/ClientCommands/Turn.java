@@ -11,6 +11,7 @@ public class Turn extends ClientCommands{
         super("turn",robotName);
         this.turnDirection = turnDirection;
     }
+
     @Override
     public String execute(World world, String[] arguments) {
         StateResponseJson stateResponseJson = null;
@@ -26,7 +27,6 @@ public class Turn extends ClientCommands{
                     case "right":
                         robot.updateDirection(true);
                         break;
-
                 }
                 stateResponseJson = new StateResponseJson(robot.getCurrentDirection().toString());
             }
@@ -43,18 +43,14 @@ public class Turn extends ClientCommands{
             this.result = result;
             this.data = data;
             this.state = state;
-
         }
     }
-
-
 
     public static class DataResponseJson{
         String message;
         public DataResponseJson(String message){
             this.message = message;
         }
-
     }
     public static class StateResponseJson{
         String direction;
@@ -62,5 +58,4 @@ public class Turn extends ClientCommands{
             this.direction = direction;
         }
     }
-
 }

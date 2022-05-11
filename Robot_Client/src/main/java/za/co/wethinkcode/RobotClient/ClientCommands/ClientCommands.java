@@ -1,7 +1,7 @@
 package za.co.wethinkcode.RobotClient.ClientCommands;
 
-
 public abstract class ClientCommands implements ClientCommandsInterface{
+
     private final String name;
     private String argument;
     private String argument2;
@@ -29,11 +29,9 @@ public abstract class ClientCommands implements ClientCommandsInterface{
         return argument;
     }
 
-
     public String getArgument2() {
         return argument2;
     }
-
 
     public abstract String execute(String robotName);
 

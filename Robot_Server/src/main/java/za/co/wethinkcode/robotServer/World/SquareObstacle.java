@@ -4,7 +4,6 @@ import za.co.wethinkcode.robotServer.Position;
 
 public class SquareObstacle implements Obstacle {
 
-
     private final int bottomLeftX;
     private final int bottomLeftY;
 

@@ -7,16 +7,13 @@ import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot.*;
 import za.co.wethinkcode.robotServer.World.Obstacle;
 import za.co.wethinkcode.robotServer.World.World;
-
 import java.util.Random;
-
 
 public class Launch extends ClientCommands {
 
     public Launch(String make, String name) {
         super("launch",make,name);
     }
-
 
     @Override
     public String execute(World world, String[] arguments) {
@@ -49,16 +46,15 @@ public class Launch extends ClientCommands {
     return "Invalid tank type selected";
     }
 
-
     private String responseFormulator(Robot robot){
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
         int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
-        StateRespone stateRespone = new StateRespone(position, robot.getCurrentDirection().toString(),
+        StateResponse stateResponse = new StateResponse(position, robot.getCurrentDirection().toString(),
                 robot.getShields(), robot.getShots(), robot.getStatus());
         DataResponse dataResponse = new DataResponse(position, 0, 0, 0, 0);
-        LaunchResponse launchResponse = new LaunchResponse("OK", dataResponse, stateRespone);
+        LaunchResponse launchResponse = new LaunchResponse("OK", dataResponse, stateResponse);
         return gson.toJson(launchResponse);
     }
 
@@ -89,8 +85,8 @@ public class Launch extends ClientCommands {
     public class LaunchResponse{
         String result;
         DataResponse data;
-        StateRespone state;
-        public LaunchResponse(String result, DataResponse data, StateRespone state){
+        StateResponse state;
+        public LaunchResponse(String result, DataResponse data, StateResponse state){
             this.result = result;
             this.data = data;
             this.state = state;
@@ -104,7 +100,6 @@ public class Launch extends ClientCommands {
         int repair;
         int shields;
 
-
         public DataResponse(int[] position, int visibility, int reload, int repair, int shields){
             this.position = position;
             this.visibility = visibility;
@@ -114,14 +109,14 @@ public class Launch extends ClientCommands {
         }
     }
 
-    public static class StateRespone{
+    public static class StateResponse{
         int[] position;
         String direction;
         int shields;
         int shots;
         String status;
 
-        public StateRespone(int[] position, String direction, int shields, int shots, String status){
+        public StateResponse(int[] position, String direction, int shields, int shots, String status){
             this.position = position;
             this.direction = direction;
             this.shields = shields;

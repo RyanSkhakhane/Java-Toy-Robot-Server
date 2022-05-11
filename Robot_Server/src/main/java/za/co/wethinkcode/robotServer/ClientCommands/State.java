@@ -11,7 +11,6 @@ public class State extends ClientCommands{
         super("state",robotName);
     }
 
-
     @Override
     public String execute(World world, String[] arguments) {
         StateResponseJSon stateResponseJSon;
@@ -28,7 +27,6 @@ public class State extends ClientCommands{
         }
         return "Robot not found!!";
     }
-
 
     public static class StateResponseJSon{
         int[] position;

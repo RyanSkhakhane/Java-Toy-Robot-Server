@@ -41,7 +41,6 @@ public class World {
         for (int i = 0; i <= OBSTACLES.length - 1; i++) {
             System.out.println("- At position "+ Arrays.asList(OBSTACLES).get(i).getBottomLeftX()+","+Arrays.asList(OBSTACLES).get(i).getBottomLeftY()+"" +
                     " (to "+(Arrays.asList(OBSTACLES).get(i).getBottomLeftX()+ 3)+","+(Arrays.asList(OBSTACLES).get(i).getBottomLeftY()+ 3)+")");
-
         }
     }
 
@@ -75,8 +74,6 @@ public class World {
         return 5;
     }
 
-
-
     public SquareObstacle[] getOBSTACLES(){
         return OBSTACLES;
     }
@@ -88,7 +85,6 @@ public class World {
     public Position getBOTTOM_RIGHT() {
         return BOTTOM_RIGHT;
     }
-
 
     public void setTOP_LEFT(Position TOP_LEFT) {
         this.TOP_LEFT = TOP_LEFT;

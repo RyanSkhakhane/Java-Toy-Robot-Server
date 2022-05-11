@@ -8,9 +8,8 @@ import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.Obstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
-
-
 public class Fire extends ClientCommands {
+
     public int shotDistance;
     public int obstacleDistance = 100000;
     public Fire(String name) {
@@ -68,7 +67,6 @@ public class Fire extends ClientCommands {
     public boolean hitCheck(int shotLength, Robot myRobot, World world, Robot enemyRobot) {
         int newX = myRobot.getCurrentPosition().getX();
         int newY = myRobot.getCurrentPosition().getY();
-
 
         switch (myRobot.getCurrentDirection()) {
             case NORTH:

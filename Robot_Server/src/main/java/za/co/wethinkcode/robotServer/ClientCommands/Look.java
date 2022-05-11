@@ -16,7 +16,6 @@ public class Look extends ClientCommands{
             .setPrettyPrinting()
             .create();
 
-
     public Look(String name) {
         super("look",name);
     }
@@ -53,11 +52,9 @@ public class Look extends ClientCommands{
         return null;
     }
 
-
     public void lookCommand(int visibility, Robot myRobot, World world , int direction) {
         int newX = myRobot.getCurrentPosition().getX();
         int newY = myRobot.getCurrentPosition().getY();
-
 
         switch (myRobot.getCurrentDirection()) {
             case NORTH:
@@ -340,7 +337,6 @@ public class Look extends ClientCommands{
         }
     }
 
-
     public static class ObjectJson {
         String direction;
         String objectType;
@@ -374,6 +370,7 @@ public class Look extends ClientCommands{
                 this.status = status;
             }
         }
+
     public static class LookResponseJson{
             String result;
             DataJson data;

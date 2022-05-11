@@ -7,6 +7,7 @@ import za.co.wethinkcode.robotServer.World.World;
 import java.util.ArrayList;
 
 public class Dump extends ServerCommand {
+
     @Override
     public void execute(ArrayList<ClientHandler> users, ArrayList<Robot> robots, World world) {
         world.showObstacles();
@@ -20,7 +21,6 @@ public class Dump extends ServerCommand {
                 System.out.println(robots.get(i).getRobotState());
                 System.out.println(" ");
             }
-
         }
     }
 }

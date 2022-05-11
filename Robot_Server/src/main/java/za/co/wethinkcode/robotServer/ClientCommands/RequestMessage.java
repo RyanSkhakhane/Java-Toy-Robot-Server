@@ -15,7 +15,6 @@ public class RequestMessage {
         return robot;
     }
 
-
     public String[] getArguments() {
         return arguments;
     }

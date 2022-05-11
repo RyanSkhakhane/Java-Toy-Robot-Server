@@ -7,9 +7,7 @@ import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.World;
 
-
 public class Back extends ClientCommands{
-
     int steps;
 
     public Back( String robotName, int steps) {
@@ -35,7 +33,6 @@ public class Back extends ClientCommands{
 
                         MovementJson movementJson = new MovementJson("OK", dataJson, stateJson);
                         return gson.toJson(movementJson);
-
 
                     case FAILED_OUTSIDE_WORLD:
                         int[] coord = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
@@ -65,7 +62,6 @@ public class Back extends ClientCommands{
         return null;
     }
 
-
     public static class MovementJson{
         String result;
         DataJson data;
@@ -75,10 +71,9 @@ public class Back extends ClientCommands{
             this.result = result;
             this.data = data;
             this.state = state;
-
         }
-
     }
+
     public static class DataJson{
         String message;
 

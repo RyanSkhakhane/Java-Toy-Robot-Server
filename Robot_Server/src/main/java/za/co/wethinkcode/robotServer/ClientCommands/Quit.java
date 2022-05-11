@@ -14,6 +14,7 @@ public class Quit extends ClientCommands{
 
     @Override
     public String execute(World world, String[] arguments) {
+
         try {
             for (Robot robot : world.getRobots()) {
                 if (robot.getRobotName().equals(getArgument())) {
@@ -21,11 +22,9 @@ public class Quit extends ClientCommands{
                             + robot.getRobotName().substring(1)+ " has left the game.");
                     world.getRobots().remove(robot);
                 }
-
             }
         }catch(ConcurrentModificationException ignored){
         }
         return "Bye bye";
-
     }
 }

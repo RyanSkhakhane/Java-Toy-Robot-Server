@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 
 public class Quit extends ClientCommands{
 
-
     public Quit() {
         super("quit");
     }

@@ -1,16 +1,12 @@
 package za.co.wethinkcode.RobotClient.ClientCommands;
 
-
 import com.google.gson.Gson;
 
-
 public class Back extends ClientCommands{
-
 
     public Back(String steps) {
         super("back", steps);
     }
-
 
     @Override
     public String execute(String robotName) {
@@ -20,6 +16,5 @@ public class Back extends ClientCommands{
 
         return gson.toJson(backCommandJson);
     }
-
 
 }

@@ -9,11 +9,9 @@ import java.net.*;
 import java.util.*;
 
 public class RobotServer {
-    
 
     private final ServerInput serverInput;
     private final ServerSocket serverSocket;
-
 
     public RobotServer(ServerSocket serverSocket){
         this.serverSocket = serverSocket;
@@ -216,7 +214,6 @@ public class RobotServer {
         return false;
     }
 
-
     public static void main(String[] args) throws IOException {
 
         System.out.println("Welcome to Robot Worlds Server Cpt18 please take a moment to configure server settings.");
@@ -229,8 +226,6 @@ public class RobotServer {
         server.startServer();
     }
 
-
-
     private static class ServerInput extends Thread {
         Scanner scanner;
         ServerCommand command;
@@ -240,9 +235,7 @@ public class RobotServer {
 
         @Override
         public void run() {
-
             super.run();
-
             while (true) {
                 String serverCommand = scanner.nextLine();
                 try {
@@ -251,7 +244,6 @@ public class RobotServer {
                 } catch (IllegalArgumentException e) {
                     System.out.println("Command is unrecognised");
                 }
-
             }
         }
     }

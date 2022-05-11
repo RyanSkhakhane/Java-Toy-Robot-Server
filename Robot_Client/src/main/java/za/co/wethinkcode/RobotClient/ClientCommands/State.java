@@ -2,7 +2,6 @@ package za.co.wethinkcode.RobotClient.ClientCommands;
 
 import com.google.gson.Gson;
 
-
 public class State extends ClientCommands {
     public State() {
         super("state");

@@ -61,7 +61,7 @@ public class Forward extends ClientCommands{
                 }
             }
         }
-        return null;
+        return "Forward movement error";
     }
 
 
@@ -74,9 +74,7 @@ public class Forward extends ClientCommands{
             this.result = result;
             this.data = data;
             this.state = state;
-
         }
-
     }
     public static class DataJson{
         String message;

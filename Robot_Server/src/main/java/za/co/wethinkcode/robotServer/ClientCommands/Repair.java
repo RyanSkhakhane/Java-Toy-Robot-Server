@@ -11,8 +11,6 @@ public class Repair extends ClientCommands{
         super("reload", robotName);
     }
 
-
-
     @Override
     public String execute(World world, String[] arguments) {
 

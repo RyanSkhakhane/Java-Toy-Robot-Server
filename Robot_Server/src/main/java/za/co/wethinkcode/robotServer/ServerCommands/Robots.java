@@ -7,6 +7,7 @@ import za.co.wethinkcode.robotServer.World.World;
 import java.util.ArrayList;
 
 public class Robots extends ServerCommand{
+
     @Override
     public void execute(ArrayList<ClientHandler> users, ArrayList<Robot> robots, World world) {
         if (robots.size() == 0) {
@@ -21,7 +22,6 @@ public class Robots extends ServerCommand{
                 System.out.println("Shields : "+robots.get(i).getShields());
                 System.out.println();
             }
-
         }
     }
 }

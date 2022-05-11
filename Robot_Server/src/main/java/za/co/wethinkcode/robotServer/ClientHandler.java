@@ -53,8 +53,6 @@ public class ClientHandler implements Runnable{
         }
     }
 
-
-
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         try {
             if (bufferedReader != null) {
@@ -70,8 +68,6 @@ public class ClientHandler implements Runnable{
             e.printStackTrace();
         }
     }
-
-
 
     @Override
     public void run() {
