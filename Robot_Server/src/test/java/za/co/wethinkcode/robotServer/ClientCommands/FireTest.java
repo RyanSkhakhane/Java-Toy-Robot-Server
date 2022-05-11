@@ -3,6 +3,7 @@ package za.co.wethinkcode.robotServer.ClientCommands;
 import org.junit.jupiter.api.Test;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.io.IOException;
@@ -57,10 +58,10 @@ class FireTest {
         String[] args = {};
         assertEquals("{\n" +
                 "  \"result\": \"OK\",\n" +
-                "  \"missDataJson\": {\n" +
+                "  \"miss\": {\n" +
                 "    \"message\": \"Miss\"\n" +
                 "  },\n" +
-                "  \"stateJson\": {\n" +
+                "  \"state\": {\n" +
                 "    \"shots\": 2\n" +
                 "  }\n" +
                 "}", testFire.execute(worldTest, args));
@@ -79,10 +80,10 @@ class FireTest {
         String[] args = {};
         assertEquals("{\n" +
                 "  \"result\": \"OK\",\n" +
-                "  \"missDataJson\": {\n" +
+                "  \"miss\": {\n" +
                 "    \"message\": \"Miss\"\n" +
                 "  },\n" +
-                "  \"stateJson\": {\n" +
+                "  \"state\": {\n" +
                 "    \"shots\": 2\n" +
                 "  }\n" +
                 "}", testFire.execute(worldTest, args));
@@ -115,6 +116,32 @@ class FireTest {
                 "      \"shots\": 3,\n" +
                 "      \"status\": \"normal\"\n" +
                 "    }\n" +
+                "  },\n" +
+                "  \"state\": {\n" +
+                "    \"shots\": 2\n" +
+                "  }\n" +
+                "}", testFire.execute(worldTest, args));
+    }
+
+    @Test
+    void executeFireTestMissObstacle() throws IOException {
+        ArrayList<Robot> robots = new ArrayList<>();
+        World worldTest = new World(robots);
+        Robot test = new Robot(worldTest, "Bob", "normal");
+        SquareObstacle[] obstacles = {new SquareObstacle(0,3), new SquareObstacle(2,1)};
+        worldTest.setObstacles(obstacles);
+        robots.add(test);
+        test.setShotDistance(20);
+        test.setCurrentPosition(new Position(0, -4));
+        Robot test2 = new Robot(worldTest, "Bill", "normal");
+        robots.add(test2);
+        test2.setCurrentPosition(new Position(0, 9));
+        Fire testFire = new Fire("Bob");
+        String[] args = {};
+        assertEquals("{\n" +
+                "  \"result\": \"OK\",\n" +
+                "  \"miss\": {\n" +
+                "    \"message\": \"Miss\"\n" +
                 "  },\n" +
                 "  \"state\": {\n" +
                 "    \"shots\": 2\n" +

@@ -26,6 +26,7 @@ public abstract class ClientCommands implements CommandInterface {
     }
 
     public String getName(){
+
         return name;
     }
 

@@ -304,4 +304,7 @@ public class Robot {
         this.shields = maxShields;
     }
 
+    public void setShotDistance(int shotDistance) {
+        this.shotDistance = shotDistance;
+    }
 }

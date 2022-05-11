@@ -5,13 +5,14 @@ import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot;
+import za.co.wethinkcode.robotServer.World.Obstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
 
 
 public class Fire extends ClientCommands {
     public int shotDistance;
-
+    public int obstacleDistance = 100000;
     public Fire(String name) {
         super("fire", name);
         this.shotDistance = 0;
@@ -84,7 +85,9 @@ public class Fire extends ClientCommands {
                 break;
         }
         Position newPosition = new Position(newX, newY);
-
+        for(Obstacle obstacle : world.getOBSTACLES()){
+            this.obstacleBlocksPath(myRobot.getCurrentPosition(), newPosition, obstacle);
+        }
         if (robotBlocksPath(myRobot.getCurrentPosition(), newPosition, enemyRobot)) {
             return true;
 
@@ -106,7 +109,11 @@ public class Fire extends ClientCommands {
             for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(b.getX() + i, b.getY()), robot)) {
                     setShotDistance(i);
-                    return true;
+                    if(shotDistance < obstacleDistance){
+                        obstacleDistance = 1000;
+                        return true;
+                    }
+
                 }
             }
         } else if (a.getX() < b.getX()) {
@@ -114,7 +121,10 @@ public class Fire extends ClientCommands {
             for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(a.getX() + i, a.getY()), robot)) {
                     setShotDistance(i);
-                    return true;
+                    if(shotDistance < obstacleDistance){
+                        obstacleDistance = 1000;
+                        return true;
+                    }
                 }
             }
         } else if (a.getY() > b.getY()) {
@@ -122,7 +132,10 @@ public class Fire extends ClientCommands {
             for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(b.getX(), b.getY() + i), robot)) {
                     setShotDistance(i);
-                    return true;
+                    if(shotDistance < obstacleDistance){
+                        obstacleDistance = 1000;
+                        return true;
+                    }
                 }
             }
         } else if (a.getY() < b.getY()) {
@@ -130,11 +143,49 @@ public class Fire extends ClientCommands {
             for (int i = 0; i < path + 1; i++) {
                 if (robotBlocksSight(new Position(a.getX(), a.getY() + i), robot)) {
                     setShotDistance(i);
-                    return true;
+                    if(shotDistance < obstacleDistance){
+                        obstacleDistance = 1000;
+                        return true;
+                    }
                 }
             }
         }
         return false;
+    }
+
+    public void obstacleBlocksPath(Position a, Position b, Obstacle obstacle){
+        if(a.getX() > b.getX()){
+            int path = a.getX() - b.getX();
+            for(int i = 0; i < path; i++){
+                if(obstacle.blocksPosition(new Position(b.getX()+i, b.getY()))){
+                    obstacleDistance = i;
+                }
+            }
+        }
+        else if(a.getX() < b.getX()){
+            int path = b.getX() - a.getX();
+            for(int i = 0; i < path; i++){
+                if(obstacle.blocksPosition(new Position(a.getX()+i, a.getY()))){
+                    obstacleDistance = i;
+                }
+            }
+        }
+        else if(a.getY() > b.getY()){
+            int path = a.getY() - b.getY();
+            for(int i = 0; i < path; i++){
+                if(obstacle.blocksPosition(new Position(b.getX(), b.getY()+ i))){
+                    obstacleDistance = i;
+                }
+            }
+        }
+        else if(a.getY() < b.getY()){
+            int path = b.getY() - a.getY();
+            for(int i = 0; i < path; i++){
+                if(obstacle.blocksPosition(new Position(a.getX(), a.getY()+ i))){
+                    obstacleDistance = i;
+                }
+            }
+        }
     }
 
     public static void robotDestroyed(Robot robot){
