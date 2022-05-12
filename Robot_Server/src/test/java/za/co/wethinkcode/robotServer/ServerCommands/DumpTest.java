@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Robot.Normal;
 import za.co.wethinkcode.robotServer.Robot.Robot;
+import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.io.*;
@@ -26,6 +27,8 @@ class DumpTest {
         Robot test = new Normal(worldTest, "Bob", "normal");
         robots.add(test);
         ArrayList<ClientHandler> testUserList = new ArrayList<>();
+        SquareObstacle[] obstacles = {new SquareObstacle(0,3), new SquareObstacle(2,1)};
+        worldTest.setObstacles(obstacles);
         Dump dump = new Dump();
         dump.execute(testUserList, robots, worldTest);
 
@@ -39,14 +42,12 @@ class DumpTest {
             String simulatedUserInput = "";
             String expectedOutput =
                     "There are some obstacles\n" +
-                    "- At position -5,1 (to -2,4)\n" +
-                    "- At position 0,-3 (to 3,0)\n" +
-                    "- At position 4,4 (to 7,7)\n" +
-                    "ROBOTS:\n" +
-                    "Robot : Bob\n" +
-                    "Position [0,0] \n" +
-                    "Direction [NORTH]\n"+
-                    " \n";
+                            "- At position 0,3 (to 3,6)\n" +
+                            "- At position 2,1 (to 5,4)\n" +
+                            "ROBOTS:\n" +
+                            "Robot : Bob\n" +
+                            "Position [0,0] \n" +
+                            "Direction [NORTH]\n \n";
             simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
         }
     }

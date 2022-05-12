@@ -84,6 +84,7 @@ public abstract class Robot  {
                 newY = newY + steps;
                 break;
             case SOUTH:
+                steps *= -1;
                 if(blockCheckSouth(steps)){
                     return UpdateResponse.FAILED_OBSTRUCTED;
                 }
@@ -96,6 +97,7 @@ public abstract class Robot  {
                 newX = newX + steps;
                 break;
             case WEST:
+                steps *= -1;
                 if(blockCheckWest(steps)){
                     return UpdateResponse.FAILED_OBSTRUCTED;
                 }

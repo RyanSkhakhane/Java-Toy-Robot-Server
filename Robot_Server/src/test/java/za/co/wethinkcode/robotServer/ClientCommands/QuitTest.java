@@ -34,44 +34,7 @@ class QuitTest {
         Quit quit = new Quit("Bill");
         String[] args = {};
         quit.execute(worldTest,args);
-        Look look = new Look("Bob");
-        assertEquals("{\n" +
-                "  \"result\": \"ok\",\n" +
-                "  \"data\": {\n" +
-                "    \"objects\": [\n" +
-                "      {\n" +
-                "        \"direction\": \"NORTH\",\n" +
-                "        \"objectType\": \"ROBOT\",\n" +
-                "        \"steps\": 1\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"direction\": \"EAST\",\n" +
-                "        \"objectType\": \"OBSTACLE\",\n" +
-                "        \"steps\": 1\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"direction\": \"SOUTH\",\n" +
-                "        \"objectType\": \"ROBOT\",\n" +
-                "        \"steps\": 3\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"direction\": \"WEST\",\n" +
-                "        \"objectType\": \"EDGE\",\n" +
-                "        \"steps\": 6\n" +
-                "      }\n" +
-                "    ]\n" +
-                "  },\n" +
-                "  \"state\": {\n" +
-                "    \"position\": [\n" +
-                "      1,\n" +
-                "      1\n" +
-                "    ],\n" +
-                "    \"direction\": \"NORTH\",\n" +
-                "    \"shields\": 3,\n" +
-                "    \"shots\": 3,\n" +
-                "    \"status\": \"normal\"\n" +
-                "  }\n" +
-                "}",look.execute(worldTest, args));
+        assertEquals(worldTest.getRobots().size(), 2);
     }
 
 }

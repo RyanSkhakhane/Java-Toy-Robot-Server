@@ -14,7 +14,7 @@ public class Launch extends ClientCommands{
         String commandName = getName();
         String robotMake = getArgument();
         String robotName = getArgument2();
-        String[] arguments = {robotMake, "3" , "3"};
+        String[] arguments = {robotMake};
         RequestJson launchCommandJson = new RequestJson(robotName, commandName, arguments);
         Gson gson = new Gson();
         String json = gson.toJson(launchCommandJson);

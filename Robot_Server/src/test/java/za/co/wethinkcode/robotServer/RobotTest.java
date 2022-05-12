@@ -40,7 +40,7 @@ class RobotTest {
         assertEquals(Robot.UpdateResponse.SUCCESS, test.updatePosition(1));
         test.setCurrentDirection(Direction.SOUTH);
         assertEquals(Robot.UpdateResponse.SUCCESS, test.updatePosition(5));
-        assertEquals(Robot.UpdateResponse.FAILED_OUTSIDE_WORLD, test.updatePosition(600));
+        assertEquals(Robot.UpdateResponse.FAILED_OBSTRUCTED, test.updatePosition(600));
     }
 
     @Test

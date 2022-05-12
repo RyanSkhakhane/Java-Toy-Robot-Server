@@ -42,7 +42,7 @@ class RobotsTest {
                         "Direction [NORTH]\n"+
                         "Shots : 3\n"+
                         "Shields : 3\n"+
-                        " \n";
+                        "\n";
         simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
     }
 }
