@@ -8,6 +8,6 @@ class ForwardTest {
     @Test
     void executeTest(){
         Forward test = new Forward("20");
-        assertEquals("{\"robot\":\"bob\",\"command\":\"forward\",\"arguments\":[20]}", test.execute("bob"));
+        assertEquals("{\"robot\":\"bob\",\"command\":\"forward\",\"arguments\":[\"20\"]}", test.execute("bob"));
     }
 }

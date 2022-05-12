@@ -10,6 +10,6 @@ class LaunchTest {
     @Test
     void executeTest(){
         Launch test = new Launch("normal", "bob");
-        assertEquals("{\"robot\":\"bob\",\"command\":\"launch\",\"arguments\":[\"normal\",\"3\",\"3\"]}", test.execute("bob"));
+        assertEquals("{\"robot\":\"bob\",\"command\":\"launch\",\"arguments\":[\"normal\"]}", test.execute("bob"));
     }
 }
