@@ -108,7 +108,7 @@ class LaunchRobotTests {
         //And the message "No more space in this world"
         assertNotNull(response2.get("data"));
         assertNotNull(response2.get("data").get("message"));
-//        System.out.println(response2.get("data").get("message").asText());
+        System.out.println(response2.get("data").get("message").asText());
         assertTrue(response2.get("data").get("message").asText().contains("No more space in this world"));
     }
 
