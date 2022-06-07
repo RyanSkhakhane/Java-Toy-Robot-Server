@@ -87,10 +87,12 @@ public class RobotClient {
     }
 
     public void listenForResponse(){
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String msgFromGroupChat;
+
 
                 while(socket.isConnected()){
                     try{
@@ -100,12 +102,19 @@ public class RobotClient {
                         }
                         System.out.println(msgFromGroupChat);
 
+
                     }catch(IOException e){
                         closeEverything(socket, bufferedReader, bufferedWriter);
                     }
+
                 }
+                System.out.println("What do you want to do next: ");
+
             }
+
+
         }).start();
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -119,7 +128,7 @@ public class RobotClient {
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
         System.out.println("Thank you " + username.substring(0,1).toUpperCase() + username
-                .substring(1)+ " please launch your robot when you are ready.");
+                .substring(1)+ " please launch your robot when you are ready (launch | make | name)");
         Socket socket = new Socket(hostname, port);
         RobotClient robotClient = new RobotClient(socket, username);
         robotClient.listenForResponse();
