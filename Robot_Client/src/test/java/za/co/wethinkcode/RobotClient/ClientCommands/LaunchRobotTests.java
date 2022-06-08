@@ -15,9 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * So that I can break the record for the most robot kills
  */
 class LaunchRobotTests {
-    private final static int DEFAULT_PORT = 8080;
-//    private final static String DEFAULT_IP = "localhost";
-    private final static String DEFAULT_IP = "20.20.28.20";
+    private final static int DEFAULT_PORT = 5000;
+    private final static String DEFAULT_IP = "localhost";
+
+//    private final static int DEFAULT_PORT = 8080;
+//    private final static String DEFAULT_IP = "20.20.28.20";
     private final RobotWorldClient serverClient = new RobotWorldJsonClient();
 
     @BeforeEach
@@ -44,7 +46,8 @@ class LaunchRobotTests {
                 "  \"command\": \"launch\"," +
                 "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
-        JsonNode response = serverClient.sendRequest(request);
+        JsonNode response = serverClient.sendRequest(request); // test infinitely runs from here
+        System.out.println("Response: " + response);
 
         // Then I should get a valid response from the server
         assertNotNull(response.get("result"));

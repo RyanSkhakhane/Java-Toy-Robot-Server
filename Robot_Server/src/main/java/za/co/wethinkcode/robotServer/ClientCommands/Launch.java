@@ -47,15 +47,19 @@ public class Launch extends ClientCommands {
     }
 
     private String responseFormulator(Robot robot){
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+//        Gson gson = new GsonBuilder()
+//                .setPrettyPrinting()
+//                .create();
+
+        Gson gson = new Gson();
         int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
         StateResponse stateResponse = new StateResponse(position, robot.getCurrentDirection().toString(),
                 robot.getShields(), robot.getShots(), robot.getStatus());
-        DataResponse dataResponse = new DataResponse(position, 0, 0, 0, 0);
+        DataResponse dataResponse = new DataResponse(position, 1, 3, 3, 3);
         LaunchResponse launchResponse = new LaunchResponse("OK", dataResponse, stateResponse);
-        return gson.toJson(launchResponse);
+        String toReturn = gson.toJson(launchResponse);
+
+        return toReturn;
     }
 
     private Position findFreeSpace(World world){

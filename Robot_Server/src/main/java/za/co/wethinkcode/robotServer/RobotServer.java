@@ -25,6 +25,7 @@ public class RobotServer {
                 Socket socket = serverSocket.accept();
                 System.out.println("A new user has connected to the server.");
                 ClientHandler clientHandler = new ClientHandler(socket);
+                System.out.println(clientHandler.clientUsername + " connected :)");
                 Thread thread = new Thread(clientHandler);
                 thread.start();
             }
