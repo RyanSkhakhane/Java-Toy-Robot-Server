@@ -1,15 +1,14 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot.*;
 import za.co.wethinkcode.robotServer.World.Obstacle;
 import za.co.wethinkcode.robotServer.World.World;
-import java.util.Random;
 
-import static za.co.wethinkcode.robotServer.RobotServer.numberOfRobots;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Launch extends ClientCommands {
 
@@ -31,7 +30,20 @@ public class Launch extends ClientCommands {
                 freePosition = findFreeSpace(world);
                 machineGun.setRobotPosition(0,0);
                 ClientHandler.robots.add(machineGun);
+
+
                 if(ClientHandler.robots.size() > 1){
+                    ArrayList<Robot> robots = ClientHandler.robots;
+
+                    for (int i = 0; i < ClientHandler.robots.size(); i++) {
+                        String name1 = this.getArgument2();
+                        String name2 = ClientHandler.robots.get(0).getRobotName();
+                        if (name1.equalsIgnoreCase(name2)) {
+                            ClientHandler.robots.clear();
+                            return "{\"result\":\"ERROR\",\"data\":{\"message\":\"Too many of you in this world\"}}";
+                        }
+                    }
+                    ClientHandler.robots.clear();
                     return "{\"result\":\"ERROR\",\"data\":{\"message\":\"No more space in this world\"}}";
                 }
                 return responseFormulator(machineGun);

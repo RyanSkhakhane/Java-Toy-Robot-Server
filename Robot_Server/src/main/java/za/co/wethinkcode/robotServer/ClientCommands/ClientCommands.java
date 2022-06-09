@@ -1,5 +1,6 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
+import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.World.World;
 import com.google.gson.Gson;
 
@@ -60,6 +61,7 @@ public abstract class ClientCommands implements CommandInterface {
                 return new Quit(requestMessage.robot);
             default:
 //                throw new CommandNotFoundException("Unsupported command: " + instruction);
+                ClientHandler.robots.clear();
                 return new UnsupportedCommand(requestMessage.robot);
 
         }

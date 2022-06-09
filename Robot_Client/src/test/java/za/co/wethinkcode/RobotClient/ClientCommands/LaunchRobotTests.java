@@ -42,7 +42,7 @@ class LaunchRobotTests {
 
         // When I send a valid launch request to the server
         String request = "{" +
-                "  \"robot\": \"HAL\"," +
+                "  \"robot\": \"VAL\"," +
                 "  \"command\": \"launch\"," +
                 "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
@@ -70,7 +70,7 @@ class LaunchRobotTests {
 
         // When I send a invalid launch request with the command "luanch" instead of "launch"
         String request = "{" +
-                "\"robot\": \"HAL\"," +
+                "\"robot\": \"ROTO\"," +
                 "\"command\": \"luanch\"," +
                 "\"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
@@ -91,7 +91,7 @@ class LaunchRobotTests {
         //Given that a client is connected and successfully launched to a Robot Worlds server
         //And the world is of size 1x1
         String request1 = "{" +
-                "  \"robot\": \"HAL\"," +
+                "  \"robot\": \"MAL\"," +
                 "  \"command\": \"launch\"," +
                 "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
@@ -121,7 +121,7 @@ class LaunchRobotTests {
         // Given that a client is connected and successfully launched to a Robot Worlds server
         // And the world is of size 1x1
         String request1 = "{" +
-                "  \"robot\": \"HAL\"," +
+                "  \"robot\": \"ROTO1\"," +
                 "  \"command\": \"launch\"," +
                 "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
@@ -129,7 +129,7 @@ class LaunchRobotTests {
 
         // When I launch and name my Robot with an existing Robot name in the World
         String request2 = "{" +
-                "  \"robot\": \"HAL\"," +
+                "  \"robot\": \"ROTO1\"," +
                 "  \"command\": \"launch\"," +
                 "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
