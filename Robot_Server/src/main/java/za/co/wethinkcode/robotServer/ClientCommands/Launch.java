@@ -21,25 +21,25 @@ public class Launch extends ClientCommands {
             case "normal":
                 Normal robot = new Normal(world, getArgument2(), getArgument());
                 Position freePosition = findFreeSpace(world);
-                robot.setRobotPosition(freePosition.getX(),freePosition.getY());
+                robot.setRobotPosition(0,0);
                 ClientHandler.robots.add(robot);
                 return responseFormulator(robot);
             case "machinegun":
                 MachineGun machineGun = new MachineGun(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
-                machineGun.setRobotPosition(freePosition.getX(),freePosition.getY());
+                machineGun.setRobotPosition(0,0);
                 ClientHandler.robots.add(machineGun);
                 return responseFormulator(machineGun);
             case "sniper":
                 Sniper sniper = new Sniper(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
-                sniper.setRobotPosition(freePosition.getX(),freePosition.getY());
+                sniper.setRobotPosition(0,0);
                 ClientHandler.robots.add(sniper);
                 return responseFormulator(sniper);
             case "tank":
                 Tank tank = new Tank(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
-                tank.setRobotPosition(freePosition.getX(),freePosition.getY());
+                tank.setRobotPosition(0,0);
                 ClientHandler.robots.add(tank);
                 return responseFormulator(tank);
         }
