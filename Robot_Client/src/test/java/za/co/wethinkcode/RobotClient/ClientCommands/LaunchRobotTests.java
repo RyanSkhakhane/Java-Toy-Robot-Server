@@ -47,9 +47,9 @@ class LaunchRobotTests {
                 "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
         JsonNode response = serverClient.sendRequest(request); // test infinitely runs from here
-        System.out.println("Response: " + response);
+//        System.out.println("Response: " + response);
 
-        // Then I should get a valid response from the server
+        // Then I should get a valid response from the server ({"result":"OK","data":{"position":[0,0],"visibility":1,"reload":3,"repair":3,"shields":3},"state":{"position":[0,0],"direction":"NORTH","shields":2,"shots":6,"status":"normal"}})
         assertNotNull(response.get("result"));
         assertEquals("OK", response.get("result").asText());
 
@@ -76,7 +76,7 @@ class LaunchRobotTests {
                 "}";
         JsonNode response = serverClient.sendRequest(request); // {"result":"ERROR","data":{"message":"Unsupported command"}}
 
-        // Then I should get an error response
+        // Then I should get an error response ( {"result":"ERROR","data":{"message":"Unsupported command"}} )
         assertNotNull(response.get("result"));
         assertEquals("ERROR", response.get("result").asText());
 
@@ -86,65 +86,65 @@ class LaunchRobotTests {
         assertTrue(response.get("data").get("message").asText().contains("Unsupported command"));
     }
 
-//    @Test
-//    void theWorldHasNoSpaceForRobot(){
-//        //Given that a client is connected and successfully launched to a Robot Worlds server
-//        //And the world is of size 1x1
-//        String request1 = "{" +
-//                "  \"robot\": \"HAL\"," +
-//                "  \"command\": \"launch\"," +
-//                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
-//                "}";
-//        JsonNode response1 = serverClient.sendRequest(request1);
-//
-//        //When I send a valid launch request
-//        String request2 = "{" +
-//                "  \"robot\": \"HAP\"," +
-//                "  \"command\": \"launch\"," +
-//                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
-//                "}";
-//        JsonNode response2 = serverClient.sendRequest(request2);
-//
-//        // Then I should get an "ERROR" response
-//        assertNotNull(response2.get("result"));
-//        assertEquals("ERROR", response2.get("result").asText());
-//
-//        //And the message "No more space in this world"
-//        assertNotNull(response2.get("data"));
-//        assertNotNull(response2.get("data").get("message"));
-//        System.out.println(response2.get("data").get("message").asText());
-//        assertTrue(response2.get("data").get("message").asText().contains("No more space in this world"));
-//    }
+    @Test
+    void theWorldHasNoSpaceForRobot(){
+        //Given that a client is connected and successfully launched to a Robot Worlds server
+        //And the world is of size 1x1
+        String request1 = "{" +
+                "  \"robot\": \"HAL\"," +
+                "  \"command\": \"launch\"," +
+                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        JsonNode response1 = serverClient.sendRequest(request1); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
 
-//    @Test
-//    void robotNameAlreadyTaken (){
-//        // Given that a client is connected and successfully launched to a Robot Worlds server
-//        // And the world is of size 1x1
-//        String request1 = "{" +
-//                "  \"robot\": \"HAL\"," +
-//                "  \"command\": \"launch\"," +
-//                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
-//                "}";
-//        JsonNode response1 = serverClient.sendRequest(request1);
-//
-//        // When I launch and name my Robot with an existing Robot name in the World
-//        String request2 = "{" +
-//                "  \"robot\": \"HAL\"," +
-//                "  \"command\": \"launch\"," +
-//                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
-//                "}";
-//        JsonNode response2 = serverClient.sendRequest(request2);
-//
-//
-//        // Then I should get an "ERROR" response
-//        assertNotNull(response2.get("result"));
-//        assertEquals("ERROR", response2.get("result").asText());
-//
-//        // And the message "Too many of you in this world"
-//        assertNotNull(response2.get("data"));
-//        assertNotNull(response2.get("data").get("message"));
+        //When I send a valid launch request
+        String request2 = "{" +
+                "  \"robot\": \"HAP\"," +
+                "  \"command\": \"launch\"," +
+                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        JsonNode response2 = serverClient.sendRequest(request2); // {"result":"ERROR","data":{"message":"No more space in this world"}}
+
+        // Then I should get an "ERROR" response
+        assertNotNull(response2.get("result"));
+        assertEquals("ERROR", response2.get("result").asText());
+
+        //And the message "No more space in this world"
+        assertNotNull(response2.get("data"));
+        assertNotNull(response2.get("data").get("message"));
 //        System.out.println(response2.get("data").get("message").asText());
-//        assertTrue(response2.get("data").get("message").asText().contains("Too many of you in this world"));
-//
-//    }
+        assertTrue(response2.get("data").get("message").asText().contains("No more space in this world"));
+    }
+
+    @Test
+    void robotNameAlreadyTaken (){
+        // Given that a client is connected and successfully launched to a Robot Worlds server
+        // And the world is of size 1x1
+        String request1 = "{" +
+                "  \"robot\": \"HAL\"," +
+                "  \"command\": \"launch\"," +
+                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        JsonNode response1 = serverClient.sendRequest(request1); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
+
+        // When I launch and name my Robot with an existing Robot name in the World
+        String request2 = "{" +
+                "  \"robot\": \"HAL\"," +
+                "  \"command\": \"launch\"," +
+                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        JsonNode response2 = serverClient.sendRequest(request2); // {"result":"ERROR","data":{"message":"Too many of you in this world"}}
+
+
+        // Then I should get an "ERROR" response
+        assertNotNull(response2.get("result"));
+        assertEquals("ERROR", response2.get("result").asText());
+
+        // And the message "Too many of you in this world"
+        assertNotNull(response2.get("data"));
+        assertNotNull(response2.get("data").get("message"));
+        System.out.println(response2.get("data").get("message").asText());
+        assertTrue(response2.get("data").get("message").asText().contains("Too many of you in this world"));
+
+    }
 }

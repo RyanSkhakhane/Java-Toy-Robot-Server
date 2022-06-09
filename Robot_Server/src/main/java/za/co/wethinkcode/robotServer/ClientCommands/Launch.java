@@ -9,6 +9,8 @@ import za.co.wethinkcode.robotServer.World.Obstacle;
 import za.co.wethinkcode.robotServer.World.World;
 import java.util.Random;
 
+import static za.co.wethinkcode.robotServer.RobotServer.numberOfRobots;
+
 public class Launch extends ClientCommands {
 
     public Launch(String make, String name) {
@@ -29,6 +31,9 @@ public class Launch extends ClientCommands {
                 freePosition = findFreeSpace(world);
                 machineGun.setRobotPosition(0,0);
                 ClientHandler.robots.add(machineGun);
+                if(ClientHandler.robots.size() > 1){
+                    return "{\"result\":\"ERROR\",\"data\":{\"message\":\"No more space in this world\"}}";
+                }
                 return responseFormulator(machineGun);
             case "sniper":
                 Sniper sniper = new Sniper(world, getArgument2(), getArgument());
