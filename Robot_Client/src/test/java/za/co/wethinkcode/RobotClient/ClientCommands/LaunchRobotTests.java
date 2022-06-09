@@ -44,7 +44,7 @@ class LaunchRobotTests {
         String request = "{" +
                 "  \"robot\": \"HAL\"," +
                 "  \"command\": \"launch\"," +
-                "  \"arguments\": [\"sniper\",\"5\",\"5\"]" +
+                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
         JsonNode response = serverClient.sendRequest(request); // test infinitely runs from here
         System.out.println("Response: " + response);
@@ -72,7 +72,7 @@ class LaunchRobotTests {
         String request = "{" +
                 "\"robot\": \"HAL\"," +
                 "\"command\": \"luanch\"," +
-                "\"arguments\": [\"sniper\",\"5\",\"5\"]" +
+                "\"arguments\": [\"shooter\",\"5\",\"5\"]" +
                 "}";
         JsonNode response = serverClient.sendRequest(request); // {"result":"ERROR","data":{"message":"Unsupported command"}}
 

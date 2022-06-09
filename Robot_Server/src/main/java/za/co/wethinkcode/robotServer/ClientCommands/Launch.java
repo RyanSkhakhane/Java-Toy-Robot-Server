@@ -24,7 +24,7 @@ public class Launch extends ClientCommands {
                 robot.setRobotPosition(0,0);
                 ClientHandler.robots.add(robot);
                 return responseFormulator(robot);
-            case "machinegun":
+            case "shooter": // 'machinegun' replaced with 'shooter'
                 MachineGun machineGun = new MachineGun(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
                 machineGun.setRobotPosition(0,0);
