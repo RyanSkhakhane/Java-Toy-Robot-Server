@@ -44,13 +44,13 @@ public class ClientHandler implements Runnable{
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.clientUsername = bufferedReader.readLine();
+//            this.clientUsername = bufferedReader.readLine();
             this.shieldRepairCheck = false;
             this.reloadCheck = false;
             users.add(this);
             System.out.println("CLIENTHANDLER CALLED");
-            this.run();
-            System.out.println("CLIENTHANDLER CALLED2");
+//            this.run();
+//            System.out.println("CLIENTHANDLER CALLED2");
 
 //            System.out.println("clientUsername " +clientUsername);
 //            clientCommand = ClientCommands.create(bufferedReader.readLine());
@@ -86,18 +86,27 @@ public class ClientHandler implements Runnable{
     public void run() {
         System.out.println("TOP RUN CALLED");
         String commandFromClient;
+        System.out.println("Top run below");
         while (socket.isConnected()) {
+            System.out.println("Inside while loop");
             try {
-//                commandFromClient = bufferedReader.readLine(); // stucks here
-                commandFromClient = "{\"robot\":\"HAL\",\"command\":\"launch\",\"arguments\":[\"sniper\"]}";
+                System.out.println("inside try");
+//                System.out.println(bufferedReader.read());
+//                System.out.println(bufferedReader.readLine());
+
+                 commandFromClient = bufferedReader.readLine(); // (receive message from RobotClient) stucks here
+                System.out.println("below bufferedReader");
+                System.out.println("CommandFromClient: " + commandFromClient);
+
+//                String commandFromClient = "{\"robot\":\"HAL\",\"command\":\"lanach\",\"arguments\":[\"sniper\"]}";
                 if(!repairFinished() || !reloadFinished()){
                     continue;
                 }
                 try {
                     clientCommand = ClientCommands.create(commandFromClient);
                     requestMessage = gson.fromJson(commandFromClient, RequestMessage.class);
-//                    String message = clientCommand.execute(world, requestMessage.arguments);
-                    String message = "{\"result\":\"OK\",\"data\":{\"visibility\":1,\"position\":[0,0],\"objects\":[]},\"state\":{\"position\":[0,0],\"direction\":\"NORTH\",\"shields\":0,\"shots\":0,\"status\":\"TODO\"}}";
+                    String message = clientCommand.execute(world, requestMessage.arguments);
+//                    String message = "{\"result\":\"OK\",\"data\":{\"visibility\":1,\"position\":[0,0],\"objects\":[]},\"state\":{\"position\":[0,0],\"direction\":\"NORTH\",\"shields\":0,\"shots\":0,\"status\":\"TODO\"}}";
                     bufferedWriter.write(message);
                     bufferedWriter.newLine();
                     bufferedWriter.flush();

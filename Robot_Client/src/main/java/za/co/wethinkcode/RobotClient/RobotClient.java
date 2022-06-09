@@ -72,11 +72,18 @@ public class RobotClient {
                         message = command.execute(robotName);
                         bufferedWriter.write(message);
                         bufferedWriter.newLine();
+                        bufferedWriter.flush(); // send message to server (to 'Clienthandler')
+                    } else { // invalid command
+                        robotName = command.getArgument2();
+                        message = command.execute(robotName); // json format message to send
+                        bufferedWriter.write(message);
+                        bufferedWriter.newLine();
                         bufferedWriter.flush();
                     }
                     
                 }catch(IllegalArgumentException e){
                     System.out.println("invalid command");
+
                     continue;
                 }
 
@@ -129,7 +136,7 @@ public class RobotClient {
         String username = scanner.nextLine();
         System.out.println("Thank you " + username.substring(0,1).toUpperCase() + username
                 .substring(1)+ " please launch your robot when you are ready (launch | make | name)");
-        System.out.println("Response: {\"result\":\"OK\",\"data\":{\"visibility\":1,\"position\":[0,0],\"objects\":[]},\"state\":{\"position\":[0,0],\"direction\":\"NORTH\",\"shields\":0,\"shots\":0,\"status\":\"TODO\"}}");
+//        System.out.println("Response: {\"result\":\"OK\",\"data\":{\"visibility\":1,\"position\":[0,0],\"objects\":[]},\"state\":{\"position\":[0,0],\"direction\":\"NORTH\",\"shields\":0,\"shots\":0,\"status\":\"TODO\"}}");
 //        System.out.println("Their response: " + );
         Socket socket = new Socket(hostname, port);
         RobotClient robotClient = new RobotClient(socket, username);

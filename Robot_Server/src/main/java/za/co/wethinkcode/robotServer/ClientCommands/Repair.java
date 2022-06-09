@@ -16,7 +16,7 @@ public class Repair extends ClientCommands{
 
         Repair.StateJson stateJson;
         Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
+//                .setPrettyPrinting()
                 .create();
         for (Robot robot : world.getRobots()) {
             if (robot.getRobotName().equals(getArgument())) {

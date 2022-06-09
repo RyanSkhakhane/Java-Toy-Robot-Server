@@ -44,7 +44,7 @@ class LaunchRobotTests {
         String request = "{" +
                 "  \"robot\": \"HAL\"," +
                 "  \"command\": \"launch\"," +
-                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "  \"arguments\": [\"sniper\",\"5\",\"5\"]" +
                 "}";
         JsonNode response = serverClient.sendRequest(request); // test infinitely runs from here
         System.out.println("Response: " + response);
@@ -56,7 +56,7 @@ class LaunchRobotTests {
         // And the position should be (x:0, y:0)
         assertNotNull(response.get("data"));
         assertNotNull(response.get("data").get("position"));
-        assertEquals(0, response.get("data").get("position").get(0).asInt());
+        assertEquals(0, response.get("data").get("position").get(0).asInt()); // fail
         assertEquals(0, response.get("data").get("position").get(1).asInt());
 
         // And I should also get the state of the robot
@@ -72,9 +72,9 @@ class LaunchRobotTests {
         String request = "{" +
                 "\"robot\": \"HAL\"," +
                 "\"command\": \"luanch\"," +
-                "\"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "\"arguments\": [\"sniper\",\"5\",\"5\"]" +
                 "}";
-        JsonNode response = serverClient.sendRequest(request);
+        JsonNode response = serverClient.sendRequest(request); // {"result":"ERROR","data":{"message":"Unsupported command"}}
 
         // Then I should get an error response
         assertNotNull(response.get("result"));

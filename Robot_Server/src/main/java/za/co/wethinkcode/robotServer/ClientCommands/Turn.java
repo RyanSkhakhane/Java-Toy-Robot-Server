@@ -16,7 +16,7 @@ public class Turn extends ClientCommands{
     public String execute(World world, String[] arguments) {
         StateResponseJson stateResponseJson = null;
         Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
+//                .setPrettyPrinting()
                 .create();
         for (Robot robot : world.getRobots()) {
             if (robot.getRobotName().equals(getArgument())){
