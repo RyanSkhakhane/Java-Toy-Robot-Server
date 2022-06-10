@@ -16,10 +16,10 @@ public class RobotClient {
     public static boolean launchCheck;
 
 
-    public RobotClient(Socket socket, String userName) {
+    public RobotClient(Socket socket) {
         try {
             this.socket = socket;
-            this.userName = userName;
+//            this.userName = userName;
             this.robotName = "";
             launchCheck = false;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -50,9 +50,9 @@ public class RobotClient {
     public void sendCommand(){
         String message;
         try{
-            bufferedWriter.write(userName);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
+//            bufferedWriter.write();
+//            bufferedWriter.newLine();
+//            bufferedWriter.flush();
             Scanner scanner = new Scanner(System.in);
             while(socket.isConnected()){
                 try {
@@ -80,7 +80,7 @@ public class RobotClient {
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
                     }
-                    
+
                 }catch(IllegalArgumentException e){
                     System.out.println("invalid command");
 
@@ -131,17 +131,22 @@ public class RobotClient {
         String hostname = args[0];
         int port = Integer.parseInt(args[1]);
 
-        System.out.print("Welcome to Robot Worlds CPT18 client please enter your username : ");
-        Scanner scanner = new Scanner(System.in);
-        String username = scanner.nextLine();
-        System.out.println("Thank you " + username.substring(0,1).toUpperCase() + username
-                .substring(1)+ " please launch your robot when you are ready (launch | make | name)");
+//        System.out.print("Welcome to Robot Worlds CPT18 client please enter your username : ");
+//        Scanner scanner = new Scanner(System.in);
+//        String username = scanner.nextLine();
+//        System.out.println("Thank you " + username.substring(0,1).toUpperCase() + username
+//                .substring(1)+ " please launch your robot when you are ready (launch | make | name)");
 //        System.out.println("Response: {\"result\":\"OK\",\"data\":{\"visibility\":1,\"position\":[0,0],\"objects\":[]},\"state\":{\"position\":[0,0],\"direction\":\"NORTH\",\"shields\":0,\"shots\":0,\"status\":\"TODO\"}}");
 //        System.out.println("Their response: " + );
+
+        System.out.println("Welcome to Robot Worlds. You're connected. Please launch your robot when ready (e.g launch sniper hal): ");
         Socket socket = new Socket(hostname, port);
-        RobotClient robotClient = new RobotClient(socket, username);
+        RobotClient robotClient = new RobotClient(socket);
         robotClient.listenForResponse();
         robotClient.sendCommand();
     }
 
 }
+
+
+

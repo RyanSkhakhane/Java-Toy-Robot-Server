@@ -2,8 +2,12 @@ package za.co.wethinkcode.robotServer.ClientCommands;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot.Robot;
 import za.co.wethinkcode.robotServer.World.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class State extends ClientCommands{
 
@@ -22,12 +26,43 @@ public class State extends ClientCommands{
                 int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
                 stateResponseJSon = new StateResponseJSon(position, robot.getCurrentDirection().toString(),
                         robot.getShields(),robot.getShots(),robot.getStatus());
-                return gson.toJson(stateResponseJSon);
+
+                List objectList = new ArrayList();
+                StateDataJson dataJson = new StateDataJson(1, position, objectList);
+                FullStateResponse fullStateResp = new FullStateResponse("OK", dataJson, stateResponseJSon);
+
+                System.out.println(stateResponseJSon);
+                System.out.println(gson.toJson(stateResponseJSon));
+                return gson.toJson(fullStateResp);
             }
         }
         return "Robot not found!!";
     }
 
+    public class FullStateResponse{
+        String result;
+        StateDataJson data;
+        StateResponseJSon state;
+
+        public FullStateResponse(String result, StateDataJson data, StateResponseJSon state) {
+            this.result = result;
+            this.data = data;
+            this. state = state;
+        }
+    }
+
+    public static class StateDataJson {
+        int visibility;
+        List objects;
+        int[] position;
+
+        public StateDataJson(int visibility, int[] position, List objects) {
+            this.visibility = visibility;
+            this.position = position;
+            this.objects = objects;
+
+        }
+    }
     public static class StateResponseJSon{
         int[] position;
         String direction;
@@ -44,3 +79,4 @@ public class State extends ClientCommands{
         }
     }
 }
+
