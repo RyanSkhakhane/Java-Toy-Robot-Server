@@ -12,6 +12,7 @@ public class RobotServer {
 
     private final ServerInput serverInput;
     private final ServerSocket serverSocket;
+    public static int numberOfRobots = 0;
 
     public RobotServer(ServerSocket serverSocket){
         this.serverSocket = serverSocket;
@@ -24,6 +25,7 @@ public class RobotServer {
             while(!serverSocket.isClosed()){
                 Socket socket = serverSocket.accept();
                 System.out.println("A new user has connected to the server.");
+                numberOfRobots+=1;
                 ClientHandler clientHandler = new ClientHandler(socket);
                 Thread thread = new Thread(clientHandler);
                 thread.start();

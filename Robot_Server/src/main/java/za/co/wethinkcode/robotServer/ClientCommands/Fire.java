@@ -20,7 +20,7 @@ public class Fire extends ClientCommands {
     @Override
     public String execute(World world, String[] arguments) {
         Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
+//                .setPrettyPrinting()
                 .create();
         Robot robot = null;
         for (int i = 0; i < world.getRobots().size(); i++) {

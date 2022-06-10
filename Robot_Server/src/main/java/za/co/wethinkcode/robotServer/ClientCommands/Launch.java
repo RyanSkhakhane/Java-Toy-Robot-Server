@@ -1,12 +1,13 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot.*;
 import za.co.wethinkcode.robotServer.World.Obstacle;
 import za.co.wethinkcode.robotServer.World.World;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Launch extends ClientCommands {
@@ -21,25 +22,41 @@ public class Launch extends ClientCommands {
             case "normal":
                 Normal robot = new Normal(world, getArgument2(), getArgument());
                 Position freePosition = findFreeSpace(world);
-                robot.setRobotPosition(freePosition.getX(),freePosition.getY());
+                robot.setRobotPosition(0,0);
                 ClientHandler.robots.add(robot);
                 return responseFormulator(robot);
-            case "machinegun":
+            case "shooter": // 'machinegun' replaced with 'shooter'
                 MachineGun machineGun = new MachineGun(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
-                machineGun.setRobotPosition(freePosition.getX(),freePosition.getY());
+                machineGun.setRobotPosition(0,0);
                 ClientHandler.robots.add(machineGun);
+
+
+                if(ClientHandler.robots.size() > 1){
+                    ArrayList<Robot> robots = ClientHandler.robots;
+
+                    for (int i = 0; i < ClientHandler.robots.size(); i++) {
+                        String name1 = this.getArgument2();
+                        String name2 = ClientHandler.robots.get(0).getRobotName();
+                        if (name1.equalsIgnoreCase(name2)) {
+                            ClientHandler.robots.clear();
+                            return "{\"result\":\"ERROR\",\"data\":{\"message\":\"Too many of you in this world\"}}";
+                        }
+                    }
+                    ClientHandler.robots.clear();
+                    return "{\"result\":\"ERROR\",\"data\":{\"message\":\"No more space in this world\"}}";
+                }
                 return responseFormulator(machineGun);
             case "sniper":
                 Sniper sniper = new Sniper(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
-                sniper.setRobotPosition(freePosition.getX(),freePosition.getY());
+                sniper.setRobotPosition(0,0);
                 ClientHandler.robots.add(sniper);
                 return responseFormulator(sniper);
             case "tank":
                 Tank tank = new Tank(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
-                tank.setRobotPosition(freePosition.getX(),freePosition.getY());
+                tank.setRobotPosition(0,0);
                 ClientHandler.robots.add(tank);
                 return responseFormulator(tank);
         }
@@ -47,15 +64,19 @@ public class Launch extends ClientCommands {
     }
 
     private String responseFormulator(Robot robot){
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+//        Gson gson = new GsonBuilder()
+//                .setPrettyPrinting()
+//                .create();
+
+        Gson gson = new Gson();
         int[] position = {robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()};
         StateResponse stateResponse = new StateResponse(position, robot.getCurrentDirection().toString(),
                 robot.getShields(), robot.getShots(), robot.getStatus());
-        DataResponse dataResponse = new DataResponse(position, 0, 0, 0, 0);
+        DataResponse dataResponse = new DataResponse(position, 1, 3, 3, 3);
         LaunchResponse launchResponse = new LaunchResponse("OK", dataResponse, stateResponse);
-        return gson.toJson(launchResponse);
+        String toReturn = gson.toJson(launchResponse);
+
+        return toReturn;
     }
 
     private Position findFreeSpace(World world){

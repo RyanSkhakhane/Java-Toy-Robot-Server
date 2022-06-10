@@ -19,7 +19,7 @@ public class Forward extends ClientCommands{
     @Override
     public String execute(World world, String[] arguments) {
         Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
+//                .setPrettyPrinting()
                 .create();
         for (Robot robot: world.getRobots()) {
             if (robot.getRobotName().equals(getArgument())){

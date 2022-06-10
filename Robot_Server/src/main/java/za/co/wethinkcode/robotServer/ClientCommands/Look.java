@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Look extends ClientCommands{
     ArrayList<ObjectJson> objects = new ArrayList<>();
     Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
+//            .setPrettyPrinting()
             .create();
 
     public Look(String name) {

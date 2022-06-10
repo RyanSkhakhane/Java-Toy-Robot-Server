@@ -30,7 +30,7 @@ public class ClientHandler implements Runnable{
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private String clientUsername;
+    public String clientUsername;
     ClientCommands clientCommand;
     LocalTime localTime;
     private final int shieldRepairTime = readShieldRepairTime();
@@ -44,16 +44,22 @@ public class ClientHandler implements Runnable{
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.clientUsername = bufferedReader.readLine();
+//            this.clientUsername = bufferedReader.readLine();
             this.shieldRepairCheck = false;
             this.reloadCheck = false;
             users.add(this);
+//            ClientHandler.robots.clear();
+
+
         } catch (IOException e) {
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
 
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+        System.out.println("closeEverything ran!");
+        ClientHandler.robots.clear();
+//        ClientHandler.robots.size() = 0;
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
@@ -67,6 +73,8 @@ public class ClientHandler implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.exit(0);
+
     }
 
     @Override
@@ -74,7 +82,8 @@ public class ClientHandler implements Runnable{
         String commandFromClient;
         while (socket.isConnected()) {
             try {
-                commandFromClient = bufferedReader.readLine();
+                 commandFromClient = bufferedReader.readLine(); // (receive message from RobotClient) stucks here
+
                 if(!repairFinished() || !reloadFinished()){
                     continue;
                 }
@@ -88,8 +97,12 @@ public class ClientHandler implements Runnable{
                     reloadAndRepairTimerCheck();
                     if(clientCommand instanceof Quit){
                         this.closeEverything(socket,bufferedReader,bufferedWriter);
+                    } else if (clientCommand.equals(null)) {
+                        this.closeEverything(socket, bufferedReader, bufferedWriter);
                     }
                     } catch (IllegalArgumentException e) {
+                    this.closeEverything(socket, bufferedReader, bufferedWriter);
+
                     try {
                         Forward.DataJson dataJson = new Forward.DataJson("Could not parse arguments");
                         ErrorResponseJson errorResponseJson = new ErrorResponseJson("ERROR", dataJson);
@@ -98,6 +111,8 @@ public class ClientHandler implements Runnable{
                         bufferedWriter.flush();
                         }catch(IOException f) {
                             System.out.println("ioexception f");
+                            this.closeEverything(socket, bufferedReader, bufferedWriter);
+                            break;
                     }
                 } catch (ClientCommands.CommandNotFoundException e) {
                     Forward.DataJson dataJson = new Forward.DataJson("Unsupported command");
@@ -105,9 +120,11 @@ public class ClientHandler implements Runnable{
                     bufferedWriter.write(gsonPretty.toJson(errorResponseJson));
                     bufferedWriter.newLine();
                     bufferedWriter.flush();
+                    this.closeEverything(socket, bufferedReader, bufferedWriter);
+                    break;
                 }
             } catch (IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
+                this.closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
             }
         }
@@ -120,6 +137,8 @@ public class ClientHandler implements Runnable{
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
             }catch(IOException e) {
+//                this.closeEverything(socket, bufferedReader, bufferedWriter);
+                System.out.println("BroadcastMessage catch");
             }
         }
     }

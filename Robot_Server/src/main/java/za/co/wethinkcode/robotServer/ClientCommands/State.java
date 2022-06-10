@@ -15,7 +15,7 @@ public class State extends ClientCommands{
     public String execute(World world, String[] arguments) {
         StateResponseJSon stateResponseJSon;
         Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
+//                .setPrettyPrinting()
                 .create();
         for(Robot robot : world.getRobots()){
             if(robot.getRobotName().equals(getArgument())){

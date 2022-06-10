@@ -50,9 +50,9 @@ public class RobotWorldJsonClient implements RobotWorldClient {
     @Override
     public JsonNode sendRequest(String requestJsonString) {
         try {
-            out.println(requestJsonString);
+            out.println(requestJsonString); //
             out.flush();
-            return OBJECT_MAPPER.readTree(in.readLine());
+            return OBJECT_MAPPER.readTree(in.readLine()); // gets stuck here
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Error parsing server response as JSON.", e);
         } catch (IOException e) {

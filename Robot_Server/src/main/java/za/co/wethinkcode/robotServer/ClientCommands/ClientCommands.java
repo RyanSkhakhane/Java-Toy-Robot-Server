@@ -1,5 +1,6 @@
 package za.co.wethinkcode.robotServer.ClientCommands;
 
+import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.World.World;
 import com.google.gson.Gson;
 
@@ -33,6 +34,7 @@ public abstract class ClientCommands implements CommandInterface {
     public abstract String execute(World world, String[] arguments);
 
     public static ClientCommands create(String instruction) throws CommandNotFoundException {
+        //{"robot":"hal","command":"launch","arguments":["sniper"]}
         Gson gson = new Gson();
         RequestMessage requestMessage = gson.fromJson(instruction, RequestMessage.class);
 
@@ -58,7 +60,10 @@ public abstract class ClientCommands implements CommandInterface {
             case "quit":
                 return new Quit(requestMessage.robot);
             default:
-                throw new CommandNotFoundException("Unsupported command: " + instruction);
+//                throw new CommandNotFoundException("Unsupported command: " + instruction);
+                ClientHandler.robots.clear();
+                return new UnsupportedCommand(requestMessage.robot);
+
         }
     }
 

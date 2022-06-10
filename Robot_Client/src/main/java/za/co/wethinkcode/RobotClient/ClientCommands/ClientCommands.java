@@ -59,7 +59,8 @@ public abstract class ClientCommands implements ClientCommandsInterface{
             case "quit":
                 return new Quit();
             default:
-                throw new IllegalArgumentException("Unsupported command: " + instruction);
+//                throw new IllegalArgumentException("Unsupported command: " + instruction);
+                return new UnsupportedCommand(args[0]);
         }
     }
 }
