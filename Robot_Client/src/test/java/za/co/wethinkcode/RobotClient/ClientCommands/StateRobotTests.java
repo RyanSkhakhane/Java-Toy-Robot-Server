@@ -65,6 +65,39 @@ public class StateRobotTests {
         // And I should also get the state of the robot
         assertNotNull(response.get("state"));
     }
+    @Test
+    void InvalidState(){
+        //Given that a client is connected and successfully launched to a Robot Worlds server
+        //And the world is of size 1x1
+
+        assertTrue(serverClient.isConnected());
+
+        // When I send a invalid launch request with the command "statuss" instead of "state"
+
+        String requestr = "{" +
+                "\"robot\": \"ROTO\"," +
+                "\"command\": \"launch\"," +
+                "\"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        JsonNode responser = serverClient.sendRequest(requestr);
+
+        String request = "{" +
+                "\"robot\": \"ROTO\"," +
+                "\"command\": \"statuss\"," +
+                "\"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        JsonNode response = serverClient.sendRequest(request); // {"result":"ERROR","data":{"message":"Unsupported command"}}
+
+        // Then I should get an error response ( {"result":"ERROR","data":{"message":"Unsupported command"}} )
+        assertNotNull(response.get("result"));
+        assertEquals("ERROR", response.get("result").asText());
+
+        // And the message "Unsupported command"
+        assertNotNull(response.get("data"));
+        assertNotNull(response.get("data").get("message"));
+        assertTrue(response.get("data").get("message").asText().contains("Unsupported command"));
+    }
+
 
 }
 
