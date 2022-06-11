@@ -44,7 +44,7 @@ public class Look extends ClientCommands{
                 }
             ObjectJson[] objectJson = objects.toArray(new ObjectJson[0]);
             DataJson data = new DataJson(objectJson);
-            LookResponseJson lookResponseJson = new LookResponseJson("ok", data, state);
+            LookResponseJson lookResponseJson = new LookResponseJson("OK", data, state);
             objects.clear();
             return gson.toJson(lookResponseJson);
             }

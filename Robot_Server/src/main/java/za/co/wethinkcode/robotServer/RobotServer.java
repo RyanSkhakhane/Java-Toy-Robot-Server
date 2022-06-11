@@ -121,20 +121,20 @@ public class RobotServer {
         String[] mapSizes = {"small", "medium" , "large"};
         String mapSize;
         System.out.println("First how large would you like the grid?\n" +
-                "small(10 by 10) , medium(30 by 30) or large(50 by 50).");
+                "small(1 by 1) , medium(30 by 30) or large(50 by 50).");
         do{
             mapSize = scanner.nextLine();
         }while(!Arrays.asList(mapSizes).contains(mapSize));
         switch (mapSize){
             case "small":
-                return new ConfigFileJson.GridJson(5,5);
+                return new ConfigFileJson.GridJson(1,1);
             case "medium":
                 return new ConfigFileJson.GridJson(15,15);
             case "large":
                 return new ConfigFileJson.GridJson(25,25);
         }
         System.out.println("Default of small selected.");
-        return new ConfigFileJson.GridJson(10,10);
+        return new ConfigFileJson.GridJson(1,1);
     }
 
     static int integerChooser(String configTypeChoice){
