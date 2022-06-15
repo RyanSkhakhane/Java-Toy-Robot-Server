@@ -86,7 +86,8 @@
                 <configuration>
                     <includes>
 <!--                        <include>za.co.wethinkcode.robotServer.*Test.java</include>-->
-                        <include>za.co.wethinkcode.robotServer.ClientCommandsTest.*Test.java</include>
+<!--                        <include>za.co.wethinkcode.robotServer.ClientCommandsTest.*Test.java</include>-->
+                        <include>za.co.wethinkcode.robotServer.AcceptanceTestsTest.*Tests.java</include>
                     </includes>
                 </configuration>
             </plugin>

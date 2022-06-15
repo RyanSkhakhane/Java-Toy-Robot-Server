@@ -1,11 +1,11 @@
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/Robot/MachineGunTest.java
+/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/AcceptanceTestsTest/LaunchRobotTests.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/QuitTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/Robot/SniperTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ServerCommands/ServerCommandTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/RepairTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/RobotServerTest.java
-/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/AcceptanceTests/LaunchRobotTests.java
-/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/AcceptanceTests/StateRobotTests.java
+/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/AcceptanceTestsTest/StateRobotTests.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/ForwardTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/World/SquareObstacleTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/StateTest.java
@@ -16,6 +16,7 @@
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientHandlerTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ServerCommands/DumpTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/LaunchTest.java
+/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/AcceptanceTestsTest/LookRobotTests.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/ReloadTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/LookTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ClientCommandsTest/FireTest.java
@@ -23,4 +24,3 @@
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/Robot/TankTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/ServerCommands/RobotsTest.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/Robot/NormalTest.java
-/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/test/java/za/co/wethinkcode/robotServer/AcceptanceTests/LookRobotTests.java

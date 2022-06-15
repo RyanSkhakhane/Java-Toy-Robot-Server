@@ -1,4 +1,4 @@
-package za.co.wethinkcode.robotServer.AcceptanceTests;
+package za.co.wethinkcode.robotServer.AcceptanceTestsTest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.AfterEach;
