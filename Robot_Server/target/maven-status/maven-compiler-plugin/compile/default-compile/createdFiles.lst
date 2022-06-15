@@ -7,6 +7,7 @@ za/co/wethinkcode/robotServer/ClientCommandsTest/Turn.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/Fire$HitJson.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/Fire$StateJson.class
 za/co/wethinkcode/robotServer/ServerCommands/Robots.class
+za/co/wethinkcode/robotServer/RobotWorldJsonClient.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/Back$StateJson.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/Repair.class
 za/co/wethinkcode/robotServer/ServerCommands/Quit.class
@@ -59,6 +60,7 @@ za/co/wethinkcode/robotServer/ClientCommandsTest/Back$DataJson.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/State$StateDataJson.class
 za/co/wethinkcode/robotServer/Robot/MachineGun.class
 za/co/wethinkcode/robotServer/Robot/Sniper.class
+za/co/wethinkcode/robotServer/RobotWorldClient.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/Back.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/Reload$StateJson.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/Turn$TurnResponseJson.class

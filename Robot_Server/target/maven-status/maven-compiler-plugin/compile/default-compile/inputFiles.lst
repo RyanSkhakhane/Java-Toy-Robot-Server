@@ -12,11 +12,13 @@
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/ClientCommandsTest/State.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/Robot/Normal.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/Robot/Sniper.java
+/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/RobotWorldClient.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/ClientCommandsTest/Look.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/ConfigFileJson.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/ClientHandler.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/Position.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/World/World.java
+/home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/RobotWorldJsonClient.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/ClientCommandsTest/Launch.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/Direction.java
 /home/kmeyiswa/student_work/s2nd_year/f1st_semester/brownfields/group_projects/otis-boykin2/otis-boykin/Robot_Server/src/main/java/za/co/wethinkcode/robotServer/ServerCommands/ServerCommand.java

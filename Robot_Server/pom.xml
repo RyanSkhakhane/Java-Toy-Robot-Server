@@ -9,6 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
@@ -79,7 +85,7 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <includes>
-                        <include>za.co.wethinkcode.robotServer.*Test.java</include>
+<!--                        <include>za.co.wethinkcode.robotServer.*Test.java</include>-->
                         <include>za.co.wethinkcode.robotServer.ClientCommandsTest.*Test.java</include>
                     </includes>
                 </configuration>
