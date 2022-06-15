@@ -1,11 +1,13 @@
-package za.co.wethinkcode.RobotClient.ClientCommands;
+package za.co.wethinkcode.robotServer.AcceptanceTests;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.RobotClient.RobotWorldClient;
-import za.co.wethinkcode.RobotClient.RobotWorldJsonClient;
+import za.co.wethinkcode.robotServer.RobotWorldClient;
+import za.co.wethinkcode.robotServer.RobotWorldJsonClient;
+import za.co.wethinkcode.robotServer.RobotWorldClient;
+import za.co.wethinkcode.robotServer.RobotWorldJsonClient;
 
 import static org.junit.jupiter.api.Assertions.*;
 
