@@ -154,44 +154,44 @@ class LaunchRobotTests {
 //
 //    }
 
-//    @Test
-//    void canLaunchAnotherRobot() {
-//        // Given that I am connected to a running Robot Worlds server
-//        // And the world is of size (-s entered parameter)
-//        assertTrue(serverClient.isConnected());
-//
-//        // and robot "HAL" has already been launched into the world
-//        String request1 = "{" +
-//                "  \"robot\": \"HAL\"," +
-//                "  \"command\": \"launch\"," +
-//                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
-//                "}";
-//        JsonNode firstRobotResponse = serverClient.sendRequest(request1);
-//
-//        JsonNode response1 = null;
-//        boolean world_full = false;
-//        int count = 1;
-//
-//        // When I launch another robot into the world
-//            String request2 = "{" +
-//                    "  \"robot\": \"HAL " + count + "\"," +
-//                    "  \"command\": \"launch\"," +
-//                    "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
-//                    "}";
-//            response1 = serverClient.sendRequest(request2); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
-//
-//
-//
-//            // Then I should get an "OK" response (launch should be successful)
-//            assertNotNull(response1.get("result"));
-//            assertEquals("OK", response1.get("result").asText());
-//            // a randomly allocated position of R2D2 should be returned.
-//        System.out.println("Random position");
-//            assertNotEquals("[0,0]", response1.get("data").get("position").toString());
-//
-//
-//
-//    }
+    @Test
+    void canLaunchAnotherRobot() {
+        // Given that I am connected to a running Robot Worlds server
+        // And the world is of size (-s entered parameter)
+        assertTrue(serverClient.isConnected());
+
+        // and robot "HAL" has already been launched into the world
+        String request1 = "{" +
+                "  \"robot\": \"HAL\"," +
+                "  \"command\": \"launch\"," +
+                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        JsonNode firstRobotResponse = serverClient.sendRequest(request1);
+
+        JsonNode response1 = null;
+        boolean world_full = false;
+        int count = 1;
+
+        // When I launch another robot into the world
+            String request2 = "{" +
+                    "  \"robot\": \"HAL " + count + "\"," +
+                    "  \"command\": \"launch\"," +
+                    "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                    "}";
+            response1 = serverClient.sendRequest(request2); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
+
+
+
+            // Then I should get an "OK" response (launch should be successful)
+            assertNotNull(response1.get("result"));
+            assertEquals("OK", response1.get("result").asText());
+            // a randomly allocated position of R2D2 should be returned.
+        System.out.println("Random position");
+            assertNotEquals("[0,0]", response1.get("data").get("position").toString());
+
+
+
+    }
 
 //    @Test
 //    void worldWithoutObstaclesIsFull(){
