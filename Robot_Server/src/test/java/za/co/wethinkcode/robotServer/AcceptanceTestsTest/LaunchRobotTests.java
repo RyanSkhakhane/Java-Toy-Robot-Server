@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.RobotWorldClient;
 import za.co.wethinkcode.robotServer.RobotWorldJsonClient;
+import za.co.wethinkcode.robotServer.World.Obstacle;
 
 import java.util.List;
 
@@ -157,7 +158,7 @@ class LaunchRobotTests {
     @Test
     void canLaunchAnotherRobot() {
         // Given that I am connected to a running Robot Worlds server
-        // And the world is of size (-s entered parameter)
+        // And the world is of size (-s entered parameter) (2x2)
         assertTrue(serverClient.isConnected());
 
         // and robot "HAL" has already been launched into the world
@@ -182,10 +183,11 @@ class LaunchRobotTests {
 
 
 
-            // Then I should get an "OK" response (launch should be successful)
+            // Then the launch should be successful and I should get an "OK" response (launch should be successful)
             assertNotNull(response1.get("result"));
             assertEquals("OK", response1.get("result").asText());
-            // a randomly allocated position of R2D2 should be returned.
+
+            // and a randomly allocated position of R2D2 should be returned.
         System.out.println("Random position");
             assertNotEquals("[0,0]", response1.get("data").get("position").toString());
 
@@ -196,10 +198,13 @@ class LaunchRobotTests {
     @Test
     void worldWithoutObstaclesIsFull(){
         //Given that a client is connected and successfully launched to a Robot Worlds server
-        //And the world is of size yxy (y > 0)
+        //And the world is of size AxA (A > 0) (2x2)
         boolean world_full = false;
         int count = 1;
         JsonNode response1 = null;
+
+        // And I have successfully launched 9 robots into the world
+        // When I launch one more robot
         while (!world_full) {
             String request1 = "{" +
                     "  \"robot\": \"HAL " + count + "\"," +
@@ -226,5 +231,37 @@ class LaunchRobotTests {
         assertTrue(response1.get("data").get("message").asText().contains("No more space in this world"));
     }
 
+
+    @Test
+    void launchRobotsIntoAWorldWithAnObstacle(){
+        // Given a world of size 2x2
+        // And the world has an obstacle at coordinate [1,1]
+
+        // When I launch 8 robots into the world
+
+        boolean world_full = false;
+        int count = 1;
+        JsonNode response1 = null;
+
+        while (!world_full) {
+            String request1 = "{" +
+                    "  \"robot\": \"HAL " + count + "\"," +
+                    "  \"command\": \"launch\"," +
+                    "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                    "}";
+            response1 = serverClient.sendRequest(request1); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
+            String currentResult = response1.get("result").asText();
+            if (currentResult.equalsIgnoreCase("error")) {
+                System.out.println("[Print statement] : The world is full with " + (count-1) + " robots inside.");
+                world_full = true;
+            } else {
+                // Then each robot cannot be in position [1,1]
+                assertNotEquals("[1,1]", response1.get("data").get("position").toString());
+            }
+            count++;
+        }
+
+
+    }
 
 }
