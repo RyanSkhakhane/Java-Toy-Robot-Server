@@ -174,26 +174,37 @@ class LaunchRobotTests {
         int count = 1;
 
         // When I launch another robot into the world
+        while (!world_full) {
+            count++;
             String request2 = "{" +
                     "  \"robot\": \"HAL " + count + "\"," +
                     "  \"command\": \"launch\"," +
                     "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
                     "}";
-            response1 = serverClient.sendRequest(request2); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
+            response1 = serverClient.sendRequest(request1); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
+            String currentResult = response1.get("result").asText();
+            if (currentResult.equalsIgnoreCase("error")) {
+                System.out.println("[Print statement] : The world is full with " + (count - 1) + " robots inside.");
+                world_full = true;
+                break;
+            }
+            count++;
+        }
 
+            if (count <= 2) {
+                assertTrue(response1.get("result").toString().contains("ERROR"));
+            } else {
 
+                // Then the launch should be successful and I should get an "OK" response (launch should be successful)
+                assertNotNull(response1.get("result"));
+                assertEquals("OK", response1.get("result"));
 
-            // Then the launch should be successful and I should get an "OK" response (launch should be successful)
-            assertNotNull(response1.get("result"));
-            assertEquals("OK", response1.get("result").asText());
+                // and a randomly allocated position of R2D2 should be returned.
+                //        System.out.println("Random position");
+                assertNotEquals("[0,0]", response1.get("data").get("position").toString());
+            }
+        }
 
-            // and a randomly allocated position of R2D2 should be returned.
-        System.out.println("Random position");
-            assertNotEquals("[0,0]", response1.get("data").get("position").toString());
-
-
-
-    }
 
     @Test
     void worldWithoutObstaclesIsFull(){
