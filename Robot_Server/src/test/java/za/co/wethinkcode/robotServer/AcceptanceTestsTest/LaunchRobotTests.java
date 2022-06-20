@@ -264,4 +264,48 @@ class LaunchRobotTests {
 
     }
 
+
+    @Test
+    void worldWithAnObstacleIsFull(){
+        // Given a world of size 2x2
+        // And the world has an obstacle at coordinate [1,1]
+
+        // And I have successfully launche 8 robots into the world
+
+        boolean world_full = false;
+        int count = 1;
+        JsonNode response1 = null;
+
+        while (!world_full) {
+            String request1 = "{" +
+                    "  \"robot\": \"HAL " + count + "\"," +
+                    "  \"command\": \"launch\"," +
+                    "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                    "}";
+            response1 = serverClient.sendRequest(request1); // {"result":"OK","data":{"visibility":1,"position":[0,0],"objects":[]},"state":{"position":[0,0],"direction":"NORTH","shields":0,"shots":0,"status":"TODO"}}
+            String currentResult = response1.get("result").asText();
+            if (currentResult.equalsIgnoreCase("error")) {
+                System.out.println("[Print statement] : The world is full with " + (count-1) + " robots inside.");
+                world_full = true;
+            }
+            count++;
+        }
+
+        // When I launch one more robot
+        String request1 = "{" +
+                "  \"robot\": \"HAL " + count + "\"," +
+                "  \"command\": \"launch\"," +
+                "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                "}";
+        response1 = serverClient.sendRequest(request1);
+
+        // Then I should get an error response bac with the message "No more space in this world"
+        assertNotNull(response1.get("data"));
+        assertNotNull(response1.get("data").get("message"));
+//        System.out.println(response1.get("data").get("message").asText());
+        assertTrue(response1.get("data").get("message").asText().contains("No more space in this world"));
+
+
+
+    }
 }
