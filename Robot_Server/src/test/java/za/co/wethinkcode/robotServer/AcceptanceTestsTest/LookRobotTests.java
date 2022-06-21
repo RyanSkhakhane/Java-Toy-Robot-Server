@@ -58,7 +58,65 @@ public class LookRobotTests {
         assertNotNull(response2.get("result"));
         assertEquals("OK",  response2.get("result").asText());
         assertTrue(response2.get("data").get("objects").toString().contains("EDGE"));
-        assertFalse(response2.get("data").get("objects").toString().contains("OBSTACLE"));
+        assertTrue(response2.get("data").get("objects").toString().contains("OBSTACLE"));
 
+    }
+
+    @Test
+    void shouldSeeOtherRobots() {
+        int robots = 0;
+        boolean world_ful = false;
+        while (!world_ful) {
+            if(robots == 4){
+                world_ful = true;
+            }
+            robots++;
+            String request = "{" +
+                    "  \"robot\": \"HAL " + robots + "\"," +
+                    "  \"command\": \"launch\"," +
+                    "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                    "}";
+            JsonNode response = serverClient.sendRequest(request);
+        }
+
+        String request1 = "{" +
+                "  \"robot\": \"HAL 2\"," +
+                "  \"command\": \"look\","+
+                "  \"arguments\": [\"\"]" +
+                "}";
+
+        JsonNode response1 = serverClient.sendRequest(request1);
+        assertNotNull(response1.get("result"));
+        assertTrue(response1.get("data").get("objects").toString().contains("ROBOT"));
+        assertTrue(response1.get("data").get("objects").toString().contains("EDGE"));
+    }
+
+    @Test
+    void shouldSeeObstacles(){
+        int robots = 0;
+        boolean world_ful = false;
+        while (!world_ful) {
+            if(robots == 4){
+                world_ful = true;
+            }
+            robots++;
+            String request = "{" +
+                    "  \"robot\": \"HAL " + robots + "\"," +
+                    "  \"command\": \"launch\"," +
+                    "  \"arguments\": [\"shooter\",\"5\",\"5\"]" +
+                    "}";
+            JsonNode response = serverClient.sendRequest(request);
+        }
+
+        String request1 = "{" +
+                "  \"robot\": \"HAL 2\"," +
+                "  \"command\": \"look\","+
+                "  \"arguments\": [\"\"]" +
+                "}";
+
+        JsonNode response1 = serverClient.sendRequest(request1);
+        assertNotNull(response1.get("result"));
+        assertTrue(response1.get("data").get("objects").toString().contains("OBSTACLE"));
+        assertTrue(response1.get("data").get("objects").toString().contains("EDGE"));
     }
 }
