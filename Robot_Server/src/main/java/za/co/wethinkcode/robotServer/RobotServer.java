@@ -105,9 +105,9 @@ public class RobotServer {
     }
 
     public static void fileConfig(){
-        System.out.println("\n----------------------------------");
-        System.out.println("\nFile Config function ran\n");
-        System.out.println("----------------------------------\n");
+//        System.out.println("\n----------------------------------");
+//        System.out.println("\nFile Config function ran\n");
+//        System.out.println("----------------------------------\n");
         ConfigFileJson.GridJson gridJson;
         Gson gson = new Gson();
         gridJson = mapSizeChooser();
