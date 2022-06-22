@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Launch extends ClientCommands {
-
+    static public boolean world_full = false;
     public Launch(String make, String name) {
         super("launch",make,name);
     }
 
     @Override
     public String execute(World world, String[] arguments) {
+
         switch (getArgument()){
             case "normal":
                 Normal robot = new Normal(world, getArgument2(), getArgument());
@@ -28,24 +29,28 @@ public class Launch extends ClientCommands {
             case "shooter": // 'machinegun' replaced with 'shooter'
                 MachineGun machineGun = new MachineGun(world, getArgument2(), getArgument());
                 freePosition = findFreeSpace(world);
-                machineGun.setRobotPosition(0,0);
+//                machineGun.setRobotPosition(0,0);
+                machineGun.setRobotPosition(freePosition.getX(), freePosition.getY()); // setting the robot into a free position
                 ClientHandler.robots.add(machineGun);
+                System.out.println("Free Space: (" + freePosition.getX() + "," + freePosition.getY() + ")");
 
-
-                if(ClientHandler.robots.size() > 1){
-                    ArrayList<Robot> robots = ClientHandler.robots;
-
-                    for (int i = 0; i < ClientHandler.robots.size(); i++) {
-                        String name1 = this.getArgument2();
-                        String name2 = ClientHandler.robots.get(0).getRobotName();
-                        if (name1.equalsIgnoreCase(name2)) {
-                            ClientHandler.robots.clear();
-                            return "{\"result\":\"ERROR\",\"data\":{\"message\":\"Too many of you in this world\"}}";
-                        }
-                    }
-                    ClientHandler.robots.clear();
+                if(world_full){
                     return "{\"result\":\"ERROR\",\"data\":{\"message\":\"No more space in this world\"}}";
                 }
+//                if(ClientHandler.robots.size() > 1){
+//                    ArrayList<Robot> robots = ClientHandler.robots;
+//
+//                    for (int i = 0; i < ClientHandler.robots.size(); i++) {
+//                        String name1 = this.getArgument2();
+//                        String name2 = ClientHandler.robots.get(0).getRobotName();
+//                        if (name1.equalsIgnoreCase(name2)) {
+//                            ClientHandler.robots.clear();
+//                            return "{\"result\":\"ERROR\",\"data\":{\"message\":\"Too many of you in this world\"}}";
+//                        }
+//                    }
+//                    ClientHandler.robots.clear();
+//                    return "{\"result\":\"ERROR\",\"data\":{\"message\":\"No more space in this world\"}}";
+//                }
                 return responseFormulator(machineGun);
             case "sniper":
                 Sniper sniper = new Sniper(world, getArgument2(), getArgument());
@@ -60,7 +65,7 @@ public class Launch extends ClientCommands {
                 ClientHandler.robots.add(tank);
                 return responseFormulator(tank);
         }
-    return "Invalid tank type selected";
+        return "Invalid tank type selected";
     }
 
     private String responseFormulator(Robot robot){
@@ -81,26 +86,76 @@ public class Launch extends ClientCommands {
 
     private Position findFreeSpace(World world){
         Random random = new Random();
-        while(true){
-            boolean free = true;
-            Position freePosition = new Position((random.nextInt(world.getBOTTOM_RIGHT().getX() -
-                    (world.getTOP_LEFT().getX())) + (world.getTOP_LEFT().getX())),
-                    (random.nextInt(world.getTOP_LEFT().getY() -(world.getBOTTOM_RIGHT().getY()))) + (world.getBOTTOM_RIGHT().getY()));
-            for(Obstacle obstacles: world.getOBSTACLES()){
-                if(obstacles.blocksPosition(freePosition)){
-                    free = false;
-                }
-            for(Robot robots: world.getRobots())    {
-                if(robots.getCurrentPosition().getX() == freePosition.getX()
-                        && robots.getCurrentPosition().getY() == freePosition.getY()){
-                    free = false;
-                }
+        world_full = false;
+
+        ArrayList<Position> positions = new ArrayList<>();
+        int x1 = world.getBOTTOM_RIGHT().getX();
+        int x2 = world.getTOP_LEFT().getX();
+
+        int y1 = world.getBOTTOM_RIGHT().getY();
+        int y2 = world.getTOP_LEFT().getY();
+
+        int count = x1-1;
+        while(x2<count){
+
+            for(int i=(y1+1); i<y2; i++) {
+//                System.out.println("(" + (count) + "," + i + ")");
+                Position freePosition = new Position(count, i);
+                positions.add(freePosition);
             }
-            }
-            if(free){
-                return freePosition;
-            }
+            count--;
         }
+
+        if(world.getRobots().size()>0) {
+            for (Robot robots : world.getRobots()) {
+                Position robotPosition = new Position(robots.getCurrentPosition().getX(), robots.getCurrentPosition().getY());
+                if (positions.contains(robotPosition)) {
+                    positions.remove(robotPosition);
+                    System.out.println("(" + robotPosition.getX() + "," + robotPosition.getY() + ") is occupied");
+                }
+            }
+        }else{
+            return positions.get(0);
+        }
+        if(positions.size()>0){
+            return positions.get(0);
+        }
+
+        world_full = true;
+        return new Position(0, 0);
+
+//        while(true){
+//            boolean free = true;
+////            In a 2x2 world:
+//            int lowX =world.getTOP_LEFT().getX()+1; // -1
+//            int highX = world.getBOTTOM_RIGHT().getX(); // 2
+//
+//            int highY =world.getTOP_LEFT().getY(); // 2
+//            int lowY = world.getBOTTOM_RIGHT().getY()+1; // -1
+//
+//            int randomX = random.nextInt(highX-lowX)+lowX;
+//            int randomY = random.nextInt(highY-lowY)+lowY;
+//
+//            Position freePosition = new Position(randomX, randomY);
+//            for(Obstacle obstacles: world.getOBSTACLES()) {
+//                if (obstacles.blocksPosition(freePosition)) {
+//                    free = false;
+//                }
+//            }
+//            for(Robot robots: world.getRobots())    {
+//                if(robots.getCurrentPosition().getX() == freePosition.getX()
+//                        && robots.getCurrentPosition().getY() == freePosition.getY()){
+//                    free = false;
+//                }
+//            }
+//            if(free){
+//                world_full = false;
+//                return freePosition;
+//            } else {
+//                world_full = true;
+//                return new Position(0,0);
+//            }
+//        }
     }
 
     public class LaunchResponse{

@@ -123,18 +123,18 @@ public class RobotServer {
 //        System.out.println("First how large would you like the grid?\n" +
 //                "small(1 by 1) , medium(30 by 30) or large(50 by 50).");
         do{
-            mapSize = "small"; // scanner.nextLine();
+            mapSize = "medium"; // scanner.nextLine();
         }while(!Arrays.asList(mapSizes).contains(mapSize));
         switch (mapSize){
             case "small":
                 return new ConfigFileJson.GridJson(1,1);
             case "medium":
-                return new ConfigFileJson.GridJson(15,15);
+                return new ConfigFileJson.GridJson(2,2);
             case "large":
                 return new ConfigFileJson.GridJson(25,25);
         }
-        System.out.println("Default of small selected.");
-        return new ConfigFileJson.GridJson(1,1);
+        System.out.println("Default of medium selected.");
+        return new ConfigFileJson.GridJson(2,2);
     }
 
     static int integerChooser(String configTypeChoice){
@@ -191,7 +191,7 @@ public class RobotServer {
             SquareObstacle newObstacle = new SquareObstacle((random.nextInt(xSize - (-xSize)) + (-xSize)),
                     random.nextInt(ySize - (-ySize)) + (-ySize));
             for(SquareObstacle squareObstacle : obstaclesArrayList){
-               sharesPosition = sharesPosition(squareObstacle, newObstacle);
+                sharesPosition = sharesPosition(squareObstacle, newObstacle);
             }
             if(sharesPosition){
                 continue;
@@ -209,7 +209,7 @@ public class RobotServer {
                     return true;
                 }
                 else if(newObstacle.getBottomLeftY() + i == existingObstacle.getBottomLeftY() + j){
-                        return true;
+                    return true;
                 }
             }
         }
