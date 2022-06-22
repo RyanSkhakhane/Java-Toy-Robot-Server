@@ -24,7 +24,12 @@ public class RobotServer {
         try{
             while(!serverSocket.isClosed()){
                 Socket socket = serverSocket.accept();
-                System.out.println("A new user has connected to the server.");
+
+                System.out.println("\n----------------------------------------------");
+                System.out.println("      A New User Has Connected To The Server       ");
+                System.out.println("----------------------------------------------\n");
+
+
                 numberOfRobots+=1;
                 ClientHandler clientHandler = new ClientHandler(socket);
                 Thread thread = new Thread(clientHandler);
@@ -39,6 +44,10 @@ public class RobotServer {
     public void closeServerSocket() {
         try {
             if (serverSocket != null) {
+//                System.out.println("Server Socket Has Been Closed");
+//                System.out.println("\n----------------------------------");
+//                System.out.println("\nServer Socket Has Been Closed\n");
+//                System.out.println("----------------------------------\n");
                 serverSocket.close();
             }
         } catch (IOException e) {
@@ -96,6 +105,9 @@ public class RobotServer {
     }
 
     public static void fileConfig(){
+        System.out.println("\n----------------------------------");
+        System.out.println("\nFile Config function ran\n");
+        System.out.println("----------------------------------\n");
         ConfigFileJson.GridJson gridJson;
         Gson gson = new Gson();
         gridJson = mapSizeChooser();
@@ -217,8 +229,10 @@ public class RobotServer {
     }
 
     public static void main(String[] args) throws IOException {
+        System.out.println("\n=====================================================================================================");
+        System.out.println("\n      W E L C O M E - - - T O - - - O U R - - - R O B O T - W O R L D S - - - S E R V E R    :)\n");
+        System.out.println("======================================================================================================\n");
 
-        System.out.println("Welcome to Robot Worlds Server Cpt18 please take a moment to configure server settings.");
         int port = 5000;//portChoice();
         myIp();
         fileConfig();

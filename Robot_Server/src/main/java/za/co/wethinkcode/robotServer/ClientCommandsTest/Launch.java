@@ -32,7 +32,7 @@ public class Launch extends ClientCommands {
 //                machineGun.setRobotPosition(0,0);
                 machineGun.setRobotPosition(freePosition.getX(), freePosition.getY()); // setting the robot into a free position
                 ClientHandler.robots.add(machineGun);
-                System.out.println("Free Space: (" + freePosition.getX() + "," + freePosition.getY() + ")");
+                System.out.println("\n>>>>  Free Space: (" + freePosition.getX() + "," + freePosition.getY() + ")\n  <<<<<");
 
                 if(world_full){
                     return "{\"result\":\"ERROR\",\"data\":{\"message\":\"No more space in this world\"}}";
@@ -111,7 +111,7 @@ public class Launch extends ClientCommands {
                 Position robotPosition = new Position(robots.getCurrentPosition().getX(), robots.getCurrentPosition().getY());
                 if (positions.contains(robotPosition)) {
                     positions.remove(robotPosition);
-                    System.out.println("(" + robotPosition.getX() + "," + robotPosition.getY() + ") is occupied");
+//                    System.out.println("(" + robotPosition.getX() + "," + robotPosition.getY() + ") is occupied");
                 }
             }
         }else{

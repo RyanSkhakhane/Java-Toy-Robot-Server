@@ -58,7 +58,7 @@ public class ClientHandler implements Runnable{
 
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         System.out.println("closeEverything ran!");
-        ClientHandler.robots.clear();
+//        ClientHandler.robots.clear();
 //        ClientHandler.robots.size() = 0;
         try {
             if (bufferedReader != null) {
@@ -73,7 +73,7 @@ public class ClientHandler implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.exit(0);
+//        System.exit(0);
 
     }
 
@@ -82,7 +82,7 @@ public class ClientHandler implements Runnable{
         String commandFromClient;
         while (socket.isConnected()) {
             try {
-                 commandFromClient = bufferedReader.readLine(); // (receive message from RobotClient) stucks here
+                commandFromClient = bufferedReader.readLine(); // (receive message from RobotClient) stucks here
 
                 if(!repairFinished() || !reloadFinished()){
                     continue;
@@ -100,7 +100,12 @@ public class ClientHandler implements Runnable{
                     } else if (clientCommand.equals(null)) {
                         this.closeEverything(socket, bufferedReader, bufferedWriter);
                     }
-                    } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException | NullPointerException e) {
+                    System.out.println("Number of Robots before: " + ClientHandler.robots.size());
+                    System.out.println("CATCH SOMETHING NICE :)");
+                    ClientHandler.robots.clear();
+                    System.out.println("Number of Robots after: " + ClientHandler.robots.size());
+
                     this.closeEverything(socket, bufferedReader, bufferedWriter);
 
                     try {
@@ -109,10 +114,10 @@ public class ClientHandler implements Runnable{
                         bufferedWriter.write(gsonPretty.toJson(errorResponseJson));
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
-                        }catch(IOException f) {
-                            System.out.println("ioexception f");
-                            this.closeEverything(socket, bufferedReader, bufferedWriter);
-                            break;
+                    }catch(IOException f) {
+                        System.out.println("ioexception f");
+                        this.closeEverything(socket, bufferedReader, bufferedWriter);
+                        break;
                     }
                 } catch (ClientCommands.CommandNotFoundException e) {
                     Forward.DataJson dataJson = new Forward.DataJson("Unsupported command");
@@ -124,6 +129,7 @@ public class ClientHandler implements Runnable{
                     break;
                 }
             } catch (IOException e) {
+                ClientHandler.robots.clear();
                 this.closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
             }
@@ -133,9 +139,9 @@ public class ClientHandler implements Runnable{
     public static void broadcastMessage(String messageToBroadcast){
         for(ClientHandler clientHandler : users) {
             try {
-                    clientHandler.bufferedWriter.write(messageToBroadcast);
-                    clientHandler.bufferedWriter.newLine();
-                    clientHandler.bufferedWriter.flush();
+                clientHandler.bufferedWriter.write(messageToBroadcast);
+                clientHandler.bufferedWriter.newLine();
+                clientHandler.bufferedWriter.flush();
             }catch(IOException e) {
 //                this.closeEverything(socket, bufferedReader, bufferedWriter);
                 System.out.println("BroadcastMessage catch");
