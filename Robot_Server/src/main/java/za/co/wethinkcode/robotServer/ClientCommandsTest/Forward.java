@@ -42,7 +42,7 @@ public class Forward extends ClientCommands{
                         StateJson stateJson1 = new StateJson(coord, robot.getCurrentDirection().toString(),
                                 robot.getShields(), robot.getShots(), robot.getStatus());
 
-                        DataJson dataJson1 = new DataJson("Edge");
+                        DataJson dataJson1 = new DataJson("At the NORTH edge");
 
                         MovementJson movementJson1 = new MovementJson("OK", dataJson1, stateJson1);
 
