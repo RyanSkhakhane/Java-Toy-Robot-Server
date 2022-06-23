@@ -135,7 +135,12 @@ public class Launch extends ClientCommands {
             count--;
         }
         if(world.getRobots().size()>0) {
-
+            for (SquareObstacle obstacle: world.getOBSTACLES()){
+                Position obstaclePosition = new Position(obstacle.getBottomLeftX(), obstacle.getBottomLeftY());
+                if (positions.contains(obstaclePosition)) {
+                    positions.remove(obstaclePosition);
+                }
+            }
 
 
             for (Robot robots : world.getRobots()) {
