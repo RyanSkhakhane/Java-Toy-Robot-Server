@@ -174,7 +174,7 @@ public class RobotServer {
 //        System.out.println("Next how many obstacles would you like in the world? " +
 //                "(None),(One),(Several),(Ten),(Twenty)");
         do{
-            obstaclesChoice = "none"; //scanner.nextLine();
+            obstaclesChoice = "one"; //scanner.nextLine();
         }while(!Arrays.asList(obstaclesChoices).contains(obstaclesChoice));
 
         switch (obstaclesChoice.toLowerCase()){
@@ -200,8 +200,9 @@ public class RobotServer {
         ArrayList<SquareObstacle> obstaclesArrayList = new ArrayList<>();
         while(obstaclesArrayList.size()!= obstaclesAmount){
             sharesPosition = false;
-            SquareObstacle newObstacle = new SquareObstacle((random.nextInt(xSize - (-xSize)) + (-xSize)),
-                    random.nextInt(ySize - (-ySize)) + (-ySize));
+//            SquareObstacle newObstacle = new SquareObstacle((random.nextInt(xSize - (-xSize)) + (-xSize)),
+//                    random.nextInt(ySize - (-ySize)) + (-ySize));
+            SquareObstacle newObstacle = new SquareObstacle(1,1);
             for(SquareObstacle squareObstacle : obstaclesArrayList){
                 sharesPosition = sharesPosition(squareObstacle, newObstacle);
             }
