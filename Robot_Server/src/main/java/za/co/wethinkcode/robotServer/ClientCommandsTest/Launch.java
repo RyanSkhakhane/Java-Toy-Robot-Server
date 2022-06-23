@@ -5,13 +5,18 @@ import za.co.wethinkcode.robotServer.ClientHandler;
 import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.Robot.*;
 import za.co.wethinkcode.robotServer.World.Obstacle;
+import za.co.wethinkcode.robotServer.World.SquareObstacle;
 import za.co.wethinkcode.robotServer.World.World;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import static za.co.wethinkcode.robotServer.ClientHandler.world;
+//import static za.co.wethinkcode.robotServer.RobotServer.worldObstacles;
+
 public class Launch extends ClientCommands {
     static public boolean world_full = false;
+    static public boolean name_already_taken = false;
     public Launch(String make, String name) {
         super("launch",make,name);
     }
@@ -28,11 +33,22 @@ public class Launch extends ClientCommands {
                 return responseFormulator(robot);
             case "shooter": // 'machinegun' replaced with 'shooter'
                 MachineGun machineGun = new MachineGun(world, getArgument2(), getArgument());
+
+                name_already_taken = check_name_already_taken(machineGun);
+                if (name_already_taken) {
+                    name_already_taken = false;
+                    return "{\"result\":\"ERROR\",\"data\":{\"message\":\"Too many of you in this world\"}}";
+                }
                 freePosition = findFreeSpace(world);
+
+
 //                machineGun.setRobotPosition(0,0);
-                machineGun.setRobotPosition(freePosition.getX(), freePosition.getY()); // setting the robot into a free position
-                ClientHandler.robots.add(machineGun);
-                System.out.println("\n>>>>  Free Space: (" + freePosition.getX() + "," + freePosition.getY() + ")\n  <<<<<");
+                if(!world_full && !name_already_taken){
+                    machineGun.setRobotPosition(freePosition.getX(), freePosition.getY()); // setting the robot into a free position
+                    ClientHandler.robots.add(machineGun);
+                    System.out.println("\n>>>>  Free Space: (" + freePosition.getX() + "," + freePosition.getY() + ")\n  <<<<<");
+                }
+
 
                 if(world_full){
                     return "{\"result\":\"ERROR\",\"data\":{\"message\":\"No more space in this world\"}}";
@@ -68,6 +84,16 @@ public class Launch extends ClientCommands {
         return "Invalid tank type selected";
     }
 
+    private boolean check_name_already_taken(MachineGun machineGun) {
+        for (Robot robot : world.getRobots()) {
+            if (robot.getRobotName().equalsIgnoreCase(machineGun.getRobotName())) {
+                name_already_taken = true;
+
+            }
+        }
+        return name_already_taken;
+    }
+
     private String responseFormulator(Robot robot){
 //        Gson gson = new GsonBuilder()
 //                .setPrettyPrinting()
@@ -85,8 +111,11 @@ public class Launch extends ClientCommands {
     }
 
     private Position findFreeSpace(World world){
+
         Random random = new Random();
         world_full = false;
+
+//        System.out.println("World Obsticle List: " + worldObstacles.toString());
 
         ArrayList<Position> positions = new ArrayList<>();
         int x1 = world.getBOTTOM_RIGHT().getX();
@@ -105,8 +134,10 @@ public class Launch extends ClientCommands {
             }
             count--;
         }
-
         if(world.getRobots().size()>0) {
+
+
+
             for (Robot robots : world.getRobots()) {
                 Position robotPosition = new Position(robots.getCurrentPosition().getX(), robots.getCurrentPosition().getY());
                 if (positions.contains(robotPosition)) {
@@ -115,7 +146,7 @@ public class Launch extends ClientCommands {
                 }
             }
         }else{
-            return positions.get(0);
+            return new Position(0, 0);
         }
         if(positions.size()>0){
             return positions.get(0);
@@ -157,6 +188,7 @@ public class Launch extends ClientCommands {
 //            }
 //        }
     }
+
 
     public class LaunchResponse{
         String result;

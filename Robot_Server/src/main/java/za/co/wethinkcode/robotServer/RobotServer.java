@@ -13,6 +13,7 @@ public class RobotServer {
     private final ServerInput serverInput;
     private final ServerSocket serverSocket;
     public static int numberOfRobots = 0;
+//    public static SquareObstacle[] worldObstacles;
 
     public RobotServer(ServerSocket serverSocket){
         this.serverSocket = serverSocket;
@@ -231,11 +232,14 @@ public class RobotServer {
 
     public static void main(String[] args) throws IOException {
         System.out.println("\n=====================================================================================================");
-        System.out.println("\n      W E L C O M E - - - T O - - - O U R - - - R O B O T - W O R L D S - - - S E R V E R    :)\n");
+        System.out.println("\n      W E L C O M E - - - T O - - - O U R - - - R O B O T - W O R L D  - - - S E R V E R    :)\n");
         System.out.println("======================================================================================================\n");
+//        System.out.println("Enter config: \n Port | World Size | Obsticle Position\n e.g 5000 2 10,5");
+//        Scanner scanner = new Scanner(System.in);
 
         int port = 5000;//portChoice();
         myIp();
+
         fileConfig();
         ServerSocket serverSocket = new ServerSocket(port);
         RobotServer server = new RobotServer(serverSocket);
