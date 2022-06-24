@@ -9,6 +9,12 @@ import java.net.*;
 import java.util.*;
 
 public class RobotServer {
+    public static int size = 3;
+    public  static String obsPos = "1,1";
+    public static  int xcoord;
+    public static int ycoord;
+
+    public static String[] Args;
 
     private final ServerInput serverInput;
     private final ServerSocket serverSocket;
@@ -112,7 +118,7 @@ public class RobotServer {
         ConfigFileJson.GridJson gridJson;
         Gson gson = new Gson();
         gridJson = mapSizeChooser();
-        int visibility = 2; //integerChooser("visibility");
+        int visibility = 3; //integerChooser("visibility");
         SquareObstacle[] obstaclesList = obstacleChooser(gridJson);
         int shieldRepairTime = 3; //integerChooser("shield repair time");
         int reloadTime = 3; //integerChooser("reload time");
@@ -170,12 +176,14 @@ public class RobotServer {
 
     static SquareObstacle[] obstacleChooser(ConfigFileJson.GridJson mapSize){
 //        Scanner scanner = new Scanner(System.in);
-        String obstaclesChoice;
+        String obstaclesChoice = "none";
         String[] obstaclesChoices = {"none", "one" , "several", "ten", "twenty"};
 //        System.out.println("Next how many obstacles would you like in the world? " +
 //                "(None),(One),(Several),(Ten),(Twenty)");
         do{
-            obstaclesChoice = "one"; //scanner.nextLine();
+            if(Args.length > 0){
+                obstaclesChoice = "one"; //scanner.nextLine();
+            }
         }while(!Arrays.asList(obstaclesChoices).contains(obstaclesChoice));
 
         switch (obstaclesChoice.toLowerCase()){
@@ -203,7 +211,7 @@ public class RobotServer {
             sharesPosition = false;
 //            SquareObstacle newObstacle = new SquareObstacle((random.nextInt(xSize - (-xSize)) + (-xSize)),
 //                    random.nextInt(ySize - (-ySize)) + (-ySize));
-            SquareObstacle newObstacle = new SquareObstacle(1,1);
+            SquareObstacle newObstacle = new SquareObstacle(xcoord,ycoord);
             for(SquareObstacle squareObstacle : obstaclesArrayList){
                 sharesPosition = sharesPosition(squareObstacle, newObstacle);
             }
@@ -238,6 +246,25 @@ public class RobotServer {
 //        Scanner scanner = new Scanner(System.in);
 
         int port = 5000;//portChoice();
+        Args = args;
+
+        // Reading program arguments assigning them and configuring accordingly
+        for (int i =0; i< args.length;i++) {
+            if( args[i].equals( "-o")){
+                obsPos = args[i+1];
+            }else if( args[i].equals("-s")){
+                size = Integer.parseInt(args[i+1]);
+            } else if (args[i].equals("-p")) {
+                port = Integer.parseInt(args[i + 1]);
+            }
+        }
+
+
+        String[] obs =  obsPos.split(",");
+        xcoord = Integer.parseInt(obs[0]);
+        ycoord = Integer.parseInt(obs[1]);
+
+
         myIp();
 
         fileConfig();
