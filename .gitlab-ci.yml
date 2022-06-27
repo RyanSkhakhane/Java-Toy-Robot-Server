@@ -11,6 +11,7 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compiling the code..."
     - echo "Compile complete."
     - mvn package -DskipTests
+    - mvn -f path/to/pom.xml <goals> ...
   
     
 
