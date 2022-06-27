@@ -25,7 +25,7 @@ unit-test-job:   # This job runs in the test stage.
     # - echo "&"
     # - echo "testing"
     # - java -jar ./src/libs/reference-server-0.2.3.jar & mvn test
-    - kill -9 $(lsof -t -i tcp:5000)
+    # - kill -9 $(lsof -t -i tcp:5000)
 
 
 lint-test-job:   # This job also runs in the test stage.
