@@ -21,7 +21,7 @@ unit-test-job:   # This job runs in the test stage.
     - echo "Running unit tests... This will take about 60 seconds."
     - echo "Code coverage is 90%"
     # -  kill -9 $(lsof -t -i tcp:5000)
-    - echo "R_U_N_N_I_N_G    R_E_F_E_R_E_N_C_E   S_E_R_V_E_R"
+    # - echo "R_U_N_N_I_N_G    R_E_F_E_R_E_N_C_E   S_E_R_V_E_R"
     # - echo "&"
     # - echo "testing"
     # - java -jar ./src/libs/reference-server-0.2.3.jar & mvn test
