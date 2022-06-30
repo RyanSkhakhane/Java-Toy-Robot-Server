@@ -1,18 +1,5 @@
 package za.co.wethinkcode.robotServer.ClientCommandsTest;
 
-import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.Direction;
-import za.co.wethinkcode.robotServer.Position;
-import za.co.wethinkcode.robotServer.Robot.Normal;
-import za.co.wethinkcode.robotServer.Robot.Robot;
-import za.co.wethinkcode.robotServer.World.SquareObstacle;
-import za.co.wethinkcode.robotServer.World.World;
-
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class LookTest {
 //    @Test
 //    void lookTest() throws FileNotFoundException {

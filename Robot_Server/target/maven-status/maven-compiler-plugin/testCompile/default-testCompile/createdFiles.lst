@@ -6,7 +6,6 @@ za/co/wethinkcode/robotServer/AcceptanceTestsTest/StateRobotTests.class
 za/co/wethinkcode/robotServer/ClientHandlerTest.class
 za/co/wethinkcode/robotServer/World/SquareObstacleTest.class
 za/co/wethinkcode/robotServer/AcceptanceTestsTest/LaunchRobotTests.class
-za/co/wethinkcode/robotServer/Robot/MachineGunTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/LaunchTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/StateTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/LookTest.class
@@ -16,11 +15,10 @@ za/co/wethinkcode/robotServer/ClientCommandsTest/ReloadTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/QuitTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/FireTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/ForwardTest.class
-za/co/wethinkcode/robotServer/Robot/SniperTest.class
+za/co/wethinkcode/robotServer/AcceptanceTestsTest/ForwardRobotTests.class
 za/co/wethinkcode/robotServer/RobotServerTest.class
 za/co/wethinkcode/robotServer/RobotTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/RepairTest.class
-za/co/wethinkcode/robotServer/Robot/TankTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/BackTest.class
 za/co/wethinkcode/robotServer/AcceptanceTestsTest/LookRobotTests.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/TurnTest.class

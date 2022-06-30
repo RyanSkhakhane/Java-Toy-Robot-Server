@@ -4,12 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.Position;
 import za.co.wethinkcode.robotServer.RobotWorldClient;
 import za.co.wethinkcode.robotServer.RobotWorldJsonClient;
-import za.co.wethinkcode.robotServer.World.Obstacle;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -257,7 +253,7 @@ class LaunchRobotTests {
                 world_full = true;
             } else {
                 // Then each robot cannot be in position [1,1]
-                assertNotEquals("[1,1]", response1.get("data").get("position").toString());
+                assertNotEquals("[0,-1]", response1.get("data").get("position").toString());
             }
             count++;
         }
