@@ -18,6 +18,8 @@ build-job:       # This job runs in the build stage, which runs first.
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
+    - apt-get update && apt-get upgrade -y
+    - apt-get install lsof -y
     - echo "Running unit tests... This will take about 60 seconds."
     - echo "Code coverage is 90%"
     -  kill -9 $(lsof -t -i tcp:5000)
