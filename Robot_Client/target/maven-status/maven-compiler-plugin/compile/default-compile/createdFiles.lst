@@ -1,0 +1,17 @@
+za/co/wethinkcode/RobotClient/ClientCommands/ClientCommands.class
+za/co/wethinkcode/RobotClient/ClientCommands/Look.class
+za/co/wethinkcode/RobotClient/ClientCommands/RequestJson.class
+za/co/wethinkcode/RobotClient/ClientCommands/Repair.class
+za/co/wethinkcode/RobotClient/ClientCommands/Forward.class
+za/co/wethinkcode/RobotClient/RobotClient.class
+za/co/wethinkcode/RobotClient/ClientCommands/Quit.class
+za/co/wethinkcode/RobotClient/ClientCommands/Launch.class
+za/co/wethinkcode/RobotClient/ClientCommands/State$StateCommandJson.class
+za/co/wethinkcode/RobotClient/ClientCommands/UnsupportedCommand.class
+za/co/wethinkcode/RobotClient/ClientCommands/Reload.class
+za/co/wethinkcode/RobotClient/ClientCommands/State.class
+za/co/wethinkcode/RobotClient/ClientCommands/Fire.class
+za/co/wethinkcode/RobotClient/ClientCommands/ClientCommandsInterface.class
+za/co/wethinkcode/RobotClient/ClientCommands/Turn.class
+za/co/wethinkcode/RobotClient/RobotClient$1.class
+za/co/wethinkcode/RobotClient/ClientCommands/Back.class
