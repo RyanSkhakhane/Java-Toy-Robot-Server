@@ -26,7 +26,7 @@ unit-test-job:   # This job runs in the test stage.
     - echo "R_U_N_N_I_N_G    R_E_F_E_R_E_N_C_E   S_E_R_V_E_R"
     - echo "&"
     - echo "testing"
-    - java -jar Robot_Server/src/libs/reference-server-0.2.3.jar &
+    - java -jar Robot_Server/src/libs/reference-server-0.2.3.jar -p 5000 -s 2 -o 0,-1 &
     - mvn test
     - kill -9 $(lsof -t -i tcp:5000)
 
