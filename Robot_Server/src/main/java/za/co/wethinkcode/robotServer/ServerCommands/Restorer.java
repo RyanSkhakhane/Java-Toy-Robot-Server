@@ -17,28 +17,33 @@ public class Restorer extends ServerCommand {
         Statement stmt = null;
         System.out.println("What world name would like to RESTORE? ");
         Scanner in = new Scanner(System.in);
-        String world_n=in.next();
+        String world_name=in.next();
 
 
-        try{
-            stmt = connection.dbConnection.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM world_roboot WHERE world_name = world_name;" );
-            System.out.println(rs);
+        try(Connection conn = connection.dbConnection;
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM world_roboot WHERE world_name=?")) {
+            System.out.println("SOUTE");
+            pstmt.setString(1, world_name);
+//            stmt = connection.dbConnection.createStatement();
+            ResultSet rs = pstmt.executeQuery();
+//            System.out.println(rs);
+
             System.out.println("OLDS: \nWord Size: " + worldSize + "\n Obstacle at (" + obsticleXCoord + "," + obstacleYCoord + ")");
 
-            while ( rs.next() ) {
-                String world_name = rs.getString("world_name");
+            while (rs.next()) {
+//                world_name = pstmt.get("world_name");
                 int robotWorldSize = rs.getInt("size");
                 int obstacle_x = rs.getInt("obstacles_x");
                 int obstacle_y = rs.getInt("obstacles_y");
-                worldSize = robotWorldSize+1;
-                obstacleYCoord = obstacle_y+1;
-                obsticleXCoord = obstacle_x+1;
+                worldSize = robotWorldSize + 1;
+                obstacleYCoord = obstacle_y + 1;
+                obsticleXCoord = obstacle_x + 1;
             }
 
             System.out.println("NEWS: \nWord Size: " + worldSize + "\n Obstacle at (" + obsticleXCoord + "," + obstacleYCoord + ")");
             System.out.println("Previous WORLD RESTORED successfully :)");
         } catch (SQLException e) {
+            System.out.println("HERE");
             System.out.println(e.getMessage());
         }
     }
