@@ -6,19 +6,22 @@ import za.co.wethinkcode.robotServer.World.SquareObstacle;
 
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.util.*;
 
 public class RobotServer {
-    public static int size = 3;
+    public static int worldSize = 2;
     public  static String obsPos = "1,1";
-    public static  int xcoord;
-    public static int ycoord;
+    public static  int obsticleXCoord;
+    public static int obstacleYCoord;
 
     public static String[] Args;
 
     private final ServerInput serverInput;
     private final ServerSocket serverSocket;
     public static int numberOfRobots = 0;
+
+    public static DbConnect connection;
 //    public static SquareObstacle[] worldObstacles;
 
     public RobotServer(ServerSocket serverSocket){
@@ -211,7 +214,7 @@ public class RobotServer {
             sharesPosition = false;
 //            SquareObstacle newObstacle = new SquareObstacle((random.nextInt(xSize - (-xSize)) + (-xSize)),
 //                    random.nextInt(ySize - (-ySize)) + (-ySize));
-            SquareObstacle newObstacle = new SquareObstacle(xcoord,ycoord);
+            SquareObstacle newObstacle = new SquareObstacle(obsticleXCoord,obstacleYCoord);
             for(SquareObstacle squareObstacle : obstaclesArrayList){
                 sharesPosition = sharesPosition(squareObstacle, newObstacle);
             }
@@ -239,6 +242,10 @@ public class RobotServer {
     }
 
     public static void main(String[] args) throws IOException {
+
+        String database = "-f world.db";
+        String[] db=database.split(" ");
+        connection = new DbConnect( db );
         System.out.println("\n=====================================================================================================");
         System.out.println("\n      W E L C O M E - - - T O - - - O U R - - - R O B O T - W O R L D  - - - S E R V E R    :)\n");
         System.out.println("======================================================================================================\n");
@@ -253,7 +260,7 @@ public class RobotServer {
             if( args[i].equals( "-o")){
                 obsPos = args[i+1];
             }else if( args[i].equals("-s")){
-                size = Integer.parseInt(args[i+1]);
+                worldSize = Integer.parseInt(args[i+1]);
             } else if (args[i].equals("-p")) {
                 port = Integer.parseInt(args[i + 1]);
             }
@@ -261,8 +268,8 @@ public class RobotServer {
 
 
         String[] obs =  obsPos.split(",");
-        xcoord = Integer.parseInt(obs[0]);
-        ycoord = Integer.parseInt(obs[1]);
+        obsticleXCoord = Integer.parseInt(obs[0]);
+        obstacleYCoord = Integer.parseInt(obs[1]);
 
 
         myIp();
@@ -291,6 +298,8 @@ public class RobotServer {
                     command.execute(ClientHandler.users, ClientHandler.robots, ClientHandler.world);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Command is unrecognised");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
