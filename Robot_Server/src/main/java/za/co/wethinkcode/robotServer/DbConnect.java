@@ -37,7 +37,7 @@ public class DbConnect
 
     private void runTest( Connection connection ) {
         try( final Statement stmt = connection.createStatement() ){
-            stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS world_roboot(size Integer,obstacles_x Integer,obstacles_y Integer)" );
+            stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS world_roboot(world_name TEXT UNIQUE, size INTEGER,obstacles_x INTEGER,obstacles_y INTEGER)" );
             //PreparedStatement ps=connection.prepareStatement("CREATE TABLE world_roboot( size,positions,obstacles,bottomless pits,mines)");
             System.out.println( "Success creating test table!" );
         }catch( SQLException e ){
