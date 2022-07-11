@@ -11,7 +11,8 @@ import java.util.*;
 
 public class RobotServer {
     public static int worldSize = 2;
-    public  static String obsPos = "1,1";
+    public  static String obsPos = "0,-1";
+    public  static String worldName = "currentWorld";
     public static  int obsticleXCoord;
     public static int obstacleYCoord;
 
@@ -263,6 +264,8 @@ public class RobotServer {
                 worldSize = Integer.parseInt(args[i+1]);
             } else if (args[i].equals("-p")) {
                 port = Integer.parseInt(args[i + 1]);
+            } else if (args[i].equals("-w")) {
+                worldName = args[i + 1];
             }
         }
 
@@ -278,6 +281,8 @@ public class RobotServer {
         ServerSocket serverSocket = new ServerSocket(port);
         RobotServer server = new RobotServer(serverSocket);
         System.out.println("Server configuration successful starting server. \nServer listening for connections on port: "+port);
+        System.out.println("\n-------------------------------------------------");
+        System.out.println("What would you like to do next?");
         server.startServer();
     }
 
