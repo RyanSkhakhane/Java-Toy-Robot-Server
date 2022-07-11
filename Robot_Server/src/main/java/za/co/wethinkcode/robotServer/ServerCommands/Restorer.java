@@ -20,7 +20,7 @@ public class Restorer extends ServerCommand {
         String world_name=in.next();
 
 
-        try(Connection conn = connection.dbConnection;
+        try(final Connection conn = connection.dbConnection;
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM world_roboot WHERE world_name=?")) {
             System.out.println("SOUTE");
             pstmt.setString(1, world_name);
@@ -30,11 +30,12 @@ public class Restorer extends ServerCommand {
 
             System.out.println("OLDS: \nWord Size: " + worldSize + "\n Obstacle at (" + obsticleXCoord + "," + obstacleYCoord + ")");
 
-            while (rs.next()) {
+            while (rs.next()) { // something is wrong here
 //                world_name = pstmt.get("world_name");
                 int robotWorldSize = rs.getInt("size");
                 int obstacle_x = rs.getInt("obstacles_x");
                 int obstacle_y = rs.getInt("obstacles_y");
+                System.out.println("Inside while loop");
                 worldSize = robotWorldSize + 1;
                 obstacleYCoord = obstacle_y + 1;
                 obsticleXCoord = obstacle_x + 1;

@@ -16,7 +16,7 @@ import java.sql.*;
  */
 public class DbConnect
 {
-    public static final String IN_MEMORY_DB_URL = "jdbc:sqlite::memory:";
+    public static final String IN_MEMORY_DB_URL = "jdbc:sqlite:world.db";
 
     public static final String DISK_DB_URL = "jdbc:sqlite:";
 
