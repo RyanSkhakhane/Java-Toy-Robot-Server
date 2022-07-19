@@ -2,6 +2,7 @@ package za.co.wethinkcode.robotServer;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import za.co.wethinkcode.robotServer.ServerCommunication.RobotServer;
 
 import static org.junit.jupiter.api.Assertions.*;
 

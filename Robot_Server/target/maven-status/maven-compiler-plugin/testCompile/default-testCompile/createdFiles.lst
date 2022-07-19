@@ -16,6 +16,7 @@ za/co/wethinkcode/robotServer/ClientCommandsTest/QuitTest.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/FireTest.class
 za/co/wethinkcode/robotServer/AcceptanceTestsTest/SaveWorldTests.class
 za/co/wethinkcode/robotServer/ClientCommandsTest/ForwardTest.class
+za/co/wethinkcode/robotServer/DatabaseTests/Saver.class
 za/co/wethinkcode/robotServer/AcceptanceTestsTest/ForwardRobotTests.class
 za/co/wethinkcode/robotServer/RobotServerTest.class
 za/co/wethinkcode/robotServer/RobotTest.class

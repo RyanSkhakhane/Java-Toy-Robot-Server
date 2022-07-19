@@ -1,11 +1,12 @@
 package za.co.wethinkcode.robotServer.ClientCommandsTest;
 
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.Position;
-import za.co.wethinkcode.robotServer.Robot.Normal;
-import za.co.wethinkcode.robotServer.Robot.Robot;
-import za.co.wethinkcode.robotServer.World.SquareObstacle;
-import za.co.wethinkcode.robotServer.World.World;
+import za.co.wethinkcode.robotServer.RobotWorld.Position;
+import za.co.wethinkcode.robotServer.RobotWorld.ClientCommands.Fire;
+import za.co.wethinkcode.robotServer.RobotWorld.Robot.Normal;
+import za.co.wethinkcode.robotServer.RobotWorld.Robot.Robot;
+import za.co.wethinkcode.robotServer.RobotWorld.World.SquareObstacle;
+import za.co.wethinkcode.robotServer.RobotWorld.World.World;
 
 import java.io.IOException;
 import java.util.ArrayList;

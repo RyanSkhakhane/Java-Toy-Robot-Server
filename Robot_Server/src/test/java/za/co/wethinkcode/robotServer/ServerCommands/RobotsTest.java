@@ -1,10 +1,11 @@
 package za.co.wethinkcode.robotServer.ServerCommands;
 
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.robotServer.ClientHandler;
-import za.co.wethinkcode.robotServer.Robot.Normal;
-import za.co.wethinkcode.robotServer.Robot.Robot;
-import za.co.wethinkcode.robotServer.World.World;
+import za.co.wethinkcode.robotServer.ServerCommunication.ClientHandler;
+import za.co.wethinkcode.robotServer.ServerCommunication.ServerCommands.Robots;
+import za.co.wethinkcode.robotServer.RobotWorld.Robot.Normal;
+import za.co.wethinkcode.robotServer.RobotWorld.Robot.Robot;
+import za.co.wethinkcode.robotServer.RobotWorld.World.World;
 
 import java.io.*;
 import java.util.ArrayList;
