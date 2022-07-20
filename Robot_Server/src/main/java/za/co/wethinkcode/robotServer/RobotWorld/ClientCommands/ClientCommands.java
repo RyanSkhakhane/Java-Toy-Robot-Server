@@ -36,7 +36,7 @@ public abstract class ClientCommands implements CommandInterface {
     public static ClientCommands create(String instruction) throws CommandNotFoundException {
         //{"robot":"hal","command":"launch","arguments":["sniper"]}
         Gson gson = new Gson();
-        RequestMessage requestMessage = gson.fromJson(instruction, RequestMessage.class);
+        RequestMessage requestMessage = gson.fromJson("{\"robot\":\"hal\",\"command\":\"launch\",\"arguments\":[\"sniper\"]}", RequestMessage.class);
 
         switch (requestMessage.command) {
             case "launch":

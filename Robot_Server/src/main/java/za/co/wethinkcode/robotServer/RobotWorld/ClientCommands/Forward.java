@@ -61,7 +61,7 @@ public class Forward extends ClientCommands{
                 }
             }
         }
-        return "Forward movement error";
+        return "{\"result\":\"ERROR\",\"data\":{\"message\": Forward movement error}}";
     }
 
 
