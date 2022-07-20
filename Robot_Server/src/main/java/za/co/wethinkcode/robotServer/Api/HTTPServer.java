@@ -20,7 +20,8 @@ public class HTTPServer {
         Javalin server = Javalin.create()
                 .start(7000);
         server.routes(() -> {
-            path("/", HTTPServer::forward);
+            path("/forward", HTTPServer::forward);
+            path("/back", HTTPServer::Back);
         });
     }
 
@@ -29,6 +30,18 @@ public class HTTPServer {
     }
 
     private static void doForward(Context context) throws ClientCommands.CommandNotFoundException, FileNotFoundException {
+        ClientCommands clientCommand = ClientCommands.create(context.body());
+        ArrayList<Robot> robots = new ArrayList<>();
+        World world = new World(robots);
+        String message = clientCommand.execute(world, new String[]{"10"});
+        context.json(message);
+    }
+
+    public static void Back() {
+        path("/", () -> get(HTTPServer::doBack));
+    }
+
+    private static void doBack(Context context) throws ClientCommands.CommandNotFoundException, FileNotFoundException {
         ClientCommands clientCommand = ClientCommands.create(context.body());
         ArrayList<Robot> robots = new ArrayList<>();
         World world = new World(robots);
