@@ -28,6 +28,7 @@ public class HTTPServer {
             path("/repair", HTTPServer::Repair);
             path("/state", HTTPServer::State);
             path("/turn", HTTPServer::Turn);
+            path("/unsupportedcommand", HTTPServer::UnsupportedCommand);
         });
     }
 
@@ -116,6 +117,17 @@ public class HTTPServer {
     }
 
     private static void doTurn(Context context) throws ClientCommands.CommandNotFoundException, FileNotFoundException {
+        ClientCommands clientCommand = ClientCommands.create(context.body());
+        ArrayList<Robot> robots = new ArrayList<>();
+        World world = new World(robots);
+        String message = clientCommand.execute(world, new String[]{"10"});
+        context.json(message);
+    }
+    public static void UnsupportedCommand() {
+        path("/", () -> get(HTTPServer::doUnsupportedCommand));
+    }
+
+    private static void doUnsupportedCommand(Context context) throws ClientCommands.CommandNotFoundException, FileNotFoundException {
         ClientCommands clientCommand = ClientCommands.create(context.body());
         ArrayList<Robot> robots = new ArrayList<>();
         World world = new World(robots);
