@@ -24,6 +24,7 @@ public class HTTPServer {
             path("/back", HTTPServer::Back);
             path("/fire", HTTPServer::Fire);
             path("/look", HTTPServer::Look);
+            path("/reload", HTTPServer::Reload);
         });
     }
 
@@ -74,5 +75,16 @@ public class HTTPServer {
         context.json(message);
     }
 
+    public static void Reload() {
+        path("/", () -> get(HTTPServer::doReload));
+    }
+
+    private static void doReload(Context context) throws ClientCommands.CommandNotFoundException, FileNotFoundException {
+        ClientCommands clientCommand = ClientCommands.create(context.body());
+        ArrayList<Robot> robots = new ArrayList<>();
+        World world = new World(robots);
+        String message = clientCommand.execute(world, new String[]{"10"});
+        context.json(message);
+    }
 
 }
