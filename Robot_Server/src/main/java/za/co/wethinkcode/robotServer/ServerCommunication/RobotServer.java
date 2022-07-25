@@ -12,6 +12,27 @@ import java.util.*;
 
 public class RobotServer {
     public static int worldSize = 2;
+
+    public static int getWorldSize() {
+        return worldSize;
+    }
+
+    public static String getWorldName() {
+        return worldName;
+    }
+
+    public static int getObsticleXCoord() {
+        return obsticleXCoord;
+    }
+
+    public static int getObstacleYCoord() {
+        return obstacleYCoord;
+    }
+
+    public static int getNumberOfRobots() {
+        return numberOfRobots;
+    }
+
     public  static String obsPos = "0,-1";
     public  static String worldName = "currentWorld";
     public static  int obsticleXCoord;
