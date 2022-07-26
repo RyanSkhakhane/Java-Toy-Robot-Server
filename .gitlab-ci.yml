@@ -1,9 +1,9 @@
-image: maven:3-jdk-11
+# image: maven:3-jdk-11
 
-stages:          # List of stages for jobs, and their order of execution
-  - build
-  - test
-  - deploy
+# stages:          # List of stages for jobs, and their order of execution
+#   - build
+#   - test
+#   - deploy
 
 # build-job:       # This job runs in the build stage, which runs first.
 #   stage: build
