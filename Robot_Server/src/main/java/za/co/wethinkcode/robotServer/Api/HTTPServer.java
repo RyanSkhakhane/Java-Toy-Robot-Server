@@ -3,11 +3,14 @@ package za.co.wethinkcode.robotServer.Api;
 import com.google.gson.Gson;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import za.co.wethinkcode.robotServer.Database.DbConnect;
+import za.co.wethinkcode.robotServer.Database.Restore;
 import za.co.wethinkcode.robotServer.RobotWorld.ClientCommands.ClientCommands;
 import za.co.wethinkcode.robotServer.RobotWorld.Robot.Robot;
 import za.co.wethinkcode.robotServer.RobotWorld.World.World;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
@@ -17,9 +20,23 @@ public class HTTPServer {
     private static Gson gson;
 
     public static void main(String[] args) {
+
+
+        String database = "-f world.db";
+        String[] dbh=database.split(" ");
+        DbConnect db=new DbConnect(dbh);
+
+        Restore r=new Restore();
+        try {
+            r.useTheDb(db.dbConnection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         Javalin server = Javalin.create()
                 .start(7000);
         server.routes(() -> {
+            path("/launch", HTTPServer::luanch);
             path("/forward", HTTPServer::forward);
             path("/back", HTTPServer::Back);
             path("/fire", HTTPServer::Fire);
@@ -31,6 +48,7 @@ public class HTTPServer {
             path("/unsupportedcommand", HTTPServer::UnsupportedCommand);
             path("/requestmessage", HTTPServer::RequestMessage);
             path("/quit", HTTPServer::Quit);
+
         });
     }
 
@@ -42,7 +60,17 @@ public class HTTPServer {
         ClientCommands clientCommand = ClientCommands.create(context.body());
         ArrayList<Robot> robots = new ArrayList<>();
         World world = new World(robots);
-        String message = clientCommand.execute(world, new String[]{"10"});
+        String message = clientCommand.execute(world, new String[]{"1"});
+        context.json(message);
+    }
+    public static void luanch() {path("/", () -> get(HTTPServer::doLuanch));
+    }
+
+    private static void doLuanch(Context context) throws ClientCommands.CommandNotFoundException, FileNotFoundException {
+        ClientCommands clientCommand = ClientCommands.create(context.body());
+        ArrayList<Robot> robots = new ArrayList<>();
+        World world = new World(robots);
+        String message = clientCommand.execute(world, new String[]{"1"});
         context.json(message);
     }
 
