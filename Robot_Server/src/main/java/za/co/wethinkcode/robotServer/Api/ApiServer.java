@@ -28,9 +28,9 @@ public class ApiServer {
         // For example, if we wanted to get the quote with the id of 3 then we will send an HTTP GET message
         // to /quote/3. The Javalin framework provides functionality to parse the URI to get the id of the quote.
         // We will see this in action shortly.
-//        this.server.get("/world/{worldName}", // '{}' are very important to have
-////                context -> context.result("Restore database objects for specified world and return as JSON {worldName}"));
-//                context -> apiHandler.restoreWorld(context));
+        this.server.get("/world/{worldName}", // '{}' are very important to have
+//                context -> context.result("Restore database objects for specified world and return as JSON {worldName}"));
+                context -> apiHandler.restoreWorld(context));
 
         // This handles POST /quotes with the assumption that the body of the HTTP request contains a JSON
         // representation of the quote to add. The QuoteServer doesn’t take on the responsibility of checking if the

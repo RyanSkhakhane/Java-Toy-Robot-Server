@@ -47,9 +47,10 @@ public class Saver extends ServerCommand {
 
     public static boolean worldNameAlreadyExistsInDatabase(String worldNameToSave) {
         String sql = "SELECT * FROM world_roboot WHERE world_name=?";
+        System.out.println(sql.toString());
 
         try(final Connection conn = DriverManager.getConnection(IN_MEMORY_DB_URL)) {
-//            System.out.println("Database connected!");
+            System.out.println("Database connected!");
 
             try (PreparedStatement pstmt = conn.prepareStatement(sql)){
                 pstmt.setString(1, worldNameToSave);

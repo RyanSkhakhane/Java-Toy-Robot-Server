@@ -23,21 +23,22 @@ public class ApiHandler {
         context.json(currentWorld.allWorldObjects());
     }
 
-//    public void restoreWorld(Context context) throws FileNotFoundException {
-//        // connect to database
+    public void restoreWorld(Context context) throws FileNotFoundException {
+        // connect to database
 //        String databaseFile = "-f world.db";
 //        String[] db=databaseFile.split(" ");
 //        DbConnect database = new DbConnect(db);
-//
-//
-//        // restore specified world
-//        String worldName = context.pathParamMap().get("worldName"); // world name as string
-//        ArrayList<Robot> robots = new ArrayList<>();
+
+
+        // restore specified world
+        String worldName = context.pathParamMap().get("worldName"); // world name as string
+        ArrayList<Robot> robots = new ArrayList<>();
 //        World currentWorld = new World(robots);
-//        world.restoreWorld(worldName);
-//
-//
-//    }
+        world.restoreWorld(worldName);
+        context.json(world.allWorldObjects());
+
+
+    }
 
 
 }
